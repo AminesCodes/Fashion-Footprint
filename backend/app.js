@@ -7,6 +7,8 @@ const passport = require('./auth/passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const materialsRouter = require('./routes/materials');
+const wishlistRouter = require('./routes/wishlist');
 
 const secret = require('./secret')
 
@@ -34,6 +36,9 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/materials', materialsRouter);
+app.use('/wishlist', wishlistRouter);
+
 
 // app.use('*', (req, res) => {
 //     res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
