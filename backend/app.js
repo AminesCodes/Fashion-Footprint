@@ -43,7 +43,6 @@ app.use('/api/materials', materialsRouter);
 app.use('api/wishlist', wishlistRouter);
 
 
-
 // app.use('*', (req, res) => {
 //     res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
 // });
