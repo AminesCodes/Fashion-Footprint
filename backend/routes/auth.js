@@ -2,63 +2,127 @@
 const express = require('express');
 const router = express.Router();
 
-const usersQueries = require('../queries/users');
+const userQueries = require('../queries/users');
+const brandQueries = require('../queries/brands');
 const passport = require('../auth/passport');
 const { checkUserLogged, hashPassword } = require('../auth/helpers');
+const { checkValidId, checkValidParams, handleErrors } = require('./helpers/helpers');
 
 
-router.post("/login", passport.authenticate('local'), (request, response) => {
-    const user = request.user
+router.post('/:userType/login', passport.authenticate('local'), (request, response) => {
     response.json({
-        err: false,
+        error: false,
         message: 'Successfully logged user',
-        payload: user,
+        payload: request.user,
     })
 })
 
 
 const signupUser = async (request, response, next) => {
-    const { username, firstname, lastname, password, email, ageCheck } = request.body
-    if (!username || !firstname || !lastname || !password || !email || !ageCheck || ageCheck !== 'true') {
-        response.status(400)
-            response.json({
-                status: 'fail',
-                message: 'Missing Information, all fields are required',
-                payload: null,
-            })
-    } else {
+    let { email, password, firstName, lastName, name, businessID, userType } = request.body
+    if (checkValidParams(response, email) 
+        && checkValidParams(response, password)) {
         try {
-            // request.body.password = await hashPassword(request.body.password)
-            const newUser = await usersQueries.createUser(request.body)
+            request.body.password = await hashPassword(password);
+            const userType = request.params.userType;
+            
+            if (userType === 'brands' && checkValidParams(response, name) && checkValidParams(response, businessID)) {
+                await brandQueries.createBrand(email, request.body.password, name, businessID);
+            } else if (userType === 'users' && checkValidParams(response, firstName) && checkValidParams(response, lastName)) {
+                await userQueries.createUser(email, request.body.password, firstName, lastName);
+            }
             next()
 
         } catch (err) {
-            // Username/email already taken 
-            if (err.code === "23505" && err.detail.includes("already exists")) {
-                console.log('Attempt to register a new user with a taken email/username')
-                response.status(403)
-                response.json({
-                    status: 'fail',
-                    message: 'Username already taken AND/OR email address already registered',
-                    payload: null,
-                })
-            } else {
-                sendError(response, err)
-            }
+            handleErrors(response, err)
         }
     }
 }
  
-router.post('/signup', signupUser, passport.authenticate('local'), (request, response) => {
-    const user = request.user
-    delete user.user_password
+router.post('/:userType/signup', signupUser, passport.authenticate('local'), (request, response) => {
     response.status(201)
     response.json({
-        status: 'success',
+        error: false,
         message: 'Successfully signed up',
-        payload: user,
+        payload: request.user
     })
 })
 
+const updateInfo = async(request, response, next) => {
+    let { email, firstName, lastName, name, businessID } = request.body
+    const targetId = request.params.id
+    if (checkValidParams(response, email) && checkValidId(response, targetId)) {
+        try {
+            const userType = request.params.userType;
+
+            if (userType === 'brands' && checkValidParams(response, name) && checkValidParams(response, businessID)) {
+                await brandQueries.updateBrandInfo(targetId, email, name, businessID);
+            } else if (userType === 'users' && checkValidParams(response, firstName) && checkValidParams(response, lastName)) {
+                await userQueries.updateUserInfo(targetId, email, firstName, lastName);
+            }
+            next()
+
+        } catch (err) {
+            handleErrors(response, err)
+        }
+    }
+}
+
+
+router.put('/:userType/:id', updateInfo, passport.authenticate('local'), (request, response) => {
+    response.json({
+        error: false,
+        message: 'Successfully signed up',
+        payload: request.user
+    })
+})
+
+const updatePassword = async(request, response, next) => {
+    let { newPassword, confirmPassword } = request.body
+    const targetId = request.params.id
+    if (parseInt(targetId) === request.user.id
+        && checkValidParams(response, newPassword) 
+        && checkValidParams(response, confirmPassword)) {
+        try {
+            const hashedPassword = await hashPassword(password);
+            const userType = request.params.userType;
+
+            if (userType === 'brands') {
+                await brandQueries.updateBrandInfo(targetId, hashedPassword);
+            } else if (userType === 'users') {
+                await userQueries.updateUserInfo(targetId, hashedPassword);
+            }
+            next()
+
+        } catch (err) {
+            handleErrors(response, err)
+        }
+    }
+}
+
+router.patch('/:userType/:id', updatePassword, (request, response) => {
+    response.json({
+        error: false,
+        message: 'Successfully signed up',
+        payload: request.user
+    })
+})
+
+router.get('/logout', checkUserLogged, (request, response) => {
+    request.logOut()
+    response.json({
+        error: false,
+        message: 'User logged out successfully',
+        payload: null,
+    })
+})
+
+router.get('/isUserLoggedIn', checkUserLogged, (request, response) => {
+    response.json({
+        error: false,
+        message: 'User is logged in. Session active',
+        payload: request.user,
+    })
+})
 
 module.exports = router;

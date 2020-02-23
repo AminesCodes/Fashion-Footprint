@@ -7,10 +7,10 @@ const passport = require('./auth/passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
-const secret = require('./secret')
-
-//const { checkUserLogged } = require('./auth/helpers');
+const secret = require('./secret');
+const { checkUserLogged } = require('./auth/helpers');
 
 const app = express();
 
@@ -32,8 +32,10 @@ app.use(session({
   app.use(passport.session())
 
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+app.use('/api/auth', authRouter)
+app.use('/api/users', checkUserLogged, usersRouter);
+
 
 // app.use('*', (req, res) => {
 //     res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));

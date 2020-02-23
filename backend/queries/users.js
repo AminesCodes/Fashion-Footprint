@@ -19,7 +19,7 @@ const createUser = (email, password, firstName, lastName) => {
     return await db.one(insertQuery, [email, password, firstName, lastName])
 }
 
-const updateUserInfo = (id, email, firstName, lastName  ) => {
+const updateUserInfo = (id, email, firstName, lastName) => {
     const updateQuery = `
         UPDATE users 
         SET email=$2, firstname=$3, lastname=$4
