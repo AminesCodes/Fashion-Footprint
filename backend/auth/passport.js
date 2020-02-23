@@ -3,10 +3,16 @@ const LocalStrategy = require('passport-local').Strategy;
 const { comparePasswords } = require('./helpers');
 const usersQueries = require('../queries/users');
 
-passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'password'}, 
-  async (username, password, done) => {
+passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'password', passReqToCallback: true}, 
+  async (req, username, password, done) => {
+  
+    let user = null,
   try {
-    const user = await usersQueries.getUserByEmail(username);
+    if (req.userType === 'brand') {
+      user = await usersQueries.getBrandByEmail(username);
+    } else {
+      user = await usersQueries.getUserByEmail(username);
+    }
     if (!user) { // user not found in the database
       console.log('user not found in the database')
       return done(null, false)
