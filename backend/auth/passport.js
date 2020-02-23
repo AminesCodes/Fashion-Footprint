@@ -4,11 +4,11 @@ const { comparePasswords } = require('./helpers');
 const usersQueries = require('../queries/users');
 
 passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'password', passReqToCallback: true}, 
-  async (req, username, password, done) => {
+  async (request, username, password, done) => {
   
     let user = null,
   try {
-    if (req.userType === 'brand') {
+    if (request.params.userType === 'brands') {
       user = await usersQueries.getBrandByEmail(username);
     } else {
       user = await usersQueries.getUserByEmail(username);
