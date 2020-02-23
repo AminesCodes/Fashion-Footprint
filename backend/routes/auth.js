@@ -109,12 +109,12 @@ router.patch('/:userType/:id', updatePassword, (request, response) => {
 })
 
 router.get('/logout', checkUserLogged, (request, response) => {
-    request.logOut()
+    request.logOut();
     response.json({
         error: false,
         message: 'User logged out successfully',
         payload: null,
-    })
+    });
 })
 
 router.get('/isUserLoggedIn', checkUserLogged, (request, response) => {
@@ -122,6 +122,33 @@ router.get('/isUserLoggedIn', checkUserLogged, (request, response) => {
         error: false,
         message: 'User is logged in. Session active',
         payload: request.user,
+    })
+})
+
+const deleteAccount = async(request, response, next) => {
+    if (parseInt(targetId) === request.user.id) {
+        try {
+            const userType = request.params.userType;
+
+            if (userType === 'brands') {
+                await brandQueries.deleteBrand(targetId);
+            } else if (userType === 'users') {
+                await userQueries.deleteUser(targetId);
+            }
+            next()
+
+        } catch (err) {
+            handleErrors(response, err)
+        }
+    }
+}
+
+router.delete('/:userType/:id', deleteAccount, (request, response) => {
+    request.logOut();
+    response.json({
+        error: false,
+        message: 'Successfully deleted user/brand',
+        payload: null
     })
 })
 
