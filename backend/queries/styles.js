@@ -1,10 +1,10 @@
 const db = require('../database/db')
 
-const getStyle = id => {
+const getStyleById = id => {
     return await db.one(`SELECT * FROM styles WHERE id = $1`, id)
 }
 
-const getStyle2 = name =>{
+const getStyleByName = name =>{
     return await db.one(`SELECT * FROM styles WHERE name= $1`, name)
 }
 
