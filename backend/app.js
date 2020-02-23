@@ -8,6 +8,9 @@ const passport = require('./auth/passport');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const materialsRouter = require('./routes/materials');
+const wishlistRouter = require('./routes/wishlist');
+
 
 const secret = require('./secret');
 const { checkUserLogged } = require('./auth/helpers');
@@ -32,9 +35,13 @@ app.use(session({
   app.use(passport.session())
 
 
+
 // app.use('/', indexRouter);
 app.use('/api/auth', authRouter)
 app.use('/api/users', checkUserLogged, usersRouter);
+app.use('/api/materials', materialsRouter);
+app.use('api/wishlist', wishlistRouter);
+
 
 
 // app.use('*', (req, res) => {
