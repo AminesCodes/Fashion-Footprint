@@ -1,11 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const wishlistQueries = require('../queries/wishlist');
+const {handleErrors} = require('./helpers/helpers');
 
-/* GET wishlist endpoint */
-router.get('/', function(req, res, next) {
-  res.send('wishlist endpoint');
-});
 
 /* GET all wishlist by User Id */
 router.get('/:user_id', async (req, res, next) => {
@@ -20,10 +17,7 @@ router.get('/:user_id', async (req, res, next) => {
         })
 
     } catch (err) {
-        console.log(err)
-        res.status(404).json({
-            message: "Failure"
-        })
+        handleErrors(res, err)
     }
 })
 
@@ -34,6 +28,8 @@ router.post('/add/:product_id', async (req, res, next) => {
     let user_id = req.body.user_id
     let style_id = req.body.style_id
 
+    if (product_id, user_id, style_id) {
+
     try {
         let newWish = await wishlistQueries.createWishlistItem(product_id, user_id, style_id)
         res.status(200).json({
@@ -42,9 +38,12 @@ router.post('/add/:product_id', async (req, res, next) => {
         })
 
     } catch (err) {
-        console.log(err)
-        res.status(404).json({
-            message: "Failure"
+        handleErrors(res, err)
+    }
+
+    } else {
+        res.status(403).json({
+            message: "Missing information"
         })
     }
 })
@@ -62,15 +61,12 @@ router.patch('/vote/:wish_id', async (req, res, next) => {
         })
 
     } catch (err) {
-        console.log(err)
-        res.status(404).json({
-            message: "Failure"
-        })
+        handleErrors(res, err)
     }
 })
 
 /* DELETE wish */
-router.patch('/delete/:wish_id', async (req, res, next) => {
+router.delete('/:wish_id', async (req, res, next) => {
 
     let wish_id = req.params.wish_id
 
@@ -82,10 +78,7 @@ router.patch('/delete/:wish_id', async (req, res, next) => {
         })
 
     } catch (err) {
-        console.log(err)
-        res.status(404).json({
-            message: "Failure"
-        })
+        handleErrors(res, err)
     }
 })
 
