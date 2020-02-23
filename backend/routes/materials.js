@@ -23,9 +23,9 @@ router.get('/:idOrName', async (req, res, next) => {
 
     let idOrName = Number(req.params.idOrName)
 
-    if (isNaN(idOrName)) {
-
         try {
+            
+        if (isNaN(idOrName)) {
 
             let materialByName = await materialsQueries.getMaterialByName(idOrName)
             res.status(200).json({
@@ -33,12 +33,7 @@ router.get('/:idOrName', async (req, res, next) => {
                 payload: materialByName
             })
 
-        } catch (err) {
-            handleErrors(res, err)
-        }
-    } else {
-
-        try {
+        } else {
 
             let materialById = await materialsQueries.getMaterialById(idOrName)
             res.status(200).json({
@@ -46,10 +41,11 @@ router.get('/:idOrName', async (req, res, next) => {
                 payload: materialById
             })
 
+        } 
         } catch (err) {
             handleErrors(res, err)
         }
-    }
+    
 })
 
 
