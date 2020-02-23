@@ -5,11 +5,11 @@ const getAllMaterials = async () => {
 }
 
 const getMaterialById = async (id) => {
-    return await db.one('Select * from users where id = $1', id)
+    return await db.one('Select * from materials where id = $1', id)
 }
 
 const getMaterialByName = async (name) => {
-    return await db.one('Select * from users where name = $1', name)
+    return await db.one('Select * from materials where name = $1', name)
 }
 
 module.exports = {
