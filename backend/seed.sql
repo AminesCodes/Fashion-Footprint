@@ -48,7 +48,7 @@ CREATE TABLE products (
 
 CREATE TABLE wishlists (
   id SERIAL PRIMARY KEY,
-  willingToBuy BOOLEAN,
+  willingToBuy BOOLEAN DEFAULT false,
   user_id INT REFERENCES users(id),
   product_id INT  REFERENCES products(id),
   style_id INT REFERENCES styles(id)
