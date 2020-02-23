@@ -29,6 +29,12 @@ CREATE TABLE textiles (
   environmentalImpact VARCHAR
 );
 
+CREATE TABLE types (
+  id SERIAL PRIMARY KEY, 
+  name VARCHAR
+);
+
+
 CREATE TABLE styles  (
   id SERIAL PRIMARY KEY, 
   name VARCHAR
@@ -37,7 +43,7 @@ CREATE TABLE styles  (
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     brand_id INT REFERENCES brands(id) ON DELETE CASCADE,
-    type VARCHAR,
+    type INT REFERENCES types(id),
     name VARCHAR,
     defaultPic VARCHAR,
     description VARCHAR,
@@ -74,9 +80,12 @@ INSERT INTO textiles (name, pic, care, environmentalImpact)
 INSERT INTO styles (name)
     VALUES ('red stuff');
 
+INSERT INTO types (name)
+    VALUES ('shirt'), ('pants');
+
 INSERT INTO  products (brand_id, type, name, defaultPic, description, closingDate, style, textile_id)
-    VALUES (1, 'shirt', 'red shirt', 'http://localhost:3030/images/redshirt.jpg', 'This is a red shirt', '2008-11-11', 1, 1 ),
-            (2, 'pants', 'red pants', 'http://localhost:3030/images/redpants.jpg', 'These are red pants', '2009-11-11', 1, 2);
+    VALUES (1, 1, 'red shirt', 'http://localhost:3030/images/redshirt.jpg', 'This is a red shirt', '2008-11-11', 1, 1 ),
+            (2, 2, 'red pants', 'http://localhost:3030/images/redpants.jpg', 'These are red pants', '2009-11-11', 1, 2);
 
 INSERT INTO wishlists (willingToBuy, user_id, product_id) 
     VALUES (true, 1, 2), (false, 2, 1);
