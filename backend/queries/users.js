@@ -29,9 +29,9 @@ const updateUserInfo = (id, email, firstName, lastName  ) => {
     return await db.one(updateQuery, [id, email, firstName, lastName])
 }
 
-const updateBrandPassword = (id, password) => {
+const updateUserPassword = (id, password) => {
     const updateQuery = `
-        UPDATE brands 
+        UPDATE users 
         SET password=$2
         WHERE id = $1 
         RETURNING *
@@ -39,15 +39,15 @@ const updateBrandPassword = (id, password) => {
     return await db.one(updateQuery, [id, password])
 }
 
-const deleteBrand = id => {
-    return db.one('DELETE FROM brands WHERE id=$1', id)
+const deleteUser = id => {
+    return db.one('DELETE FROM users WHERE id=$1', id)
 }
 
 module.exports = {
-    getBrandById,
-    getBrandByEmail,
-    createBrand,
-    updateBrandInfo,
-    updateBrandPassword,
-    deleteBrand,
+    getUserById,
+    getUserByEmail,
+    createUser,
+    updateUserInfo,
+    updateUserPassword,
+    deleteUser,
 }
