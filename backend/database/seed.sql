@@ -18,7 +18,7 @@ CREATE TABLE brands (
     email VARCHAR UNIQUE NOT NULL,
     password VARCHAR NOT NULL,
     name VARCHAR NOT NULL,
-    businessId INT UNIQUE NOT NULL
+    business_id INT UNIQUE NOT NULL
 );
 
 CREATE TABLE textiles (
@@ -26,7 +26,7 @@ CREATE TABLE textiles (
   name VARCHAR,
   pic VARCHAR,
   care VARCHAR,
-  environmentalImpact VARCHAR
+  environmental_impact VARCHAR
 );
 
 CREATE TABLE types (
@@ -45,16 +45,16 @@ CREATE TABLE products (
     brand_id INT REFERENCES brands(id) ON DELETE CASCADE,
     type INT REFERENCES types(id),
     name VARCHAR,
-    defaultPic VARCHAR,
+    default_pic VARCHAR,
     description VARCHAR,
-    closingDate DATE, 
+    closing_date DATE, 
     style INT REFERENCES styles(id),
     textile_id INT REFERENCES textiles(id)
 );
 
 CREATE TABLE wishlists (
   id SERIAL PRIMARY KEY,
-  willingToBuy BOOLEAN DEFAULT false,
+  willing_to_buy BOOLEAN DEFAULT false,
   user_id INT REFERENCES users(id),
   product_id INT  REFERENCES products(id),
   style_id INT REFERENCES styles(id)
@@ -69,11 +69,11 @@ INSERT INTO users (email, password, firstname, lastname)
     VALUES ('lebronjames@gmail.com', 'lakersforlife', 'lebron', 'james'),
             ('drake@jumpman.com', 'godsplan', 'Aubrey', 'Graham');
 
-INSERT INTO brands (email, password, name, businessId)
+INSERT INTO brands (email, password, name, business_id)
     VALUES ('Uber@gmail.com', 'UberEats', 'Uber', 9245632),
            ('Nba@gmail.com', 'leberon', 'Espn', 272774721);
 
-INSERT INTO textiles (name, pic, care, environmentalImpact)
+INSERT INTO textiles (name, pic, care, environmental_impact)
     VALUeS ('wool', 'http://localhost:3030/textiles/wool.jpg', 'You shoulc care for wool', 'wool is natural because sheep'),
           ('polyester', 'http://localhost:3030/textiles/polyester.jpg', 'You shouldnt care for polyester', 'bad for environment, bad for you');
 
@@ -83,11 +83,11 @@ INSERT INTO styles (name)
 INSERT INTO types (name)
     VALUES ('shirt'), ('pants');
 
-INSERT INTO  products (brand_id, type, name, defaultPic, description, closingDate, style, textile_id)
+INSERT INTO  products (brand_id, type, name, default_pic, description, closing_date, style, textile_id)
     VALUES (1, 1, 'red shirt', 'http://localhost:3030/images/redshirt.jpg', 'This is a red shirt', '2008-11-11', 1, 1 ),
             (2, 2, 'red pants', 'http://localhost:3030/images/redpants.jpg', 'These are red pants', '2009-11-11', 1, 2);
 
-INSERT INTO wishlists (willingToBuy, user_id, product_id) 
+INSERT INTO wishlists (willing_to_buy, user_id, product_id) 
     VALUES (true, 1, 2), (false, 2, 1);
 
 INSERT INTO facts (fact)

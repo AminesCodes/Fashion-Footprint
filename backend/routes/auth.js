@@ -19,19 +19,24 @@ router.post('/:userType/login', passport.authenticate('local'), (request, respon
 
 
 const signupUser = async (request, response, next) => {
-    let { email, password, firstName, lastName, name, businessID, userType } = request.body
+    const { email, password, firstName, lastName, name, businessID } = request.body
     if (checkValidParams(response, email) 
         && checkValidParams(response, password)) {
         try {
-            request.body.password = await hashPassword(password);
+            const hashedPassword = await hashPassword(password);
             const userType = request.params.userType;
             
-            if (userType === 'brands' && checkValidParams(response, name) && checkValidParams(response, businessID)) {
-                await brandQueries.createBrand(email, request.body.password, name, businessID);
-            } else if (userType === 'users' && checkValidParams(response, firstName) && checkValidParams(response, lastName)) {
-                await userQueries.createUser(email, request.body.password, firstName, lastName);
+            if (userType === 'brands' 
+                && checkValidParams(response, name) 
+                && checkValidParams(response, businessID)) {
+                    await brandQueries.createBrand(email.toLowerCase(), hashedPassword, name, businessID);
+                    next();
+            } else if (userType === 'users' 
+                && checkValidParams(response, firstName) 
+                && checkValidParams(response, lastName)) {
+                    await userQueries.createUser(email.toLowerCase(), hashedPassword, firstName, lastName);
+                    next();
             }
-            next()
 
         } catch (err) {
             handleErrors(response, err)
@@ -48,17 +53,18 @@ router.post('/:userType/signup', signupUser, passport.authenticate('local'), (re
     })
 })
 
+
 const updateInfo = async(request, response, next) => {
-    let { email, firstName, lastName, name, businessID } = request.body
+    const { email, firstName, lastName, name, businessID } = request.body
     const targetId = request.params.id
     if (checkValidParams(response, email) && checkValidId(response, targetId)) {
         try {
             const userType = request.params.userType;
 
             if (userType === 'brands' && checkValidParams(response, name) && checkValidParams(response, businessID)) {
-                await brandQueries.updateBrandInfo(targetId, email, name, businessID);
+                await brandQueries.updateBrandInfo(targetId, email.toLowerCase(), name, businessID);
             } else if (userType === 'users' && checkValidParams(response, firstName) && checkValidParams(response, lastName)) {
-                await userQueries.updateUserInfo(targetId, email, firstName, lastName);
+                await userQueries.updateUserInfo(targetId, email.toLowerCase(), firstName, lastName);
             }
             next()
 
@@ -68,7 +74,6 @@ const updateInfo = async(request, response, next) => {
     }
 }
 
-
 router.put('/:userType/:id', updateInfo, passport.authenticate('local'), (request, response) => {
     response.json({
         error: false,
@@ -76,6 +81,7 @@ router.put('/:userType/:id', updateInfo, passport.authenticate('local'), (reques
         payload: request.user
     })
 })
+
 
 const updatePassword = async(request, response, next) => {
     let { newPassword, confirmPassword } = request.body
@@ -108,22 +114,6 @@ router.patch('/:userType/:id', updatePassword, (request, response) => {
     })
 })
 
-router.get('/logout', checkUserLogged, (request, response) => {
-    request.logOut();
-    response.json({
-        error: false,
-        message: 'User logged out successfully',
-        payload: null,
-    });
-})
-
-router.get('/isUserLoggedIn', checkUserLogged, (request, response) => {
-    response.json({
-        error: false,
-        message: 'User is logged in. Session active',
-        payload: request.user,
-    })
-})
 
 const deleteAccount = async(request, response, next) => {
     if (parseInt(targetId) === request.user.id) {
@@ -151,5 +141,25 @@ router.delete('/:userType/:id', deleteAccount, (request, response) => {
         payload: null
     })
 })
+
+
+router.get('/logout', checkUserLogged, (request, response) => {
+    request.logOut();
+    response.json({
+        error: false,
+        message: 'User logged out successfully',
+        payload: null,
+    });
+})
+
+
+router.get('/isUserLoggedIn', checkUserLogged, (request, response) => {
+    response.json({
+        error: false,
+        message: 'User is logged in. Session active',
+        payload: request.user,
+    })
+})
+
 
 module.exports = router;
