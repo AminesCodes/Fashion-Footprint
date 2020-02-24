@@ -5,7 +5,7 @@ const getUserById = async (id) => {
 }
 
 const getUserByEmail = async (email) => {
-    return await db.one('Select * from users where email = $1', email)
+    return await db.oneOrNone('Select * from users where email = $1', email)
 }
 
 const createUser = async (email, password, firstName, lastName) => {

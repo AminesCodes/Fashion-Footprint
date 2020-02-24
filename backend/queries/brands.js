@@ -9,7 +9,7 @@ const getBrandById = async (id) => {
 }
 
 const getBrandByEmail = async (email) => {
-    return await db.one('SELECT * FROM brands WHERE email = $1', email)
+    return await db.oneOrNone('SELECT * FROM brands WHERE email = $1', email)
 }
 
 const createBrand = async (email, password, name, businessID) => {

@@ -19,7 +19,7 @@ router.post('/:userType/login', passport.authenticate('local'), (request, respon
 
 
 const signupUser = async (request, response, next) => {
-    let { email, password, firstName, lastName, name, businessID } = request.body
+    const { email, password, firstName, lastName, name, businessID } = request.body
     if (checkValidParams(response, email) 
         && checkValidParams(response, password)) {
         try {
@@ -29,12 +29,12 @@ const signupUser = async (request, response, next) => {
             if (userType === 'brands' 
                 && checkValidParams(response, name) 
                 && checkValidParams(response, businessID)) {
-                    await brandQueries.createBrand(email, hashedPassword, name, businessID);
+                    await brandQueries.createBrand(email.toLowerCase(), hashedPassword, name, businessID);
                     next();
             } else if (userType === 'users' 
                 && checkValidParams(response, firstName) 
                 && checkValidParams(response, lastName)) {
-                    await userQueries.createUser(email, hashedPassword, firstName, lastName);
+                    await userQueries.createUser(email.toLowerCase(), hashedPassword, firstName, lastName);
                     next();
             }
 
@@ -55,16 +55,16 @@ router.post('/:userType/signup', signupUser, passport.authenticate('local'), (re
 
 
 const updateInfo = async(request, response, next) => {
-    let { email, firstName, lastName, name, businessID } = request.body
+    const { email, firstName, lastName, name, businessID } = request.body
     const targetId = request.params.id
     if (checkValidParams(response, email) && checkValidId(response, targetId)) {
         try {
             const userType = request.params.userType;
 
             if (userType === 'brands' && checkValidParams(response, name) && checkValidParams(response, businessID)) {
-                await brandQueries.updateBrandInfo(targetId, email, name, businessID);
+                await brandQueries.updateBrandInfo(targetId, email.toLowerCase(), name, businessID);
             } else if (userType === 'users' && checkValidParams(response, firstName) && checkValidParams(response, lastName)) {
-                await userQueries.updateUserInfo(targetId, email, firstName, lastName);
+                await userQueries.updateUserInfo(targetId, email.toLowerCase(), firstName, lastName);
             }
             next()
 
