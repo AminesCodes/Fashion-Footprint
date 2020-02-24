@@ -2,14 +2,15 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { comparePasswords } = require('./helpers');
 const usersQueries = require('../queries/users');
+const brandQueries = require('../queries/brands');
 
 passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'password', passReqToCallback: true}, 
   async (request, username, password, done) => {
-  
-    let user = null,
+console.log(100000, username, password)
+    let user = null;
   try {
     if (request.params.userType === 'brands') {
-      user = await usersQueries.getBrandByEmail(username);
+      user = await brandQueries.getBrandByEmail(username);
     } else {
       user = await usersQueries.getUserByEmail(username);
     }
@@ -18,8 +19,9 @@ passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'passwor
       return done(null, false)
     }
 
-    const passMatch = await comparePasswords(password, user.user_password);
+    const passMatch = await comparePasswords(password, user.password);
     if (!passMatch) { // user found but passwords don't match
+    console.log('password not matching')
       return done(null, false)
     }
 
