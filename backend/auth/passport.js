@@ -10,9 +10,9 @@ passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'passwor
     let user = null;
   try {
     if (request.params.userType === 'brands') {
-      user = await brandQueries.getBrandByEmail(username);
+      user = await brandQueries.getBrandByEmail(username.toLowerCase());
     } else {
-      user = await usersQueries.getUserByEmail(username);
+      user = await usersQueries.getUserByEmail(username.toLowerCase());
     }
     if (!user) { // user not found in the database
       console.log('user not found in the database');

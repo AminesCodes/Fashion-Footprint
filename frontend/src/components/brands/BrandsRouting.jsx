@@ -10,7 +10,7 @@ export default function BrandRouting(props) {
     return (
         <>
             <nav className='col-2 sideBar'>
-                <BrandsSideBar handleLogout={props.handleLogout}/>
+                <BrandsSideBar loggedUser={props.loggedUser} handleLogout={props.handleLogout}/>
             </nav>
             <div className='col-10 p-3 overflow-auto mainContent'>
                 <Switch>
