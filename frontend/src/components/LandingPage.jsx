@@ -5,7 +5,7 @@ import Feedback from './Feedback';
 import LoginSignupForm from './LoginSignupForm';
 
 export default function LandingPage (props) {
-    const [userType, setUserType] = useState('users');
+    const [userType, setUserType] = useState('');
     const [randomFact, setRandomFact] = useState('');
     const [networkErr, setNetworkErr] = useState(null);
 
@@ -44,7 +44,10 @@ export default function LandingPage (props) {
                 <button className='btn btn-primary' onClick={() => setUserType('brands')}>I'm a brand</button>
             </div>
 
-            <LoginSignupForm userType={userType} setLoggedUser={props.setLoggedUser}/>
+            { userType 
+                ? <LoginSignupForm userType={userType} setUser={props.setUser}/>
+                : null
+            }
         </div>
     )
 }

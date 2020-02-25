@@ -33,7 +33,7 @@ export default function LoginSignupForm (props) {
             setBusinessId('');
             setFirstName('');
             setLastName('');
-            props.setLoggedUser(data.payload)
+            props.setUser(data.payload)
         } catch (err) {
             setNetworkErr(err)
         }
@@ -82,7 +82,8 @@ export default function LoginSignupForm (props) {
 
     if (formType === 'login') {
         return(
-            <form className='form-inline' onSubmit={handleFormSubmit}>
+            <form className='form' onSubmit={handleFormSubmit}>
+                <h4 className='mb-2 mr-sm-2 text-center'>{`Logging as a ${props.userType.slice(0, -1)}`}</h4>
                 {staticFormPart}
                 {loginSubForm}
             </form>
@@ -90,7 +91,8 @@ export default function LoginSignupForm (props) {
         
     } else if (props.userType === 'brands') {
         return (
-            <form className='form-inline' onSubmit={handleFormSubmit}>
+            <form className='form' onSubmit={handleFormSubmit}>
+                <h4 className='mb-2 mr-sm-2 text-center'>{`Signing up as a brand`}</h4>
                 {staticFormPart}
 
                 <input 
@@ -115,7 +117,8 @@ export default function LoginSignupForm (props) {
 
     } else {
         return(
-            <form className='form-inline' onSubmit={handleFormSubmit}>
+            <form className='form' onSubmit={handleFormSubmit}>
+                <h4 className='mb-2 mr-sm-2 text-center'>{`Signing up as a user`}</h4>
                 {staticFormPart}
 
                 <input 
