@@ -1,14 +1,18 @@
 const db = require('../database/db')
 
-const getBrandById = id => {
-    return await db.one('Select * from brands where id = $1', id)
+const getAllBrands = async () => {
+    return await db.any('SELECT id, name FROM brands')
 }
 
-const getBrandByEmail = email => {
-    return await db.one('Select * from brands where email = $1', email)
+const getBrandById = async (id) => {
+    return await db.one('SELECT id, name FROM brands WHERE id = $1', id)
 }
 
-const createBrand = (email, password, name, businessID) => {
+const getBrandByEmail = async (email) => {
+    return await db.oneOrNone('SELECT * FROM brands WHERE email = $1', email)
+}
+
+const createBrand = async (email, password, name, businessID) => {
     const insertQuery = `
         INSERT INTO brands
             (email, password, name, business_id)
@@ -19,7 +23,7 @@ const createBrand = (email, password, name, businessID) => {
     return await db.one(insertQuery, [email, password, name, businessID])
 }
 
-const updateBrandInfo = (id, email, name, businessID) => {
+const updateBrandInfo = async (id, email, name, businessID) => {
     const updateQuery = `
         UPDATE brands 
         SET email=$2, name=$3, business_id=$4
@@ -29,7 +33,7 @@ const updateBrandInfo = (id, email, name, businessID) => {
     return await db.one(updateQuery, [id, email, name, businessID])
 }
 
-const updateBrandPassword = (id, password) => {
+const updateBrandPassword = async (id, password) => {
     const updateQuery = `
         UPDATE brands 
         SET password=$2
@@ -39,11 +43,12 @@ const updateBrandPassword = (id, password) => {
     return await db.one(updateQuery, [id, password])
 }
 
-const deleteBrand = id => {
-    return db.one('DELETE FROM brands WHERE id=$1', id)
+const deleteBrand = async (id) => {
+    return await db.one('DELETE FROM brands WHERE id=$1', id)
 }
 
 module.exports = {
+    getAllBrands,
     getBrandById,
     getBrandByEmail,
     createBrand,
