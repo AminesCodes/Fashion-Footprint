@@ -29,7 +29,7 @@ router.get('/:idOrName', async (req, res, next) => {
 
             let materialByName = await materialsQueries.getMaterialByName(idOrName)
             res.status(200).json({
-                message: `Success retrieved material from textiles table with name "${name}"`,
+                message: `Success retrieved material from textiles table with name "${idOrName}"`,
                 payload: materialByName
             })
 
@@ -37,7 +37,7 @@ router.get('/:idOrName', async (req, res, next) => {
 
             let materialById = await materialsQueries.getMaterialById(idOrName)
             res.status(200).json({
-                message: `Success retrieved material from textiles table with id ${id}`,
+                message: `Success retrieved material from textiles table with id ${idOrName}`,
                 payload: materialById
             })
 
