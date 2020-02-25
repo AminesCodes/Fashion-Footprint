@@ -6,7 +6,7 @@ const brandQueries = require('../queries/brands');
 
 passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'password', passReqToCallback: true}, 
   async (request, username, password, done) => {
-console.log(100000, username, password, request.params.userType)
+
     let user = null;
   try {
     if (request.params.userType === 'brands') {
@@ -38,7 +38,6 @@ passport.serializeUser((user, done) => {
 })
 
 passport.deserializeUser(async (user, done) => {
-  console.log(user);
   try {
     if (user.business_id) {
       let retrievedBrand = await brandQueries.getBrandByEmail(user.email);
