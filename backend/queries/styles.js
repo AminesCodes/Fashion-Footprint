@@ -28,8 +28,9 @@ const updateStyle = async(id, name, pic) =>{
 }
 
 const deleteStyle = async(id) =>{
-    return await db.one(`DELETE * FROM style WHERE id=$1`, id)
+    return await db.one(`DELETE * FROM styles WHERE id = $1 RETURNING *`, id)
 }
+
 module.exports = {
    getStyleById, 
    getStyleByName,
