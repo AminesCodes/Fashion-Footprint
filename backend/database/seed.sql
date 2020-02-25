@@ -43,7 +43,7 @@ CREATE TABLE styles  (
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     brand_id INT REFERENCES brands(id) ON DELETE CASCADE,
-    type INT REFERENCES types(id),
+    type_id INT REFERENCES types(id),
     name VARCHAR,
     default_pic VARCHAR,
     description VARCHAR,

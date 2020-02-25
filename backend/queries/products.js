@@ -1,7 +1,15 @@
 const db = require('../database/db')
 
-const getProductsById = async(id) =>{
-return await db.one(`SELECT * FROM products WHERE id =$1`, id)
+const getProductsByBrand = async(id) =>{
+return await db.any(`SELECT * FROM products WHERE brand_id =$1`, id)
+}
+
+const getProductByType = async (id) => {
+    return await db.any(`SELECT * FROM products WHERE type_id =$1`, id)
+}
+
+const getProductByMaterial = async(id) => {
+    return await db.any(`SELECT * FROM products WHERE textile_id = $1`, id)
 }
 
 const createProduct = async (id, brand, type, name, defaultPic, description, closingDate) =>{
@@ -21,8 +29,9 @@ const updateProductInfoById = async (id, type, name, defaultPic, description, cl
 }
 
 const deleteProduct = async(id) =>{
-    return await db.one(`DELETE * FROM products WHERE id=$1`, id)
+    return await db.one(`DELETE * FROM products WHERE id=$1 RETURNING *`, id)
 }
+
 
 module.exports = {
 getProductsById, 
