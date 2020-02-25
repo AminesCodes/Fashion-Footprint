@@ -49,8 +49,15 @@ CREATE TABLE products (
     description VARCHAR,
     closing_date DATE, 
     style INT REFERENCES styles(id),
-    textile_id INT REFERENCES textiles(id)
+    textile_id INT REFERENCES textiles(id),
+    votes INT
 );
+
+CREATE TABLE votes (
+  id SERIAL PRIMARY KEY,
+  user_id INT REFERENCES users(id),
+  product_id INT REFERENCES products(id)
+)
 
 CREATE TABLE wishlists (
   id SERIAL PRIMARY KEY,
