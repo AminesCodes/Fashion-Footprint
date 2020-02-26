@@ -3,24 +3,12 @@ import axios from 'axios';
 
 import Feedback from '../Feedback';
 
-export default function BrandsHome (props) {
+export default function AddProduct (props) {
     const brandID = props.loggedUser.id;
 
     const [networkErr, setNetworkErr] = useState(null);
 
-    const getProducts = async () => {
-        try {
-            const { data } = await axios.get(`/api/products/${brandID}/all`);
-            console.log(data.payload)
-        } catch (err) {
-
-        }
-    }
-
-    useEffect(() => {
-        getProducts();
-    }, []);
-
+    
     const hideFeedbackDiv = () => {
         setNetworkErr(null);
     }
@@ -31,7 +19,7 @@ export default function BrandsHome (props) {
 
     return(
         <div className='container mt-5'>
-            brand feed
+            Add product
         </div>
     )
 }
