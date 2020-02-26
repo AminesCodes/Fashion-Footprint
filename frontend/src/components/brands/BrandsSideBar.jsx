@@ -6,13 +6,13 @@ export default function SideBar(props) {
         <>
             <ul className='navbar-nav'>
                 <li className='nav-item'>
-                    <NavLink className='nav-link d-block m-2' to='/brands/:brandId' > Home </NavLink>
+                    <NavLink className='nav-link d-block m-2' to={`/brands/${props.loggedUser.id}`} > Home </NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink className='nav-link d-block m-2' to='/brands/profile/:brandId' > Profile </NavLink>
+                    <NavLink className='nav-link d-block m-2' to={`/brands/profile/${props.loggedUser.id}`} > Profile </NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink className='d-block m-2' to='/brands/:brandId/add' > Add Product </NavLink>
+                    <NavLink className='d-block m-2' to={`/brands/${props.loggedUser.id}/add`} > Add Product </NavLink>
                 </li>
                 <li className='nav-item'>
                     <NavLink className='d-block m-2' to='/about' > About </NavLink>
