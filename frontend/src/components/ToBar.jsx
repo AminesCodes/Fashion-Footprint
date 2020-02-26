@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function TopBar(props) {
     return (
-        <>
+        <div>
             <div className='col-3'>
                 <img 
                     className='d-block mx-auto m-2'
@@ -13,6 +13,6 @@ export default function TopBar(props) {
             <div className='col-9 mt-3 h3 text-center'>
                 Fashion Footprint
             </div>
-        </>
+        </div>
     )
 }

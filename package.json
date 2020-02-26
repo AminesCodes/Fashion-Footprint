@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node ./server/bin/www",
     "heroku-postbuild": "cd server && npm install && cd ../client && npm install && npm run build",
-    "test":  "echo 'Error: no test specified' && exit 1"
-    },
+    "test": "echo 'Error: no test specified' && exit 1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AminesCodes/Fashion-Sustainability.git"
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/AminesCodes/Fashion-Sustainability/issues"
   },
-  "homepage": "https://github.com/AminesCodes/Fashion-Sustainability#readme"
+  "homepage": "https://github.com/AminesCodes/Fashion-Sustainability#readme",
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }

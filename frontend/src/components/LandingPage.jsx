@@ -11,7 +11,8 @@ export default function LandingPage (props) {
 
     const getRandomFact = async () => {
         try {
-          const { data } = await axios.get('/api/facts/random');
+          const { data } = await axios.get('../api/facts/random');
+          console.log(data);
           setRandomFact(data.payload.fact);
     
         } catch (err) {
