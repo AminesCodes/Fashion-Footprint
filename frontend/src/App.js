@@ -15,17 +15,23 @@ function App(props) {
 
   const setUser = (user) => {
     setLoggedUser(user);
-    if (user.business_id) {
-      props.history.push({ pathname: `/brands/${user.id}` })
-    } else {
-      props.history.push({ pathname: `/users/${user.id}` })
+    const locallyStoredUser = localStorage.getItem('userLoggedIn');
+    if (!locallyStoredUser) {
+      if (user.business_id) {
+        props.history.push({ pathname: `/brands/${user.id}` });
+      } else {
+        props.history.push({ pathname: `/users/${user.id}` });
+      }
     }
+    localStorage.setItem('userLoggedIn', user.id);
   }
   
   const checkIfUserLogged = async () => {
     try {
-      const { data } = await axios.get('/api/auth/isUserLoggedIn')
-      setUser(data.payload)
+      const { data } = await axios.get('/api/auth/isUserLoggedIn');
+      setTimeout(() => {
+        setUser(data.payload);
+      }, 3000);
 
     } catch (err) {
       if (err.response && err.response.status === 401) {
@@ -37,17 +43,16 @@ function App(props) {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      checkIfUserLogged(); 
-    }, 3000);
+    checkIfUserLogged();
   }, []);
 
   const handleLogout = async () => {
     try {
-      await axios.get('/api/auth/logout')
-      setLoggedUser(null)
+      await axios.get('/api/auth/logout');
+      localStorage.clear();
+      setLoggedUser(null);
     } catch (err) {
-      setNetworkErr(err)
+      setNetworkErr(err);
     }
   }
 
@@ -70,7 +75,7 @@ function App(props) {
           <TopBar />
         </div>
         <div className='row mx-auto overflow-auto myPage'>
-          <BrandsRouting loggedUser={loggedUser} handleLogout={handleLogout}/>
+          <BrandsRouting loggedUser={loggedUser} handleLogout={handleLogout} setUser={setUser} />
         </div>
       </div>
     );
@@ -82,7 +87,7 @@ function App(props) {
         <TopBar />
       </div>
       <div className='row mx-auto overflow-auto myPage'>
-        <UsersRouting loggedUser={loggedUser} handleLogout={handleLogout}/>
+        <UsersRouting loggedUser={loggedUser} handleLogout={handleLogout} setUser={setUser} />
       </div>
     </div>
   );

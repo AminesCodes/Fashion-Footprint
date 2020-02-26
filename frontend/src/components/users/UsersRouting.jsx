@@ -15,7 +15,11 @@ export default function UsersRouting(props) {
             <div className='col-10 p-3 overflow-auto mainContent'>
                 <Switch>
                     <Route path='/users/profile/:userId' render={routeProps => 
-                        <UserProfile loggedUser={props.loggedUser} {...routeProps} />} >
+                        <UserProfile  
+                        loggedUser={props.loggedUser} 
+                        setUser={props.setUser} 
+                        handleLogout={props.handleLogout} 
+                        {...routeProps} />} >
                     </Route>
                     <Route path='/users/:userId' render={routeProps => 
                         <UsersHome loggedUser={props.loggedUser} {...routeProps} />} >
