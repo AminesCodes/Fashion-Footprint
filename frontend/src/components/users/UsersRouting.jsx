@@ -4,6 +4,7 @@ import { Switch, Route } from 'react-router-dom';
 import UsersSideBar from './UsersSideBar';
 import UsersHome from './UsersHome';
 import UserProfile from './UserProfile';
+import WishlistContainer from './WishlistContainer';
 import About from '../About';
 
 export default function UsersRouting(props) {
@@ -16,6 +17,9 @@ export default function UsersRouting(props) {
                 <Switch>
                     <Route path='/users/profile/:userId' render={routeProps => 
                         <UserProfile loggedUser={props.loggedUser} {...routeProps} />} >
+                    </Route>
+                    <Route path='/users/wishlist/:userId' render = {routeProps => 
+                        <WishlistContainer loggedUser = {props.loggedUser} {...routeProps} />} >
                     </Route>
                     <Route path='/users/:userId' render={routeProps => 
                         <UsersHome loggedUser={props.loggedUser} {...routeProps} />} >
