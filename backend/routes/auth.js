@@ -19,7 +19,7 @@ router.post('/:userType/login', passport.authenticate('local'), (request, respon
 
 
 const signupUser = async (request, response, next) => {
-    const { email, password, firstName, lastName, name, businessID } = request.body
+    const { email, password, firstName, lastName, name, businessID, termsAgree } = request.body
     if (checkValidParams(response, email) 
         && checkValidParams(response, password)) {
         try {
@@ -32,6 +32,7 @@ const signupUser = async (request, response, next) => {
                     await brandQueries.createBrand(email.toLowerCase(), hashedPassword, name, businessID);
                     next();
             } else if (userType === 'users' 
+                && checkValidParams(response, termsAgree) 
                 && checkValidParams(response, firstName) 
                 && checkValidParams(response, lastName)) {
                     await userQueries.createUser(email.toLowerCase(), hashedPassword, firstName, lastName);

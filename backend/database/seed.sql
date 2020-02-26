@@ -10,7 +10,8 @@ CREATE TABLE users (
     email VARCHAR UNIQUE NOT NULL,
     password VARCHAR NOT NULL,
     firstname VARCHAR NOT NULL, 
-    lastname VARCHAR NOT NULL
+    lastname VARCHAR NOT NULL,
+    agreed_on_terms BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE brands (
@@ -43,7 +44,7 @@ CREATE TABLE styles  (
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     brand_id INT REFERENCES brands(id) ON DELETE CASCADE,
-    type INT REFERENCES types(id),
+    type_id INT REFERENCES types(id),
     name VARCHAR,
     default_pic VARCHAR,
     description VARCHAR,
@@ -83,7 +84,7 @@ INSERT INTO styles (name)
 INSERT INTO types (name)
     VALUES ('shirt'), ('pants');
 
-INSERT INTO  products (brand_id, type, name, default_pic, description, closing_date, style, textile_id)
+INSERT INTO  products (brand_id, type_id, name, default_pic, description, closing_date, style, textile_id)
     VALUES (1, 1, 'red shirt', 'http://localhost:3030/images/redshirt.jpg', 'This is a red shirt', '2008-11-11', 1, 1 ),
             (2, 2, 'red pants', 'http://localhost:3030/images/redpants.jpg', 'These are red pants', '2009-11-11', 1, 2);
 

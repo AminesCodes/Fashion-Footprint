@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 
 import Feedback from './Feedback';
+import Terms from './Terms'
 
 export default function LoginSignupForm (props) {
     const [formType, setFormType] = useState('login');
@@ -11,6 +12,8 @@ export default function LoginSignupForm (props) {
     const [businessId, setBusinessId] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [agreeOnTerms, setAgreeOnTerms] = useState(false);
+    const [showTerms, setShowTerms] = useState(false);
     const [networkErr, setNetworkErr] = useState(null);
 
     const handleFormSubmit = async (event) => {
@@ -26,6 +29,7 @@ export default function LoginSignupForm (props) {
                     lastName,
                     name: brandName,
                     businessID: businessId,
+                    termsAgree: agreeOnTerms,
                 }
                 const { data } = await axios.post(url, requestBody)
                 setEmail('');
@@ -138,7 +142,26 @@ export default function LoginSignupForm (props) {
                     value={lastName}
                     onChange={e => setLastName(e.target.value)}
                 />
+
+                <div className='mb-2 mr-sm-2'>
+                    <input 
+                        className='form-check-input' 
+                        type='checkbox'
+                        id='terms' 
+                        onChange={e => setAgreeOnTerms(e.target.checked)}
+                        checked={agreeOnTerms}
+                    />
+                    <label className='form-check-label' htmlFor='terms'>
+                        I agree on the 
+                        <span className='alert-link btn-link' onClick={e => setShowTerms(true)}> terms </span>
+                    </label>
+                </div>
             
+                { showTerms
+                    ? <Terms setShowTerms={setShowTerms} />
+                    : null
+                }
+
                 {signupSubForm}                
             </form>
         )  
