@@ -40,7 +40,7 @@ const updateUserPassword = async (id, password) => {
 }
 
 const deleteUser = async (id) => {
-    return await db.one('DELETE FROM users WHERE id=$1', id)
+    return await db.one('DELETE FROM users WHERE id=$1 RETURNING *', id)
 }
 
 module.exports = {

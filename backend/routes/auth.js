@@ -55,9 +55,10 @@ router.post('/:userType/signup', signupUser, passport.authenticate('local'), (re
 
 
 const updateInfo = async(request, response, next) => {
-    const { email, firstName, lastName, name, businessID } = request.body
+    const { email, password, firstName, lastName, name, businessID } = request.body
     const targetId = request.params.id
-    if (checkValidParams(response, email) && checkValidId(response, targetId)) {
+    
+    if (parseInt(targetId) === request.user.id && checkValidParams(response, email) && checkValidParams(response, password)) {
         try {
             const userType = request.params.userType;
 
@@ -66,6 +67,7 @@ const updateInfo = async(request, response, next) => {
             } else if (userType === 'users' && checkValidParams(response, firstName) && checkValidParams(response, lastName)) {
                 await userQueries.updateUserInfo(targetId, email.toLowerCase(), firstName, lastName);
             }
+            console.log('Went well')
             next()
 
         } catch (err) {
@@ -74,10 +76,10 @@ const updateInfo = async(request, response, next) => {
     }
 }
 
-router.put('/:userType/:id', updateInfo, passport.authenticate('local'), (request, response) => {
+router.put('/:userType/:id', checkUserLogged, updateInfo, passport.authenticate('local'), (request, response) => {
     response.json({
         error: false,
-        message: 'Successfully signed up',
+        message: 'Successfully updated user/brand info',
         payload: request.user
     })
 })
@@ -88,16 +90,18 @@ const updatePassword = async(request, response, next) => {
     const targetId = request.params.id
     if (parseInt(targetId) === request.user.id
         && checkValidParams(response, newPassword) 
-        && checkValidParams(response, confirmPassword)) {
+        && checkValidParams(response, confirmPassword)
+        && newPassword === confirmPassword) {
         try {
-            const hashedPassword = await hashPassword(password);
+            const hashedPassword = await hashPassword(newPassword);
             const userType = request.params.userType;
 
             if (userType === 'brands') {
-                await brandQueries.updateBrandInfo(targetId, hashedPassword);
+                await brandQueries.updateBrandPassword(targetId, hashedPassword);
             } else if (userType === 'users') {
-                await userQueries.updateUserInfo(targetId, hashedPassword);
+                await userQueries.updateUserPassword(targetId, hashedPassword);
             }
+            request.body.password = newPassword;
             next()
 
         } catch (err) {
@@ -106,26 +110,28 @@ const updatePassword = async(request, response, next) => {
     }
 }
 
-router.patch('/:userType/:id', updatePassword, (request, response) => {
+router.patch('/:userType/:id', checkUserLogged, updatePassword, (request, response) => {
     response.json({
         error: false,
-        message: 'Successfully signed up',
+        message: 'Successfully updated password',
         payload: request.user
     })
 })
 
 
 const deleteAccount = async(request, response, next) => {
+    const targetId = request.params.id;
     if (parseInt(targetId) === request.user.id) {
         try {
             const userType = request.params.userType;
 
             if (userType === 'brands') {
                 await brandQueries.deleteBrand(targetId);
+                next();
             } else if (userType === 'users') {
                 await userQueries.deleteUser(targetId);
+                next();
             }
-            next()
 
         } catch (err) {
             handleErrors(response, err)
@@ -133,7 +139,7 @@ const deleteAccount = async(request, response, next) => {
     }
 }
 
-router.delete('/:userType/:id', deleteAccount, (request, response) => {
+router.delete('/:userType/:id', checkUserLogged, deleteAccount, (request, response) => {
     request.logOut();
     response.json({
         error: false,

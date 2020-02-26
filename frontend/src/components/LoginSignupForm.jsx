@@ -16,26 +16,28 @@ export default function LoginSignupForm (props) {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const url = `/api/auth/${props.userType}/${formType}`
-            const requestBody = {
-                email,
-                password,
-                firstName,
-                lastName,
-                name: brandName,
-                businessID: businessId,
+        if (email && password) {
+            try {
+                const url = `/api/auth/${props.userType}/${formType}`
+                const requestBody = {
+                    email,
+                    password,
+                    firstName,
+                    lastName,
+                    name: brandName,
+                    businessID: businessId,
+                }
+                const { data } = await axios.post(url, requestBody)
+                setEmail('');
+                setPassword('');
+                setBrandName('');
+                setBusinessId('');
+                setFirstName('');
+                setLastName('');
+                props.setUser(data.payload)
+            } catch (err) {
+                setNetworkErr(err)
             }
-            const { data } = await axios.post(url, requestBody)
-            setEmail('');
-            setPassword('');
-            setBrandName('');
-            setBusinessId('');
-            setFirstName('');
-            setLastName('');
-            props.setUser(data.payload)
-        } catch (err) {
-            setNetworkErr(err)
         }
     }
 
@@ -50,8 +52,8 @@ export default function LoginSignupForm (props) {
     const staticFormPart = <span>
                 <input 
                     className='form-control mb-2 mr-sm-2'
-                    type='text' 
-                    placeholder='Enter your email to login'
+                    type='email' 
+                    placeholder='Enter your email'
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                 />
