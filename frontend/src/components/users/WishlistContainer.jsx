@@ -25,7 +25,7 @@ class WishlistContainer extends React.Component {
 			return (<Wishlist wishlist={elem} />);
 		});
 		return (
-		<div>
+		<div className = 'row'>
            {allWishListItems}
         </div>);
 	}

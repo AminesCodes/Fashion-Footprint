@@ -18,7 +18,7 @@ export default function UsersRouting(props) {
                     <Route path='/users/profile/:userId' render={routeProps => 
                         <UserProfile loggedUser={props.loggedUser} {...routeProps} />} >
                     </Route>
-                    <Route path='/users/wishlist/:userId' render = {routeProps => 
+                    <Route path='/users/:userId/wishlist' render = {routeProps => 
                         <WishlistContainer loggedUser = {props.loggedUser} {...routeProps} />} >
                     </Route>
                     <Route path='/users/:userId' render={routeProps => 
