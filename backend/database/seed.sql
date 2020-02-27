@@ -10,7 +10,8 @@ CREATE TABLE users (
     email VARCHAR UNIQUE NOT NULL,
     password VARCHAR NOT NULL,
     firstname VARCHAR NOT NULL, 
-    lastname VARCHAR NOT NULL
+    lastname VARCHAR NOT NULL,
+    agreed_on_terms BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE brands (
@@ -48,8 +49,8 @@ CREATE TABLE products (
     default_pic VARCHAR,
     description VARCHAR,
     closing_date DATE, 
-    style INT REFERENCES styles(id),
-    textile_id INT REFERENCES textiles(id)
+    textile_id INT REFERENCES textiles(id),
+    going_to_production BOOlEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE wishlists (
@@ -74,8 +75,9 @@ INSERT INTO brands (email, password, name, business_id)
            ('Nba@gmail.com', 'leberon', 'Espn', 272774721);
 
 INSERT INTO textiles (name, pic, care, environmental_impact)
-    VALUeS ('wool', 'http://localhost:3129/textiles/wool.jpg', 'You shoulc care for wool', 'wool is natural because sheep'),
-          ('polyester', 'http://localhost:3129/textiles/polyester.jpg', 'You shouldnt care for polyester', 'bad for environment, bad for you');
+    VALUES ('wool', '/images/textiles/wool.jpg', 'You shoulc care for wool', 'wool is natural because sheep'),
+          ('polyester', '/images/textiles/polyester.jpg', 'You shouldnt care for polyester', 'bad for environment, bad for you');
+
 
 INSERT INTO styles (name)
     VALUES ('red stuff');
@@ -83,9 +85,9 @@ INSERT INTO styles (name)
 INSERT INTO types (name)
     VALUES ('shirt'), ('pants');
 
-INSERT INTO  products (brand_id, type_id, name, default_pic, description, closing_date, style, textile_id)
-    VALUES (1, 1, 'red shirt', 'http://localhost:3129/images/redshirt.jpg', 'This is a red shirt', '2008-11-11', 1, 1 ),
-            (2, 2, 'red pants', 'http://localhost:3129/images/redpants.jpg', 'These are red pants', '2009-11-11', 1, 2);
+INSERT INTO  products (brand_id, type_id, name, default_pic, description, closing_date, textile_id)
+    VALUES (1, 1, 'red shirt', '/images/products/redshirt.jpg', 'This is a red shirt', '2008-11-11', 1 ),
+            (2, 2, 'red pants', '/images/products/redpants.jpg', 'These are red pants', '2009-11-11', 2);
 
 INSERT INTO wishlists (willing_to_buy, user_id, product_id) 
     VALUES (true, 1, 2), (false, 2, 1), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2);

@@ -19,3 +19,11 @@ code {
 .going_to_production_true {
 	color: green;
 }
+
+.termsContainer {
+  background-color: aliceblue;
+}
+
+.feedbackContainer {
+  background-color: aliceblue;
+}

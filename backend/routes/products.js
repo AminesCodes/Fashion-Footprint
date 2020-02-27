@@ -5,17 +5,17 @@ const { handleErrors } = require('./helpers/helpers');
 const multer = require('multer')
 
 const storage = multer.diskStorage({
-    destination: (request, file, cb) => {
-        cb(null, './public/products')
+    destination: (req, file, cb) => {
+        cb(null, './public/images/products')
     },
-    filename: (request, file, cb) => {
+    filename: (req, file, cb) => {
         const filename = Date.now() + '-' + file.originalname
         cb(null, filename)
     }
 
 })
 
-const fileFilter = (request, file, cb) => {
+const fileFilter = (req, file, cb) => {
     if (file.mimetype.slice(0, 6) === 'image/') {
         cb(null, true)
     } else {
@@ -78,20 +78,24 @@ router.get('/material/:textile_id', async (req, res) => {
 
 
 /* POST new product*/
-router.post('/add/:brand_id', upload.single('product_pic'), async (req, res) => {
+router.post('/add/:brand_id', upload.single('productPic'), async (req, res) => {
 
     let brand_id = req.params.brand_id
     let type_id = req.body.type_id
     let name = req.body.name
-    let default_pic = req.body.default_pic
     let description = req.body.description
     let closing_date = req.body.closing_date
+    let default_pic = null
+    let material_id = req.body.material_id
 
+    if (req.file) {
+        // default_pic = 'http://' + req.headers.host + '/images/products/' + req.file.filename
+        default_pic = '/images/products/' + req.file.filename
+    }
 
     if (type_id, name, default_pic, description, closing_date, brand_id) {
-
         try {
-            let newProduct = await productQueries.createProduct(type_id, name, default_pic, description, closing_date, brand_id)
+            let newProduct = await productQueries.createProduct(brand_id, type_id, name, default_pic, description, closing_date, material_id)
             res.status(200).json({
                 message: "Success added new product",
                 payload: newProduct
@@ -110,15 +114,19 @@ router.post('/add/:brand_id', upload.single('product_pic'), async (req, res) => 
 
 
 /* PUT single product (updates everything) */
-router.put('/:product_id', upload.single('product_pic'), async (req, res, next) => {
+router.put('/:product_id', upload.single('productPic'), async (req, res, next) => {
 
     let product_id = req.params.product_id
     let type_id = req.body.type_id
     let name = req.body.name
-    let default_pic = req.body.default_pic
     let description = req.body.description
     let closing_date = req.body.closing_date
+    let default_pic = req.body.default_pic
 
+    if (req.file) {
+        // default_pic = 'http://' + req.headers.host + '/images/products/' + req.file.filename
+        default_pic = '/images/products/' + req.file.filename
+    }
 
     try {
         let updatedProduct = await productQueries.updateProductInfoById(product_id, type_id, name, default_pic, description, closing_date)
@@ -131,3 +139,5 @@ router.put('/:product_id', upload.single('product_pic'), async (req, res, next) 
         handleErrors(res, err)
     }
 })
+
+module.exports = router;

@@ -44,7 +44,7 @@ const updateBrandPassword = async (id, password) => {
 }
 
 const deleteBrand = async (id) => {
-    return await db.one('DELETE FROM brands WHERE id=$1', id)
+    return await db.one('DELETE FROM brands WHERE id=$1 RETURNING *', id)
 }
 
 module.exports = {
