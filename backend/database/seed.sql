@@ -67,8 +67,10 @@ CREATE TABLE facts (
 );
 
 INSERT INTO users (email, password, firstname, lastname)
-    VALUES ('lebronjames@gmail.com', 'lakersforlife', 'lebron', 'james'),
-            ('drake@jumpman.com', 'godsplan', 'Aubrey', 'Graham');
+    VALUES  ('briany@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Briany', 'T'),
+            ('chuck@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Chuck', 'A'),
+            ('suzette@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Suzette', 'I'),
+            ('amin@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Amin', 'B');
 
 INSERT INTO brands (email, password, name, business_id)
     VALUES ('info@nike.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Nike', 1234567),
