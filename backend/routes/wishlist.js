@@ -4,7 +4,7 @@ const wishlistQueries = require('../queries/wishlist');
 const {handleErrors} = require('./helpers/helpers');
 
 
-/* GET all wishlist by User Id */
+/* GET all wishlist by User Id including the users and products  */
 router.get('/:user_id', async (req, res, next) => {
 
     let user_id = req.params.user_id
