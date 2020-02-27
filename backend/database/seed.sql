@@ -75,8 +75,9 @@ INSERT INTO brands (email, password, name, business_id)
            ('Nba@gmail.com', 'leberon', 'Espn', 272774721);
 
 INSERT INTO textiles (name, pic, care, environmental_impact)
-    VALUeS ('wool', '/images/textiles/wool.jpg', 'You shoulc care for wool', 'wool is natural because sheep'),
+    VALUES ('wool', '/images/textiles/wool.jpg', 'You shoulc care for wool', 'wool is natural because sheep'),
           ('polyester', '/images/textiles/polyester.jpg', 'You shouldnt care for polyester', 'bad for environment, bad for you');
+
 
 INSERT INTO styles (name)
     VALUES ('red stuff');
@@ -89,11 +90,11 @@ INSERT INTO  products (brand_id, type_id, name, default_pic, description, closin
             (2, 2, 'red pants', '/images/products/redpants.jpg', 'These are red pants', '2009-11-11', 2);
 
 INSERT INTO wishlists (willing_to_buy, user_id, product_id) 
-    VALUES (true, 1, 2), (false, 2, 1);
+    VALUES (true, 1, 2), (false, 2, 1), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2);
 
 INSERT INTO facts (fact)
     VALUES ('Your use of this site helps the environment 100%'), ('This is amazing');
 
 
              
-           
+     
