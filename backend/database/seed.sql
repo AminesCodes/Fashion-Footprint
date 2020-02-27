@@ -10,7 +10,8 @@ CREATE TABLE users (
     email VARCHAR UNIQUE NOT NULL,
     password VARCHAR NOT NULL,
     firstname VARCHAR NOT NULL, 
-    lastname VARCHAR NOT NULL
+    lastname VARCHAR NOT NULL,
+    agreed_on_terms BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE brands (
