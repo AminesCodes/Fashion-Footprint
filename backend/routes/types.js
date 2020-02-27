@@ -4,13 +4,12 @@ const router = express.Router();
 const typesQueries = require('../queries/types');
 const { handleErrors } = require('./helpers/helpers');
 
-
-router.get('/', async (request, response) => {
+router.get('/all', async (request, response) => {
     try {
-        const allTypes = await typesQueries.getAllTypes()
+        const allTypes = await typesQueries.getAllTypes();
         response.json({
             error: false,
-            message: 'Successfully retrieved all the types',
+            message: 'Successfully retrieved all types',
             payload: allTypes,
         })
     } catch (err) {

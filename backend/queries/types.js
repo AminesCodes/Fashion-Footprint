@@ -1,7 +1,7 @@
 const db = require('../database/db')
 
-const getAllTypes = async() =>{
-return await db.any(`SELECT * FROM types`)
+const getAllTypes = async () => {
+    return await db.any('SELECT * FROM types')
 }
 
 const getTypeByName = async(name) =>{

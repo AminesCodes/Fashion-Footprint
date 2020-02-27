@@ -11,6 +11,7 @@ const brandsRouter = require('./routes/brands');
 const materialsRouter = require('./routes/materials');
 const wishlistRouter = require('./routes/wishlist');
 const factsRouter = require('./routes/facts');
+const typesRouter = require('./routes/types');
 const productsRouter = require('./routes/products');
 const typesRouter = require('./routes/types');
 
@@ -42,7 +43,8 @@ app.use('/api/auth', authRouter);
 app.use('/api/brands', checkUserLogged, brandsRouter);
 app.use('/api/materials', /*checkUserLogged,*/ materialsRouter);
 app.use('/api/wishlist', /*checkUserLogged,*/ wishlistRouter);
-app.use('/api/facts', /*checkUserLogged,*/ factsRouter);
+app.use('/api/facts', checkUserLogged, factsRouter);
+app.use('/api/types', checkUserLogged, typesRouter);
 app.use('/api/products', /*checkUserLogged,*/ productsRouter);
 app.use('/api/types',/*checkUserLogged,*/ typesRouter);
 
