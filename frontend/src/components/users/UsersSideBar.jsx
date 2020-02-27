@@ -6,23 +6,23 @@ export default function SideBar(props) {
         <>
             <ul className='navbar-nav'>
                 <li className='nav-item'>
-                    <NavLink className='nav-link d-block m-2' to='/' > Home </NavLink>
+                    <NavLink className='nav-link d-block m-2' to={`/users/${props.loggedUser.id}`} > Home </NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink className='nav-link d-block m-2' to='/profile' > Profile </NavLink>
+                    <NavLink className='nav-link d-block m-2' to={`/users/profile/${props.loggedUser.id}`} > Profile </NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink className='d-block m-2' to='/wishlist' > Wishlist </NavLink>
+                    <NavLink className='d-block m-2' to={`/users/${props.loggedUser.id}/wishlist`} > Wishlist </NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink className='d-block m-2' to='/plans' > Plans </NavLink>
+                    <NavLink className='d-block m-2' to={`/users/${props.loggedUser.id}/plans`} > Plans </NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink className='d-block m-2' to='/coupons' > Coupons </NavLink>
+                    <NavLink className='d-block m-2' to={`/users/${props.loggedUser.id}/coupons`} > Coupons </NavLink>
                 </li>
-                {/* <li className='nav-item'>
-                    <NavLink className='d-block m-2' to='/shows/add-show' > Add Show </NavLink>
-                </li> */}
+                <li className='nav-item'>
+                    <NavLink className='d-block m-2' to='/materials' > Materials </NavLink>
+                </li>
                 <li className='nav-item'>
                     <NavLink className='d-block m-2' to='/about' > About </NavLink>
                 </li>

@@ -4,6 +4,10 @@ const getProductsByBrand = async(id) =>{
 return await db.any(`SELECT * FROM products WHERE brand_id =$1`, id)
 }
 
+const getProductsById = async(id) =>{
+    return await db.any(`SELECT * FROM products WHERE id =$1`, id)
+}
+
 const getProductByType = async (id) => {
     return await db.any(`SELECT * FROM products WHERE type_id =$1`, id)
 }
@@ -34,7 +38,10 @@ const deleteProduct = async(id) =>{
 
 
 module.exports = {
-getProductsById, 
+    getProductsByBrand,
+    getProductByType,
+    getProductByMaterial,
+    getProductsById, 
 createProduct, 
 updateProductInfoById, 
 deleteProduct

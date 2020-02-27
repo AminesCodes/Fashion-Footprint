@@ -11,9 +11,9 @@ const getUserByEmail = async (email) => {
 const createUser = async (email, password, firstName, lastName) => {
     const insertQuery = `
         INSERT INTO users
-            (email, password, firstname, lastname)
+            (email, password, firstname, lastname, agreed_on_terms)
         VALUES
-            ($1, $2, $3, $4) 
+            ($1, $2, $3, $4, TRUE) 
         RETURNING *
     `
     return await db.one(insertQuery, [email, password, firstName, lastName])
@@ -40,7 +40,7 @@ const updateUserPassword = async (id, password) => {
 }
 
 const deleteUser = async (id) => {
-    return await db.one('DELETE FROM users WHERE id=$1', id)
+    return await db.one('DELETE FROM users WHERE id=$1 RETURNING *', id)
 }
 
 module.exports = {
