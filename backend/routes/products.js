@@ -86,15 +86,16 @@ router.post('/add/:brand_id', upload.single('productPic'), async (req, res) => {
     let description = req.body.description
     let closing_date = req.body.closing_date
     let default_pic = null
+    let material_id = req.body.material_id
 
     if (req.file) {
-        // default_pic = 'http://' + request.headers.host + '/images/products/' + request.file.filename
-        default_pic = '/images/products/' + request.file.filename
+        // default_pic = 'http://' + req.headers.host + '/images/products/' + req.file.filename
+        default_pic = '/images/products/' + req.file.filename
     }
 
     if (type_id, name, default_pic, description, closing_date, brand_id) {
         try {
-            let newProduct = await productQueries.createProduct(type_id, name, default_pic, description, closing_date, brand_id)
+            let newProduct = await productQueries.createProduct(brand_id, type_id, name, default_pic, description, closing_date, material_id)
             res.status(200).json({
                 message: "Success added new product",
                 payload: newProduct
@@ -123,8 +124,8 @@ router.put('/:product_id', upload.single('productPic'), async (req, res, next) =
     let default_pic = req.body.default_pic
 
     if (req.file) {
-        // default_pic = 'http://' + request.headers.host + '/images/products/' + request.file.filename
-        default_pic = '/images/products/' + request.file.filename
+        // default_pic = 'http://' + req.headers.host + '/images/products/' + req.file.filename
+        default_pic = '/images/products/' + req.file.filename
     }
 
     try {

@@ -6,7 +6,9 @@ import Feedback from '../Feedback';
 export default function AddProduct (props) {
     const brandID = props.loggedUser.id;
     const [ typesList, setTypesList ] = useState([]);
-    const [ targetType, setTargetType ] = useState('0');
+    const [ targetType, setTargetType ] = useState('1');
+    const [ materialsList, setMaterialsList ] = useState([]);
+    const [ targetMaterial, setTargetMaterial ] = useState('0');
     const [ productName, setProductName ] = useState('');
     const [ productDescription, setProductDescription ] = useState('');
     const [ closingDate, setClosingDate ] = useState('');
@@ -23,8 +25,18 @@ export default function AddProduct (props) {
         }
     }
 
+    const getAllMaterials = async () => {
+        try {
+            const { data } = await axios.get('/api/materials/all');
+            setMaterialsList(data.payload);
+        } catch (err) {
+            setNetworkErr(err);
+        }
+    }
+
     useEffect(() => {
-        // getAllTypes()
+        // getAllTypes();
+        getAllMaterials();
     }, [])
 
     const image_preview = event => {
@@ -44,20 +56,24 @@ export default function AddProduct (props) {
         event.preventDefault();
 
         try {
+            
+            console.log(targetType, productPic, productName, productDescription, closingDate)
             if (targetType !== '0' 
                 && productPic 
                 && productName
                 && productDescription
                 && closingDate
-                && new Date(closingDate) > new Date()) {
+                && new Date(closingDate) > new Date()
+                && targetMaterial !== '0') {
+
                     const product = new FormData();
-                    product.append('productPic', productPic)
-                    product.append('type_id', targetType)
-                    product.append('name', productName)
-                    product.append('description', productDescription)
-                    product.append('closing_date', closingDate)
+                    product.append('productPic', productPic);
+                    product.append('type_id', targetType);
+                    product.append('name', productName);
+                    product.append('description', productDescription);
+                    product.append('closing_date', closingDate);
                 
-                    const { data } = await axios.post(`/api/products/${brandID}/add`, product)
+                    const { data } = await axios.post(`/api/products/add/${brandID}`, product);
                     if (data.payload) {
                         setTargetType('0');
                         setProductName('');
@@ -118,6 +134,17 @@ export default function AddProduct (props) {
                         value={closingDate}
                         onChange={e => setClosingDate(e.target.value)}
                     />
+
+                    <select
+                        className='mb-2 mr-sm-2'
+                        value={targetMaterial} 
+                        onChange={e => setTargetMaterial(e.target.value)}>
+                            <option value='0'>-- Main Material --</option>
+                            {materialsList.map(material => 
+                                <option key={material.name+material.id} value={material.id}>{material.name}</option>
+                            )}
+                    </select>
+                    {typesList}
                 </div>
 
                 <div className='col-md-6'>
