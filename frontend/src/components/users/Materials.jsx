@@ -38,7 +38,7 @@ class Materials extends Component {
 
     render() {
         const {materials} = this.state
-
+        console.log(this.state)
         let mappedMaterials = materials.map(el => {return (
             <Carousel.Item>
             <Card className="d-block w-100" style={{ width: '18rem' }}>

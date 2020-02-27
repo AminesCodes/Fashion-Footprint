@@ -75,8 +75,8 @@ INSERT INTO brands (email, password, name, business_id)
            ('Nba@gmail.com', 'leberon', 'Espn', 272774721);
 
 INSERT INTO textiles (name, pic, care, environmental_impact)
-    VALUES ('wool', '/images/textiles/wool.jpg', 'You shoulc care for wool', 'wool is natural because sheep'),
-          ('polyester', '/images/textiles/polyester.jpg', 'You shouldnt care for polyester', 'bad for environment, bad for you');
+    VALUES ('wool', 'http://localhost:3129/images/textiles/wool.jpg', 'You shoulc care for wool', 'wool is natural because sheep'),
+          ('polyester', 'http://localhost:3129/images/textiles/polyester.jpg', 'You shouldnt care for polyester', 'bad for environment, bad for you');
 
 
 INSERT INTO styles (name)
