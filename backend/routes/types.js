@@ -17,4 +17,28 @@ router.get('/all', async (request, response) => {
     }
 })
 
+router.get('/:idOrName', async (request, response) => {
+    let idOrName = Number(req.params.idOrName)
+    try {
+        if(isNaN(idOrName)){
+        const typesByName = await typesQueries.getTypeByName(idOrName)
+        response.status(200).json({
+            error: false,
+            message: 'Successfully retrieved all the types',
+            payload: typesByName,
+        })
+    } else{
+        let typeById = await typesQueries.getTypeById(idOrName)
+        response.status(200).json({
+            error: false,
+            message: 'Successfully retrieved all the types',
+            payload: typeById,
+        })
+    }
+    } catch (err) {
+        handleErrors(response, err)
+    }
+})
+
+
 module.exports = router;

@@ -6,6 +6,7 @@ import UsersHome from './UsersHome';
 import UserProfile from './UserProfile';
 import WishlistContainer from './WishlistContainer';
 import About from '../About';
+import Materials from './Materials';
 
 export default function UsersRouting(props) {
     return (
@@ -30,6 +31,8 @@ export default function UsersRouting(props) {
                     </Route>
                     <Route path='/about' render={routeProps => 
                         <About loggedUser={props.loggedUser} {...routeProps} />} >
+                    </Route>
+                    <Route path='/materials' component={Materials}>
                     </Route>
                 </Switch>
             </div>
