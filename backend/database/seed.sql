@@ -53,6 +53,10 @@ CREATE TABLE products (
     going_to_production BOOlEAN NOT NULL DEFAULT FALSE
 );
 
+CREATE TABLE votes  (
+    product_id INT 
+)
+
 CREATE TABLE wishlists (
   id SERIAL PRIMARY KEY,
   willing_to_buy BOOLEAN DEFAULT false,
