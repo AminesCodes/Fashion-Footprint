@@ -44,21 +44,26 @@ CREATE TABLE styles  (
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     brand_id INT REFERENCES brands(id) ON DELETE CASCADE,
-    type_id INT REFERENCES types(id),
+    type_id INT REFERENCES types(id) ON DELETE CASCADE,
     name VARCHAR,
     default_pic VARCHAR,
     description VARCHAR,
     closing_date DATE, 
-    textile_id INT REFERENCES textiles(id),
+    textile_id INT REFERENCES textiles(id) ON DELETE CASCADE,
     going_to_production BOOlEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE votes  (
+    product_id INT REFERENCES products(id) ON DELETE CASCADE,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE wishlists (
   id SERIAL PRIMARY KEY,
   willing_to_buy BOOLEAN DEFAULT false,
-  user_id INT REFERENCES users(id),
-  product_id INT  REFERENCES products(id),
-  style_id INT REFERENCES styles(id)
+  user_id INT REFERENCES users(id) ON DELETE CASCADE,
+  product_id INT  REFERENCES products(id) ON DELETE CASCADE,
+  style_id INT REFERENCES styles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE facts (
@@ -339,5 +344,5 @@ INSERT INTO  products(brand_id, type_id, name, default_pic, description, closing
 INSERT INTO wishlists(willing_to_buy, user_id, product_id) 
     VALUES (true, 1, 2), (false, 2, 1), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2);
 
-             
-     
+INSERT INTO votes (product_id, user_id)
+  VALUES (1, 1), (1, 2), (2, 1), (2, 2), (2, 3), (2, 4);
