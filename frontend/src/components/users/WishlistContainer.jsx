@@ -13,6 +13,7 @@ class WishlistContainer extends React.Component {
 
 	componentDidMount = async () => {
 		let response = await axios.get(`/api/wishlist/${this.props.loggedUser.id}`);
+		console.log(response);
 		this.setState({
 			wishListItems: response.data.payload
 		});

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productQueries = require('../queries/products');
-const { handleErrors } = require('./helpers/helpers');
+const { handleErrors, checkValidId } = require('./helpers/helpers');
 const multer = require('multer')
 
 const storage = multer.diskStorage({
@@ -45,6 +45,22 @@ router.get('/:brand_id/all', async (req, res, next) => {
 })
 
 /* GET all product by type Id */
+router.get('/fitler/:brand_id/:material_id/:type_id', async (req, res) => {
+    let {brand_id, material_id, type_id} = req.params
+
+    try {
+        let productByType = await productQueries.getProductByFilter(Number(brand_id), Number(material_id), Number(type_id))
+        res.status(200).json({
+            message: `Success, retrieved all products with filter id #${'brand_id ' + brand_id} ${'material_id ' + material_id} ${'type_id ' + type_id}`,
+            payload: productByType
+        })
+
+    } catch (err) {
+        handleErrors(res, err)
+    }
+})
+
+/* GET all product by type Id */
 router.get('/type/:type_id', async (req, res) => {
     let type_id = req.params.type_id
 
@@ -73,6 +89,28 @@ router.get('/material/:textile_id', async (req, res) => {
 
     } catch (error) {
         handleErrors(res, error)
+    }
+})
+
+/* GET all product by filters */
+router.get('/filters/:brandId/:typeId/:textileId', async (req, res) => {
+    const brandId = req.params.brandId;
+    const typeId = req.params.typeId;
+    const textileId = req.params.textileId;
+    console.log(brandId, typeId, textileId)
+
+    if (checkValidId(res, brandId) && checkValidId(res, typeId) && checkValidId(res, textileId)) {
+        try {
+            const products = await productQueries.getFilteredProducts(brandId, typeId, textileId);
+            res.status(200).json({
+                error: false,
+                message: `Success, retrieved all products with filters`,
+                payload: products
+            })
+    
+        } catch (error) {
+            handleErrors(res, error)
+        }
     }
 })
 

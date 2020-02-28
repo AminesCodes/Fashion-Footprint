@@ -51,10 +51,19 @@ router.post('/add/:product_id', async (req, res, next) => {
 /* PATCH add vote  */
 router.patch('/vote/:wish_id', async (req, res, next) => {
 
-    let wish_id = req.params.wish_id
+    let wish_id = parseInt(req.params.wish_id);
+    console.log(typeof wish_id);
 
     try {
-        let updatedWish = await wishlistQueries.updateWishlistItem(wish_id)
+        let updatedWish = await wishlistQueries.updateWishlistItem(wish_id);
+        console.log(updatedWish);
+        if(updatedWish.willing_to_buy){
+            let updatedVote = await wishlistQueries.createVote(wish_id);
+            console.log(updatedVote);
+        }
+        else {
+            let updatedVote = await wishlistQueries.deleteVote(wish_id);
+        }
         res.status(200).json({
             message: `Success updated wish with id ${wish_id}`,
             payload: updatedWish

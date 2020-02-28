@@ -16,6 +16,46 @@ const getProductByMaterial = async(id) => {
     return await db.any(`SELECT * FROM products WHERE textile_id = $1`, id)
 }
 
+const getProductByFilter = async(brand, material, type,) => await db.any(`
+    SELECT * 
+    FROM products 
+    WHERE CAST(brand_id AS TEXT) LIKE ${brand === 'ALL' ? '%' : brand } 
+    AND CAST(textile_id AS TEXT) LIKE ${material === 'ALL' ? '%' : material }
+    AND CAST(type_id AS TEXT) LIKE ${type === 'ALL' ? '%' : type }
+`, [brand, material, type])
+
+const getFilteredProducts = async (brandId, typeId, textileId) => {
+    if (brandId === '0' && typeId === '0' && textileId === '0') {
+        return await db.any('SELECT * FROM products')
+    } 
+
+    else if (brandId === '0' && typeId === '0') {
+        return await db.any(`SELECT * FROM products WHERE textile_id=$1`, textileId)
+    } 
+
+    else if (brandId === '0' && textileId === '0') {
+        return await db.any('SELECT * FROM products WHERE type_id=$1', typeId)
+    } 
+
+    else if (typeId === '0' && textileId === '0') {
+        return await db.any(`SELECT * FROM products WHERE brand_id=$1`, brandId)
+    } 
+
+    else if (brandId === '0') {
+        return await db.any('SELECT * FROM products WHERE type_id=$1 AND textile_id=$2', [typeId, textileId])
+    } 
+
+    else if (typeId === '0') {
+        return await db.any('SELECT * FROM products WHERE brand_id=$1 AND textile_id=$2', [brandId, textileId])
+    } 
+
+    else if (textileId === '0') {
+        return await db.any('SELECT * FROM products WHERE brand_id=$1 AND type_id=$2', [brandId, typeId])
+    } 
+        
+    return await db.any('SELECT * FROM products WHERE brand_id=$1 AND type_id=$2 AND textile_id=$3', [brandId, typeId, textileId])
+}
+
 const createProduct = async (brand, type, name, defaultPic, description, closingDate, material) =>{
     const insertQuery = `
     INSERT INTO products (brand_id, type_id, name, default_pic, description, closing_date, textile_id)
@@ -38,11 +78,13 @@ const deleteProduct = async(id) =>{
 
 
 module.exports = {
+    getProductByFilter,
     getProductsByBrand,
     getProductByType,
     getProductByMaterial,
     getProductsById, 
-createProduct, 
-updateProductInfoById, 
-deleteProduct
+    createProduct, 
+    updateProductInfoById, 
+    deleteProduct,
+    getFilteredProducts,
 }
