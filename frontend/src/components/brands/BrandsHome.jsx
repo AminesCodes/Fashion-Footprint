@@ -108,9 +108,7 @@ export default function BrandsHome (props) {
                 && targetMaterial !== '0'
                 && imagePreview) {
                     let product = null;
-                    console.log("UPDATE !!")
                     if (productPic) {
-                        console.log("HAS NEW PIC")
                         product = new FormData();
                         product.append('productPic', productPic);
                         product.append('type_id', targetType);
@@ -121,7 +119,6 @@ export default function BrandsHome (props) {
                         product.append('default_pic', imagePreview);
 
                     } else {
-                        console.log("USING PREVIOUS PIC")
                         product = {
                             type_id: targetType,
                             name: productName,
@@ -154,7 +151,6 @@ export default function BrandsHome (props) {
     const handleApprobation = async (productId) => {
         try {
             const { data } = await axios.patch(`/api/products/${productId}`)
-            console.log(data.payload)
             getProducts()
         } catch (err) {
             setNetworkErr(err)
@@ -171,7 +167,6 @@ export default function BrandsHome (props) {
     }
 
     const handleUpdateProduct = (product) => {
-        console.log(product)
         setTargetProduct(product.id)
         setUpdateProduct(true);
         setTargetType(product.type_id);

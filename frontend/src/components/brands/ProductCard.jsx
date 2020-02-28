@@ -8,7 +8,6 @@ export default function ProductCard(props) {
     const [ networkErr, setNetworkErr ] = useState(null);
 
 	const getVotes = async () => {
-		//props.product.id
 		try {
 			const { data } = await axios.get(`/api/votes/${props.product.id}`);
 			setVotes(data.payload);
@@ -20,18 +19,6 @@ export default function ProductCard(props) {
 	useEffect(() => {
 		getVotes();
 	}, [])
-// id: 3
-// brand_id: 3
-// type_id: 1
-// name: "n"
-// default_pic: "/images/products/1582767464023-580b585b2edbce24c47b290c.png"
-// description: "d"
-// closing_date: "2020-05-05T04:00:00.000Z"
-// textile_id: null
-// going_to_production: false
-
-// handleDeleteProduct
-// handleUpdateProduct
 
 	const hideFeedbackDiv = () => {
 		setNetworkErr(null);
