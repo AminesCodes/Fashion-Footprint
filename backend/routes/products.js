@@ -152,7 +152,8 @@ router.post('/add/:brand_id', upload.single('productPic'), async (req, res) => {
 
 
 /* PUT single product (updates everything) */
-router.put('/:product_id', upload.single('productPic'), async (req, res, next) => {
+// router.put('/:product_id', upload.single('productPic'), async (req, res) => {
+    router.put('/:product_id', (a,b,n) => {console.log("BEFORE"); n()}, upload.single('productPic'), (a,b,n) => {console.log("AFTER"); n()}, async (req, res) => {
 
     let product_id = req.params.product_id
     let type_id = req.body.type_id
@@ -160,6 +161,8 @@ router.put('/:product_id', upload.single('productPic'), async (req, res, next) =
     let description = req.body.description
     let closing_date = req.body.closing_date
     let default_pic = req.body.default_pic
+    let material_id = req.body.material_id
+    console.log(product_id, type_id, name, default_pic, description, closing_date, material_id)
 
     if (req.file) {
         // default_pic = 'http://' + req.headers.host + '/images/products/' + req.file.filename
@@ -167,7 +170,8 @@ router.put('/:product_id', upload.single('productPic'), async (req, res, next) =
     }
 
     try {
-        let updatedProduct = await productQueries.updateProductInfoById(product_id, type_id, name, default_pic, description, closing_date)
+        console.log(product_id, type_id, name, default_pic, description, closing_date, material_id)
+        let updatedProduct = await productQueries.updateProductInfoById(product_id, type_id, name, default_pic, description, closing_date, material_id)
         res.status(200).json({
             message: `Success updated product with id ${product_id}`,
             payload: updatedProduct
@@ -175,6 +179,38 @@ router.put('/:product_id', upload.single('productPic'), async (req, res, next) =
 
     } catch (err) {
         handleErrors(res, err)
+    }
+})
+
+router.patch('/:productId', async (req, res) => {
+    const productId = req.params.productId
+    if (checkValidId(res, productId)) {
+        try {
+            let updatedProduct = await productQueries.updateProductStatus(productId)
+            res.status(200).json({
+                message: `Success updated product with id ${productId}`,
+                payload: updatedProduct
+            })
+    
+        } catch (err) {
+            handleErrors(res, err)
+        }
+    }
+})
+
+router.delete('/:productId', async (req, res) => {
+    const productId = req.params.productId
+    if (checkValidId(res, productId)) {
+        try {
+            let deletedProduct = await productQueries.deleteProduct(productId)
+            res.status(200).json({
+                message: `Success deleted product with id ${productId}`,
+                payload: deletedProduct
+            })
+    
+        } catch (err) {
+            handleErrors(res, err)
+        }
     }
 })
 

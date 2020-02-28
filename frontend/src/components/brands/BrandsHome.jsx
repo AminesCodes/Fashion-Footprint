@@ -16,6 +16,8 @@ export default function BrandsHome (props) {
     const [ closingDate, setClosingDate ] = useState('');
     const [ productPic, setProductPic ] = useState(null);
     const [ imagePreview, setImagePreview ] = useState(null);
+    const [ updateProduct, setUpdateProduct ] = useState(false)
+    const [ targetProduct, setTargetProduct ] = useState(false)
     const [ networkErr, setNetworkErr ] = useState(null);
 
     const getProducts = async () => {
@@ -68,7 +70,8 @@ export default function BrandsHome (props) {
         event.preventDefault();
 
         try {
-            if (targetType !== '0' 
+            if (!updateProduct
+                && targetType !== '0' 
                 && productPic 
                 && productName
                 && productDescription
@@ -82,6 +85,7 @@ export default function BrandsHome (props) {
                     product.append('name', productName);
                     product.append('description', productDescription);
                     product.append('closing_date', closingDate);
+                    product.append('material_id', targetMaterial);
                 
                     const { data } = await axios.post(`/api/products/add/${brandID}`, product);
                     if (data.payload) {
@@ -94,10 +98,88 @@ export default function BrandsHome (props) {
                         setImagePreview(null);
                         getProducts();
                     }
-            }
+
+            } else if (updateProduct
+                && targetType !== '0'  
+                && productName
+                && productDescription
+                && closingDate
+                && new Date(closingDate) > new Date()
+                && targetMaterial !== '0'
+                && imagePreview) {
+                    let product = null;
+                    console.log("UPDATE !!")
+                    if (productPic) {
+                        console.log("HAS NEW PIC")
+                        product = new FormData();
+                        product.append('productPic', productPic);
+                        product.append('type_id', targetType);
+                        product.append('name', productName);
+                        product.append('description', productDescription);
+                        product.append('closing_date', closingDate);
+                        product.append('material_id', targetMaterial);
+                        product.append('default_pic', imagePreview);
+
+                    } else {
+                        console.log("USING PREVIOUS PIC")
+                        product = {
+                            type_id: targetType,
+                            name: productName,
+                            description: productDescription,
+                            closing_date: closingDate,
+                            default_pic: imagePreview,
+                            material_id: targetMaterial,
+                        }
+                    }
+
+                    const { data } = await axios.put(`/api/products/${targetProduct}`, product);
+                    if (data.payload) {
+                        setTargetType('0');
+                        setTargetMaterial('0');
+                        setProductName('');
+                        setProductDescription('');
+                        setClosingDate('');
+                        setProductPic(null);
+                        setImagePreview(null);
+                        setUpdateProduct(null);
+                        getProducts();
+                    }
+                }
+
         } catch (err) {
             setNetworkErr(err);
         }
+    }
+
+    const handleApprobation = async (productId) => {
+        try {
+            const { data } = await axios.patch(`/api/products/${productId}`)
+            console.log(data.payload)
+            getProducts()
+        } catch (err) {
+            setNetworkErr(err)
+        }
+    }
+
+    const handleDeleteProduct = async (productId) => {
+        try {
+            await axios.delete(`/api/products/${productId}`)
+            getProducts();
+        } catch (err) {
+            setNetworkErr(err)
+        }
+    }
+
+    const handleUpdateProduct = (product) => {
+        console.log(product)
+        setTargetProduct(product.id)
+        setUpdateProduct(true);
+        setTargetType(product.type_id);
+        setTargetMaterial(product.textile_id);
+        setProductName(product.name);
+        setProductDescription(product.description);
+        setClosingDate(product.closing_date.slice(0, 10));
+        setImagePreview(product.default_pic);
     }
 
     const hideFeedbackDiv = () => {
@@ -191,6 +273,9 @@ export default function BrandsHome (props) {
                     <ProductCard 
                         key={product.id+product.name+product.default_pic}
                         product={product}
+                        handleApprobation={handleApprobation}
+                        handleDeleteProduct={handleDeleteProduct}
+                        handleUpdateProduct={handleUpdateProduct}
                     />
                 )}
         </div>

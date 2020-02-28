@@ -74,7 +74,7 @@ class UsersHome extends React.Component {
 
 
 
-    handleProductByFilter = async (brand_id, material_id, type_id) => {
+    handleProductByFilter = async () => {
         const {brand_id, material_id, type_id} = this.state
         // let brandId = Number(brand_id)
         let getProductsQuery = `/api/products/filter/${brand_id}/${material_id}/${type_id}`
@@ -130,15 +130,15 @@ class UsersHome extends React.Component {
         event.preventDefault()
         console.log('submitted')
         this.handleProductByFilter()
-        if(Number(brand_id) !== 0){
-            this.handleProductByBrand()
-        } 
-        if (Number(material_id) !== 0){
-            this.handleProductByMaterial()
-        }  
-        if(Number(type_id) !==0){
-            this.handleProductByType()
-        }
+        // if(Number(brand_id) !== 0){
+        //     this.handleProductByBrand()
+        // } 
+        // if (Number(material_id) !== 0){
+        //     this.handleProductByMaterial()
+        // }  
+        // if(Number(type_id) !==0){
+        //     this.handleProductByType()
+        // }
     }
 
 
