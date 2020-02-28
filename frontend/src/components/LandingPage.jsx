@@ -32,11 +32,11 @@ export default function LandingPage (props) {
     }
 
     return (
-        <div className='container'>
-            <div className='jumbotron text-center'>
+        <div className='container' style={{borderRadius: "10px", boxShadow: "6px 11px 17px 2px rgba(0,0,0,0.47)", backgroundColor: "transparent", height: "700px", marginTop: "20px", paddingTop: "10px"}}>
+            <div className='jumbotron text-center' style={{backgroundColor: "transparent",borderRadius: "10px", borderStyle: "solid", borderWidth: "medium", borderColor: "#5680E9"}}>
                 <div className='container'>
-                    <h1 className='display-4'>A Real Fact</h1>
-                    <p className='lead'>{randomFact}</p>
+                    <h2 className='display-4' style={{textShadow: "1px 1px 1px #ccc"}}>Did you know...</h2>
+                    <p className='lead'>"{randomFact}"</p>
                 </div>
             </div>
             <div className='d-flex justify-content-around'>

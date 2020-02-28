@@ -82,7 +82,7 @@ function App(props) {
   }
 
   return (
-    <div className='container-fluid-md myApp'>
+    <div className='container-fluid-md myApp' >
       <div className='row topBar'>
         <TopBar />
       </div>

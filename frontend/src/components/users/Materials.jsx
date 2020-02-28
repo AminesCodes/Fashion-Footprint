@@ -18,9 +18,11 @@ class Materials extends Component {
         const url = `/api/materials/all`
         try {
             const { data: { payload } } = await axios.get(url);
-            console.log(payload)
+            // console.log(payload)
+            let newPayload = payload.splice(0, payload.length - 1)
+            console.log(newPayload)
             this.setState({
-                materials: payload
+                materials: newPayload
             })
         } catch (err) {
             this.setState({
@@ -37,24 +39,30 @@ class Materials extends Component {
     }
 
     render() {
-        const {materials} = this.state
+        const { materials } = this.state
         console.log(this.state)
-        let mappedMaterials = materials.map(el => {return (
-            <Carousel.Item>
-            <Card className="d-block w-100" style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={el.pic} />
-                <Card.Body>
-                    <Card.Title>
-                        {el.name}
-                    </Card.Title>
-                    <Card.Text >
-                        Care: {el.care}
-                        Affects on Environment: {el.environmental_impact}
-                  </Card.Text>
-                </Card.Body>
-            </Card>
-        </Carousel.Item>
-        )})
+        let mappedMaterials = materials.map(el => {
+            return (
+                <Carousel.Item style={{ textAlign: "center" }} >
+                    <img
+                        className="d-block w-100"
+                        // width="800px"
+                        src={el.pic}
+                        alt="First slide"
+                        height="800px"
+                    />
+                    <Carousel.Caption>
+                    <div class="jumbotron" style={{backgroundColor:"#DCDCDC", opacity: "0.9", borderRadius: "25px", textAlign:"center"}}>
+                    <h3 style={{color:"black"}}>{el.name}</h3>
+                    <p style={{margin: "5%", fontWeight:"bold", color:"black"}}>How to care: </p>
+                    <p style={{margin: "5%", fontWeight:"bold", color:"black"}}>{el.care}</p>
+                    <p style={{margin: "5%", fontWeight:"bold", color:"black"}}>How it affects the environment:</p>
+                    <p style={{margin: "5%", fontWeight:"bold", color:"black"}}>{el.environmental_impact}</p>
+                    </div>
+                </Carousel.Caption>
+                </Carousel.Item>
+            )
+        })
 
         if (this.state.networkErr) {
             return <Feedback err={this.state.networkErr} hideFeedbackDiv={this.hideFeedbackDiv} />
