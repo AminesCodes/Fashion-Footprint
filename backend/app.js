@@ -13,7 +13,7 @@ const wishlistRouter = require('./routes/wishlist');
 const factsRouter = require('./routes/facts');
 const typesRouter = require('./routes/types');
 const productsRouter = require('./routes/products');
-const typesRouter = require('./routes/types');
+// const typesRouter = require('./routes/types');
 
 const secret = require('./secret');
 const { checkUserLogged } = require('./auth/helpers');
