@@ -12,6 +12,20 @@ class Wishlist extends React.Component {
 		}
 	};
 
+	componentDidMount = async () => {
+		if(this.props.wishlist.willing_to_buy){
+			this.setState({
+				userBought: true
+			})
+		}
+		else{
+			this.setState({
+				userBought: false
+			})
+		}
+	}
+
+
 	handleClick = async () => {
 		let response = await axios.patch(`/api/wishlist/vote/${this.props.wishlist.wishlist_id}`);
 		console.log(response);
@@ -22,7 +36,8 @@ class Wishlist extends React.Component {
 
 
 	render(){
-	let button = this.state.userBought ? <a href="#" className="btn btn-danger red" onClick={this.handleClick}>Bought</a> : <a href="#" className="btn btn-primary" onClick={this.handleClick}>Would Buy</a>
+	let button = this.state.userBought ? <a href="#" className="btn btn-danger " onClick={this.handleClick}>Bought</a> : <a href="#" className="btn btn-primary" onClick={this.handleClick}>Would Buy</a>
+
 	let theText = this.props.wishlist.going_to_production ? <p className='going_to_production_true'>In Production!</p> : null;
 	return (
 		<div className="card col-sm-3 wishlist-card mx-3">
