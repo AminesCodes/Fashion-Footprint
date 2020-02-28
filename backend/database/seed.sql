@@ -16,15 +16,15 @@ CREATE TABLE users (
 
 CREATE TABLE brands (
     id SERIAL PRIMARY KEY,
-    email VARCHAR UNIQUE NOT NULL,
-    password VARCHAR NOT NULL,
-    name VARCHAR NOT NULL,
+    brand_email VARCHAR UNIQUE NOT NULL,
+    brand_password VARCHAR NOT NULL,
+    brand_name VARCHAR NOT NULL,
     business_id INT UNIQUE NOT NULL
 );
 
 CREATE TABLE textiles (
   id SERIAL PRIMARY KEY,
-  name VARCHAR,
+  textile_name VARCHAR,
   pic VARCHAR,
   care VARCHAR,
   environmental_impact VARCHAR
@@ -32,20 +32,20 @@ CREATE TABLE textiles (
 
 CREATE TABLE types (
   id SERIAL PRIMARY KEY, 
-  name VARCHAR
+  type_name VARCHAR
 );
 
 
 CREATE TABLE styles  (
   id SERIAL PRIMARY KEY, 
-  name VARCHAR
+  style_name VARCHAR
 );
 
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     brand_id INT REFERENCES brands(id) ON DELETE CASCADE,
     type_id INT REFERENCES types(id),
-    name VARCHAR,
+    product_name VARCHAR,
     default_pic VARCHAR,
     description VARCHAR,
     closing_date DATE, 
@@ -54,11 +54,12 @@ CREATE TABLE products (
 );
 
 CREATE TABLE votes  (
-    product_id INT 
-)
+    product_vote_id INT REFERENCES products(id) ON DELETE CASCADE,
+    user_vote_id INT REFERENCES users(id) ON DELETE CASCADE
+);
 
 CREATE TABLE wishlists (
-  id SERIAL PRIMARY KEY,
+  wishlist_id SERIAL PRIMARY KEY,
   willing_to_buy BOOLEAN DEFAULT false,
   user_id INT REFERENCES users(id),
   product_id INT  REFERENCES products(id),
@@ -76,7 +77,7 @@ INSERT INTO users (email, password, firstname, lastname)
             ('suzette@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Suzette', 'I'),
             ('amin@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Amin', 'B');
 
-INSERT INTO brands (email, password, name, business_id)
+INSERT INTO brands (brand_email, brand_password, brand_name, business_id)
     VALUES ('info@nike.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Nike', 1234567),
 ('info@hermes.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Hermes', 1234568),
 ('info@louis vuitton.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Louis Vuitton', 1234569),
@@ -174,15 +175,15 @@ INSERT INTO brands (email, password, name, business_id)
 ('info@cavalli.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Cavalli', 1234664),
 ('info@brunello cucinelli.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Brunello Cucinelli', 1234665);
 
-INSERT INTO textiles (name, pic, care, environmental_impact)
+INSERT INTO textiles (textile_name, pic, care, environmental_impact)
     VALUES ('wool', '/images/textiles/wool.jpg', 'You shoulc care for wool', 'wool is natural because sheep'),
           ('polyester', '/images/textiles/polyester.jpg', 'You shouldnt care for polyester', 'bad for environment, bad for you');
 
 
-INSERT INTO styles (name)
+INSERT INTO styles (style_name)
     VALUES ('red stuff');
 
-INSERT INTO types (name)
+INSERT INTO types (type_name)
     VALUES ('Baby Boys Shoes'),
            ('Baby Girls Shoes'),
            ('Boys Activewear'),
@@ -275,7 +276,7 @@ INSERT INTO types (name)
            ('Women Tops'),
            ('Women Watches');
 
-INSERT INTO  products (brand_id, type_id, name, default_pic, description, closing_date, textile_id)
+INSERT INTO  products (brand_id, type_id, product_name, default_pic, description, closing_date, textile_id)
     VALUES (1, 1, 'red shirt', '/images/products/redshirt.jpg', 'This is a red shirt', '2008-11-11', 1 ),
             (2, 2, 'red pants', '/images/products/redpants.jpg', 'These are red pants', '2009-11-11', 2);
 
@@ -284,6 +285,9 @@ INSERT INTO wishlists (willing_to_buy, user_id, product_id)
 
 INSERT INTO facts (fact)
     VALUES ('Your use of this site helps the environment 100%'), ('This is amazing');
+
+ 
+       
 
 
              
