@@ -24,7 +24,7 @@ CREATE TABLE brands (
 
 CREATE TABLE textiles (
   id SERIAL PRIMARY KEY,
-  textile_name VARCHAR,
+  name VARCHAR,
   pic VARCHAR,
   care VARCHAR,
   environmental_impact VARCHAR
@@ -54,14 +54,13 @@ CREATE TABLE products (
 );
 
 CREATE TABLE votes  (
-
     id SERIAL PRIMARY KEY,
-    product_vote_id INT REFERENCES products(id) ON DELETE CASCADE,
-    user_vote_id INT REFERENCES users(id) ON DELETE CASCADE
+    product_id INT REFERENCES products(id) ON DELETE CASCADE,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE wishlists (
-  wishlist_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   willing_to_buy BOOLEAN DEFAULT false,
   user_id INT REFERENCES users(id) ON DELETE CASCADE,
   product_id INT  REFERENCES products(id) ON DELETE CASCADE,
@@ -278,7 +277,7 @@ INSERT INTO types (name)
            ('Women Tops'),
            ('Women Watches');
 
-INSERT INTO  products (brand_id, type_id, product_name, default_pic, description, closing_date, textile_id)
+INSERT INTO  products (brand_id, type_id, name, default_pic, description, closing_date, textile_id)
     VALUES (1, 1, 'red shirt', '/images/products/redshirt.jpg', 'This is a red shirt', '2008-11-11', 1 ),
             (2, 2, 'red pants', '/images/products/redpants.jpg', 'These are red pants', '2009-11-11', 2);
 
@@ -289,6 +288,5 @@ INSERT INTO facts (fact)
     VALUES ('Your use of this site helps the environment 100%'), ('This is amazing');
 
 
-INSERT INTO votes (product_vote_id, user_vote_id)
+INSERT INTO votes (product_id, user_id)
   VALUES (1, 1), (1, 2), (2, 1), (2, 2), (2, 3), (2, 4);
-
