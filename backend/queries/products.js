@@ -65,15 +65,25 @@ const createProduct = async (brand, type, name, defaultPic, description, closing
      return await db.one(insertQuery,[brand, type, name, defaultPic, description, closingDate, material])
 }
 
-const updateProductInfoById = async (id, type, name, defaultPic, description, closingDate) =>{
+const updateProductInfoById = async (id, type, name, defaultPic, description, closingDate, materialId) =>{
     const updateQuery = `UPDATE products 
-    SET type_id=$2, name=$3, default_pic = $4, description=$5, closing_date=$6 
+    SET type_id=$2, name=$3, default_pic = $4, description=$5, closing_date=$6, textile_id=$7
     WHERE id=$1 RETURNING *`
-    return await db.one(updateQuery, [id, type, name, defaultPic, description, closingDate])
+    return await db.one(updateQuery, [id, type, name, defaultPic, description, closingDate, materialId])
 }
 
 const deleteProduct = async(id) =>{
-    return await db.one(`DELETE * FROM products WHERE id=$1 RETURNING *`, id)
+    return await db.one(`DELETE FROM products WHERE id=$1 RETURNING *`, id)
+}
+
+const updateProductStatus = async (productId) => {
+    const updateQuery = `
+        UPDATE products 
+        SET going_to_production=NOT going_to_production 
+        WHERE id=$1 
+        RETURNING *
+    `
+    return await db.one(updateQuery, productId)
 }
 
 
@@ -87,4 +97,5 @@ module.exports = {
     updateProductInfoById, 
     deleteProduct,
     getFilteredProducts,
+    updateProductStatus,
 }

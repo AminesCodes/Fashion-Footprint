@@ -12,9 +12,6 @@ export default function SideBar(props) {
                     <NavLink className='nav-link d-block m-2' to={`/brands/profile/${props.loggedUser.id}`} > Profile </NavLink>
                 </li>
                 <li className='nav-item'>
-                    <NavLink className='d-block m-2' to={`/brands/${props.loggedUser.id}/add`} > Add Product </NavLink>
-                </li>
-                <li className='nav-item'>
                     <NavLink className='d-block m-2' to='/about' > About </NavLink>
                 </li>
                 <li className='nav-item'>
