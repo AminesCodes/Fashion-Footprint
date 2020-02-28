@@ -5,7 +5,6 @@ import BrandsSideBar from './BrandsSideBar';
 import About from '../About';
 import BrandsHome from './BrandsHome';
 import BrandProfile from './BrandProfile';
-import AddProduct from './AddProduct'
 
 export default function BrandRouting(props) {
     return (
@@ -21,9 +20,6 @@ export default function BrandRouting(props) {
                             setUser={props.setUser} 
                             handleLogout={props.handleLogout} 
                             {...routeProps} />} >
-                    </Route> 
-                    <Route path='/brands/:brandId/add' render={routeProps => 
-                        <AddProduct loggedUser={props.loggedUser} {...routeProps} />} >
                     </Route> 
                     <Route path='/brands/:brandId' render={routeProps => 
                         <BrandsHome loggedUser={props.loggedUser} {...routeProps} />} >
