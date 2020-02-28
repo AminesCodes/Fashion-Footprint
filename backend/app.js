@@ -42,7 +42,7 @@ app.use('/api/auth', authRouter);
 app.use('/api/brands', checkUserLogged, brandsRouter);
 app.use('/api/materials', /*checkUserLogged,*/ materialsRouter);
 app.use('/api/wishlist', /*checkUserLogged,*/ wishlistRouter);
-app.use('/api/facts', checkUserLogged, factsRouter);
+app.use('/api/facts', factsRouter);
 app.use('/api/types', checkUserLogged, typesRouter);
 app.use('/api/products', /*checkUserLogged,*/ productsRouter);
 
