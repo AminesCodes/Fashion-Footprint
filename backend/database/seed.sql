@@ -16,9 +16,9 @@ CREATE TABLE users (
 
 CREATE TABLE brands (
     id SERIAL PRIMARY KEY,
-    brand_email VARCHAR UNIQUE NOT NULL,
-    brand_password VARCHAR NOT NULL,
-    brand_name VARCHAR NOT NULL,
+    email VARCHAR UNIQUE NOT NULL,
+    password VARCHAR NOT NULL,
+    name VARCHAR NOT NULL,
     business_id INT UNIQUE NOT NULL
 );
 
@@ -32,13 +32,13 @@ CREATE TABLE textiles (
 
 CREATE TABLE types (
   id SERIAL PRIMARY KEY, 
-  type_name VARCHAR
+  name VARCHAR
 );
 
 
 CREATE TABLE styles  (
   id SERIAL PRIMARY KEY, 
-  style_name VARCHAR
+  name VARCHAR
 );
 
 CREATE TABLE products (
@@ -54,6 +54,7 @@ CREATE TABLE products (
 );
 
 CREATE TABLE votes  (
+    id SERIAL PRIMARY KEY,
     product_vote_id INT REFERENCES products(id) ON DELETE CASCADE,
     user_vote_id INT REFERENCES users(id) ON DELETE CASCADE
 );
