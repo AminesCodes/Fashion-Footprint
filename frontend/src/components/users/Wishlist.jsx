@@ -13,7 +13,10 @@ class Wishlist extends React.Component {
 	};
 
 	handleClick = async () => {
+		let response = await axios.patch(`/api/wishlist/vote/${this.props.wishlist.wishlist_id}`);
+		console.log(response);
 		this.setState({userBought: !(this.state.userBought)});
+
 	}
 
 
@@ -27,7 +30,9 @@ class Wishlist extends React.Component {
 	  		<div className="card-body">
 		    	<h5 className="card-title">{this.props.wishlist.name}</h5>
 		    	<p className="card-text">{this.props.wishlist.description}</p>
-          {button}
+
+          		{button}
+
 		    	{theText}
 	 		</div>
 		</div>

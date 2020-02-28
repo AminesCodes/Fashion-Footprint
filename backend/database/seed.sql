@@ -288,5 +288,3 @@ INSERT INTO facts (fact)
 
 INSERT INTO votes (product_id, user_id)
   VALUES (1, 1), (1, 2), (2, 1), (2, 2), (2, 3), (2, 4);
-             
-     
