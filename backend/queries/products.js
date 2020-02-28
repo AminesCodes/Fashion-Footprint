@@ -16,6 +16,14 @@ const getProductByMaterial = async(id) => {
     return await db.any(`SELECT * FROM products WHERE textile_id = $1`, id)
 }
 
+const getProductByFilter = async(brand, material, type,) => await db.any(`
+    SELECT * 
+    FROM products 
+    WHERE CAST(brand_id AS TEXT) LIKE ${brand === 'ALL' ? '%' : brand } 
+    AND CAST(textile_id AS TEXT) LIKE ${material === 'ALL' ? '%' : material }
+    AND CAST(type_id AS TEXT) LIKE ${type === 'ALL' ? '%' : type }
+`, [brand, material, type])
+
 const getFilteredProducts = async (brandId, typeId, textileId) => {
     if (brandId === '0' && typeId === '0' && textileId === '0') {
         return await db.any('SELECT * FROM products')
@@ -70,6 +78,7 @@ const deleteProduct = async(id) =>{
 
 
 module.exports = {
+    getProductByFilter,
     getProductsByBrand,
     getProductByType,
     getProductByMaterial,
