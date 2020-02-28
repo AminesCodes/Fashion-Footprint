@@ -152,9 +152,7 @@ router.post('/add/:brand_id', upload.single('productPic'), async (req, res) => {
 
 
 /* PUT single product (updates everything) */
-// router.put('/:product_id', upload.single('productPic'), async (req, res) => {
-    router.put('/:product_id', (a,b,n) => {console.log("BEFORE"); n()}, upload.single('productPic'), (a,b,n) => {console.log("AFTER"); n()}, async (req, res) => {
-
+ router.put('/:product_id', upload.single('productPic'), async (req, res) => {
     let product_id = req.params.product_id
     let type_id = req.body.type_id
     let name = req.body.name
@@ -162,7 +160,6 @@ router.post('/add/:brand_id', upload.single('productPic'), async (req, res) => {
     let closing_date = req.body.closing_date
     let default_pic = req.body.default_pic
     let material_id = req.body.material_id
-    console.log(product_id, type_id, name, default_pic, description, closing_date, material_id)
 
     if (req.file) {
         // default_pic = 'http://' + req.headers.host + '/images/products/' + req.file.filename
@@ -170,7 +167,6 @@ router.post('/add/:brand_id', upload.single('productPic'), async (req, res) => {
     }
 
     try {
-        console.log(product_id, type_id, name, default_pic, description, closing_date, material_id)
         let updatedProduct = await productQueries.updateProductInfoById(product_id, type_id, name, default_pic, description, closing_date, material_id)
         res.status(200).json({
             message: `Success updated product with id ${product_id}`,
