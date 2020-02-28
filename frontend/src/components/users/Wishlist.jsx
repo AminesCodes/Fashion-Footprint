@@ -45,7 +45,9 @@ class Wishlist extends React.Component {
 	  		<div className="card-body">
 		    	<h5 className="card-title">{this.props.wishlist.name}</h5>
 		    	<p className="card-text">{this.props.wishlist.description}</p>
+
           		{button}
+
 		    	{theText}
 	 		</div>
 		</div>
