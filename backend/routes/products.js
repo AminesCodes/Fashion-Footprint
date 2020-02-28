@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productQueries = require('../queries/products');
-const { handleErrors } = require('./helpers/helpers');
+const { handleErrors, checkValidId } = require('./helpers/helpers');
 const multer = require('multer')
 
 const storage = multer.diskStorage({
@@ -89,6 +89,28 @@ router.get('/material/:textile_id', async (req, res) => {
 
     } catch (error) {
         handleErrors(res, error)
+    }
+})
+
+/* GET all product by filters */
+router.get('/filters/:brandId/:typeId/:textileId', async (req, res) => {
+    const brandId = req.params.brandId;
+    const typeId = req.params.typeId;
+    const textileId = req.params.textileId;
+    console.log(brandId, typeId, textileId)
+
+    if (checkValidId(res, brandId) && checkValidId(res, typeId) && checkValidId(res, textileId)) {
+        try {
+            const products = await productQueries.getFilteredProducts(brandId, typeId, textileId);
+            res.status(200).json({
+                error: false,
+                message: `Success, retrieved all products with filters`,
+                payload: products
+            })
+    
+        } catch (error) {
+            handleErrors(res, error)
+        }
     }
 })
 

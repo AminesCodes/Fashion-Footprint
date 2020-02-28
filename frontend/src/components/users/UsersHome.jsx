@@ -38,7 +38,7 @@ class UsersHome extends React.Component {
     }
 
     handleTypeOfGarnment = async () => {
-        let allTypes = '/api/types'
+        let allTypes = '/api/types/all'
         try {
             let { data } = await axios.get(allTypes)
             console.log(data.payload)
