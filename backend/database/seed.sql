@@ -16,9 +16,9 @@ CREATE TABLE users (
 
 CREATE TABLE brands (
     id SERIAL PRIMARY KEY,
-    brand_email VARCHAR UNIQUE NOT NULL,
-    brand_password VARCHAR NOT NULL,
-    brand_name VARCHAR NOT NULL,
+    email VARCHAR UNIQUE NOT NULL,
+    password VARCHAR NOT NULL,
+    name VARCHAR NOT NULL,
     business_id INT UNIQUE NOT NULL
 );
 
@@ -32,28 +32,30 @@ CREATE TABLE textiles (
 
 CREATE TABLE types (
   id SERIAL PRIMARY KEY, 
-  type_name VARCHAR
+  name VARCHAR
 );
 
 
 CREATE TABLE styles  (
   id SERIAL PRIMARY KEY, 
-  style_name VARCHAR
+  name VARCHAR
 );
 
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     brand_id INT REFERENCES brands(id) ON DELETE CASCADE,
-    type_id INT REFERENCES types(id),
-    product_name VARCHAR,
+
+    type_id INT REFERENCES types(id) ON DELETE CASCADE,
+    name VARCHAR,
     default_pic VARCHAR,
     description VARCHAR,
     closing_date DATE, 
-    textile_id INT REFERENCES textiles(id),
+    textile_id INT REFERENCES textiles(id) ON DELETE CASCADE,
     going_to_production BOOlEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE votes  (
+
     product_vote_id INT REFERENCES products(id) ON DELETE CASCADE,
     user_vote_id INT REFERENCES users(id) ON DELETE CASCADE
 );
@@ -61,9 +63,9 @@ CREATE TABLE votes  (
 CREATE TABLE wishlists (
   wishlist_id SERIAL PRIMARY KEY,
   willing_to_buy BOOLEAN DEFAULT false,
-  user_id INT REFERENCES users(id),
-  product_id INT  REFERENCES products(id),
-  style_id INT REFERENCES styles(id)
+  user_id INT REFERENCES users(id) ON DELETE CASCADE,
+  product_id INT  REFERENCES products(id) ON DELETE CASCADE,
+  style_id INT REFERENCES styles(id) ON DELETE CASCADE
 );
 
 CREATE TABLE facts (
@@ -77,7 +79,7 @@ INSERT INTO users (email, password, firstname, lastname)
             ('suzette@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Suzette', 'I'),
             ('amin@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Amin', 'B');
 
-INSERT INTO brands (brand_email, brand_password, brand_name, business_id)
+INSERT INTO brands (email, password, name, business_id)
     VALUES ('info@nike.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Nike', 1234567),
 ('info@hermes.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Hermes', 1234568),
 ('info@louis vuitton.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Louis Vuitton', 1234569),
@@ -180,10 +182,10 @@ INSERT INTO textiles (textile_name, pic, care, environmental_impact)
           ('polyester', '/images/textiles/polyester.jpg', 'You shouldnt care for polyester', 'bad for environment, bad for you');
 
 
-INSERT INTO styles (style_name)
+INSERT INTO styles (name)
     VALUES ('red stuff');
 
-INSERT INTO types (type_name)
+INSERT INTO types (name)
     VALUES ('Baby Boys Shoes'),
            ('Baby Girls Shoes'),
            ('Boys Activewear'),
@@ -286,9 +288,8 @@ INSERT INTO wishlists (willing_to_buy, user_id, product_id)
 INSERT INTO facts (fact)
     VALUES ('Your use of this site helps the environment 100%'), ('This is amazing');
 
- 
-       
 
-
+INSERT INTO votes (product_vote_id, user_vote_id)
+  VALUES (1, 1), (1, 2), (2, 1), (2, 2), (2, 3), (2, 4);
              
      
