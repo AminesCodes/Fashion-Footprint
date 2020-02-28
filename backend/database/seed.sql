@@ -79,7 +79,7 @@ INSERT INTO users (email, password, firstname, lastname)
             ('suzette@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Suzette', 'I'),
             ('amin@gmail.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Amin', 'B');
 
-INSERT INTO brands (brand_email, brand_password, brand_name, business_id)
+INSERT INTO brands (email, password, name, business_id)
     VALUES ('info@nike.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Nike', 1234567),
 ('info@hermes.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Hermes', 1234568),
 ('info@louis vuitton.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Louis Vuitton', 1234569),
@@ -177,15 +177,15 @@ INSERT INTO brands (brand_email, brand_password, brand_name, business_id)
 ('info@cavalli.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Cavalli', 1234664),
 ('info@brunello cucinelli.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Brunello Cucinelli', 1234665);
 
-INSERT INTO textiles (textile_name, pic, care, environmental_impact)
+INSERT INTO textiles (name, pic, care, environmental_impact)
     VALUES ('wool', '/images/textiles/wool.jpg', 'You shoulc care for wool', 'wool is natural because sheep'),
           ('polyester', '/images/textiles/polyester.jpg', 'You shouldnt care for polyester', 'bad for environment, bad for you');
 
 
-INSERT INTO styles (style_name)
+INSERT INTO styles (name)
     VALUES ('red stuff');
 
-INSERT INTO types (type_name)
+INSERT INTO types (name)
     VALUES ('Baby Boys Shoes'),
            ('Baby Girls Shoes'),
            ('Boys Activewear'),
@@ -289,7 +289,7 @@ INSERT INTO facts (fact)
     VALUES ('Your use of this site helps the environment 100%'), ('This is amazing');
 
 
-INSERT INTO votes (product_id, user_id)
+INSERT INTO votes (product_vote_id, user_vote_id)
   VALUES (1, 1), (1, 2), (2, 1), (2, 2), (2, 3), (2, 4);
 
              
