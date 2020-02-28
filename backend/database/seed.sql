@@ -55,7 +55,7 @@ CREATE TABLE products (
 
 CREATE TABLE votes  (
     product_id INT 
-)
+);
 
 CREATE TABLE wishlists (
   id SERIAL PRIMARY KEY,

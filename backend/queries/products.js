@@ -16,6 +16,14 @@ const getProductByMaterial = async(id) => {
     return await db.any(`SELECT * FROM products WHERE textile_id = $1`, id)
 }
 
+const getProductByFilter = async(brand, material, type,) => await db.any(`
+    SELECT * 
+    FROM products 
+    WHERE CAST(brand_id AS TEXT) LIKE ${brand === 'ALL' ? '%' : brand } 
+    AND CAST(textile_id AS TEXT) LIKE ${material === 'ALL' ? '%' : material }
+    AND CAST(type_id AS TEXT) LIKE ${type === 'ALL' ? '%' : type }
+`, [brand, material, type])
+
 const createProduct = async (brand, type, name, defaultPic, description, closingDate, material) =>{
     const insertQuery = `
     INSERT INTO products (brand_id, type_id, name, default_pic, description, closing_date, textile_id)
@@ -38,6 +46,7 @@ const deleteProduct = async(id) =>{
 
 
 module.exports = {
+    getProductByFilter,
     getProductsByBrand,
     getProductByType,
     getProductByMaterial,
