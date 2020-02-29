@@ -45,10 +45,12 @@ class Materials extends PureComponent {
             return (
                 <Carousel.Item style={{ textAlign: "center", overflow: 'auto'}} >
                     <img
-                        className="d-block mx-auto"
+                        // className="d-block mx-auto"
+                        className="d-block w-100"
                         src={el.pic}
                         alt="First slide"
-                        style={{ height: "90vh", width: "80vw", objectFit: 'scale-down'}}
+                        // style={{ height: "90vh", width: "80vw", objectFit: 'scale-down'}}
+                        style={{height: "700px"}}
                     />
                     <Carousel.Caption>
                         <div className='' style={{ backgroundColor: "#DCDCDC", opacity: "0.8", borderRadius: "25px", height: '80%'}}>

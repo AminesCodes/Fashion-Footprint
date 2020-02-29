@@ -169,17 +169,20 @@ class UsersHome extends React.PureComponent {
         return (
             <div className='container'>
                 <form onSubmit={this.handleSubmit}>
-                    <select className='custom-select m-1' name='brand_id' onChange={this.handleInput}>
+                    {/* <select className='custom-select m-1' name='brand_id' onChange={this.handleInput}> */}
+                    <select className='custom-select col-md-4 mb-3' name='brand_id' onChange={this.handleInput}>
                         <option value='0'>Select a brand</option>
                         {brandName}
                     </select>
 
-                    <select className='custom-select m-1' name='type_id' onChange={this.handleInput}>
+                    {/* <select className='custom-select m-1' name='type_id' onChange={this.handleInput}> */}
+                    <select className='custom-select col-md-4 mb-3' name='brand_id' onChange={this.handleInput}>
                         <option value='0'>Select a type</option>
                         {typeName}
                     </select>
 
-                    <select className='custom-select m-1' name='material_id' onChange={this.handleInput}>
+                    {/* <select className='custom-select m-1' name='material_id' onChange={this.handleInput}> */}
+                    <select className='custom-select col-md-4 mb-3' name='brand_id' onChange={this.handleInput}>
                         <option value='0'>Select a material</option>
                         {materialName}
                     </select>
