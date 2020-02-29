@@ -39,7 +39,6 @@ class WishlistContainer extends React.PureComponent {
 		} catch (err) {
 			this.setState({ networkErr: err });
 		}
-		
 	}
 
 	hideFeedbackDiv = () => {
