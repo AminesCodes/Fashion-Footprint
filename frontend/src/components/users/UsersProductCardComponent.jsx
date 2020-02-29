@@ -5,10 +5,10 @@ const UsersProductCardComponent = (props) => {
         <div className = 'productCard'>
                 <img className='productImg' src = {props.product.default_pic} alt={props.product.name}/>
                 <div className='secondaryButtonsDiv'>
-                    <button className= "btn btn-success " onClick = {() => props.handleVote(props.product.id)}>Vote</button>
-                    <button  className="btn btn-danger " onClick ={props.handleIgnore}>Ignore</button>
+                    <button className= "btn btn-info " onClick = {() => props.handleVote(props.product.id)}>Vote</button>
+                    <button  className="btn btn-dark " onClick ={props.handleIgnore}>Ignore</button>
                 </div>
-                <button  className='btn btn-warning' onClick={() => props.handleAddToWishlist(props.product.id)}>Wishlist</button>
+                <button  className='btn btn-light' style={{borderColor: "#5bc0de"}} onClick={() => props.handleAddToWishlist(props.product.id)}>Wishlist</button>
         </div>
     )
 }

@@ -1,20 +1,20 @@
-import React from 'react'
-import axios from 'axios'
-import UsersProductCardComponent from './UsersProductCardComponent'
+import React from 'react';
+import axios from 'axios';
+import UsersProductCardComponent from './UsersProductCardComponent';
+import Feedback from '../Feedback';
+
 
 class UsersHome extends React.PureComponent {
-    constructor() {
-        super()
-        this.state = {
-            brand_id: '0',
-            material_id: '0',
-            type_id: '0',
-            brandOptions: [],
-            materialOptions: [],
-            typeOptions: [], 
-            productsArr:[],
-            currentProductIndex: 0,
-        }
+    state = {
+        brand_id: '0',
+        material_id: '0',
+        type_id: '0',
+        brandOptions: [],
+        materialOptions: [],
+        typeOptions: [], 
+        productsArr:[],
+        currentProductIndex: 0,
+        networkErr: null,
     }
 
     componentDidMount() {
@@ -32,8 +32,8 @@ class UsersHome extends React.PureComponent {
             this.setState({
                 brandOptions: data.payload
             })
-        } catch (error) {
-            console.log(error)
+        } catch (err) {
+            this.setState({ networkErr: err });
         }
 
     }
@@ -45,8 +45,8 @@ class UsersHome extends React.PureComponent {
             this.setState({
                 typeOptions: data.payload
             })
-        } catch (error) {
-            console.log(error)
+        } catch (err) {
+            this.setState({ networkErr: err });
         }
     }
 
@@ -57,8 +57,8 @@ class UsersHome extends React.PureComponent {
             this.setState({
                 materialOptions: data.payload
             })
-        } catch (error) {
-            console.log(error)
+        } catch (err) {
+            this.setState({ networkErr: err });
         }
     }
 
@@ -92,49 +92,11 @@ class UsersHome extends React.PureComponent {
             this.setState({
                 productsArr: productData.data.payload
             })
-        } catch (error) {
-            console.log(error)
+        } catch (err) {
+            this.setState({ networkErr: err });
         }
 
     }
-    
-    // handleProductByBrand = async () => {
-    //     const { brand_id } = this.state
-    //     let brandId = Number(brand_id)
-    //     let getProductsQuery = `/api/products/brand/${brandId}/all`
-
-    //     try {
-    //         let productData = await axios.get(getProductsQuery)
-    //         console.log(productData)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-
-    // }
-
-    // handleProductByMaterial = async() => {
-    //     const {material_id} = this.state
-    //     let getProductByMaterialQuery = `/api/products/materials/${material_id}`
-    //     try{
-    //         let productInfo = await axios.get(getProductByMaterialQuery)
-    //         console.log(productInfo)
-    //     } catch(error){
-    //         console.log(error)
-    //     }
-
-    // }
-
-    // handleProductByType = async() =>{
-    //     const {type_id} = this.state
-    //     let getProductsByTypeQuery = `/api/products/type/${type_id}`
-    //     try{
-    //         let productByType = await axios.get(getProductsByTypeQuery)
-    //         console.log(productByType)
-    //     } catch(error){
-    //         console.log(error)
-    //     }
-    // }
-
 
     handleSubmit = (event) => {
         event.preventDefault()
@@ -143,7 +105,7 @@ class UsersHome extends React.PureComponent {
     }
 
     handleVote = async (productId) =>{
-        try{
+        try {
             await axios.post('/api/votes/addVote', {user_id: this.props.loggedUser.id, product_id: productId});
             this.setState((state, props) => {
                 return {currentProductIndex: state.currentProductIndex >= state.productsArr.length - 1
@@ -152,8 +114,8 @@ class UsersHome extends React.PureComponent {
                 };
               });
         }
-        catch(err){
-            console.dir(err);
+        catch (err) {
+            this.setState({ networkErr: err });
         }
     }
 
@@ -167,12 +129,12 @@ class UsersHome extends React.PureComponent {
                 };
             });
         }
-        catch(err){
-            console.dir(err);
+        catch (err) {
+            this.setState({ networkErr: err });
         }
     } 
 
-    handleIgnore = () =>{
+    handleIgnore = () => {
         this.setState((state, props) => {
             return {currentProductIndex: state.currentProductIndex >= state.productsArr.length - 1
                 ? 0
@@ -181,8 +143,15 @@ class UsersHome extends React.PureComponent {
         });
     }
 
+    hideFeedbackDiv = () => {
+		this.setState({ networkErr: null });
+	}
 
     render() {
+        if (this.state.networkErr) {
+			return <Feedback err={this.state.networkErr} hideFeedbackDiv={this.hideFeedbackDiv}/> 
+        }
+        
         const { brandOptions, typeOptions, materialOptions } = this.state
         let brandName = brandOptions.map(el => (
             <option key={el.name} value={el.id}>{el.name}</option>

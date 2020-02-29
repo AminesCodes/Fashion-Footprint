@@ -57,9 +57,7 @@ class Materials extends PureComponent {
                             <p style={{  fontWeight: "bold", color: "black" }}>How to care: </p>
                             <p style={{  fontWeight: "bold", color: "black" }}>{el.care}</p>
                             <p style={{  fontWeight: "bold", color: "black" }}>How it affects the environment:</p>
-                            {/* <div className = 'description' style ={{ width: '500px', marginRight:'50%', paddingRight:'20%' }}> */}
                             <p style={{ fontWeight: "bold", color: "black" }}>{el.environmental_impact}</p>
-                            {/* </div> */}
                         </div>
                     </Carousel.Caption>
                 </Carousel.Item>

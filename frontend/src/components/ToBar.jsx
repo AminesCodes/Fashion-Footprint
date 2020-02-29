@@ -1,5 +1,5 @@
 import React from 'react';
-import GoogleFontLoader from 'react-google-font-loader';
+// import GoogleFontLoader from 'react-google-font-loader';
 
 export default function TopBar(props) {
     return (
