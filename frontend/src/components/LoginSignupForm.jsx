@@ -72,14 +72,14 @@ export default function LoginSignupForm (props) {
         </span>
 
     const loginSubForm = <span>
-                <button className='btn btn-primary mb-2'>Login</button>
+                <button className='btn btn-dark mb-2'>Login</button>
                 <span className='mb-2 mx-2 mr-sm-2'>New to this app?
                     <span className='btn btn-link' onClick={() => setFormType('signup')}>Sign up</span>
                 </span>
         </span>
 
     const signupSubForm = <span>
-                <button className='btn btn-primary mb-2'>Sign-up</button>
+                <button className='btn btn-dark mb-2'>Sign-up</button>
                 <span className='mb-2 mx-2 mr-sm-2'>Already a user?
                     <span className='btn btn-link' onClick={() => setFormType('login')}>Login</span>
                 </span>

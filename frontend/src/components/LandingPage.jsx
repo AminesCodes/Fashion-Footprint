@@ -32,16 +32,20 @@ export default function LandingPage (props) {
     }
 
     return (
-        <div className='container' style={{borderRadius: "10px", boxShadow: "6px 11px 17px 2px rgba(0,0,0,0.47)", backgroundColor: "transparent", height: "700px", marginTop: "20px", paddingTop: "10px"}}>
-            <div className='jumbotron text-center' style={{backgroundColor: "transparent",borderRadius: "10px", borderStyle: "solid", borderWidth: "medium", borderColor: "#5680E9"}}>
-                <div className='container'>
-                    <h2 className='display-4' style={{textShadow: "1px 1px 1px #ccc"}}>Did you know...</h2>
+        <div className='container' style={{height: "100%", boxShadow: "6px 11px 17px 2px rgba(0,0,0,0.47)", backgroundColor: "#7BA098"}}>
+            <img src={require('../assets/FFlogo.png')} alt="logo"/>
+            <h1 style={{display: "inline"}}>FASHION FOOTPRINT</h1>
+
+            <div className='jumbotron text-center' style={{backgroundColor: "transparent", display: "inline"}}>
+                <div className='container' style={{display: "inline"}}>
+                    <h2 className='display-4' >Did you know...</h2>
                     <p className='lead'>"{randomFact}"</p>
                 </div>
             </div>
+
             <div className='d-flex justify-content-around'>
-                <button className='btn btn-primary' onClick={() => setUserType('users')} >I'm a user</button>
-                <button className='btn btn-primary' onClick={() => setUserType('brands')}>I'm a brand</button>
+                <button className='btn btn-dark' onClick={() => setUserType('users')} >I'm a user</button>
+                <button className='btn btn-dark' onClick={() => setUserType('brands')}>I'm a brand</button>
             </div>
 
             { userType 

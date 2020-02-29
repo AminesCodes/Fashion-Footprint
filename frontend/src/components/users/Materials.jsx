@@ -52,14 +52,16 @@ class Materials extends Component {
                         height="800px"
                     />
                     <Carousel.Caption>
-                    <div class="jumbotron" style={{backgroundColor:"#DCDCDC", opacity: "0.9", borderRadius: "25px", textAlign:"center"}}>
-                    <h3 style={{color:"black"}}>{el.name}</h3>
-                    <p style={{margin: "5%", fontWeight:"bold", color:"black"}}>How to care: </p>
-                    <p style={{margin: "5%", fontWeight:"bold", color:"black"}}>{el.care}</p>
-                    <p style={{margin: "5%", fontWeight:"bold", color:"black"}}>How it affects the environment:</p>
-                    <p style={{margin: "5%", fontWeight:"bold", color:"black"}}>{el.environmental_impact}</p>
-                    </div>
-                </Carousel.Caption>
+                        <div class='jumbotron'style={{ backgroundColor: "#DCDCDC", opacity: "0.9", borderRadius: "25px", textAlign: "center"}}>
+                            <h3 style={{ color: "black" }}>{el.name}</h3>
+                            <p style={{  fontWeight: "bold", color: "black" }}>How to care: </p>
+                            <p style={{  fontWeight: "bold", color: "black" }}>{el.care}</p>
+                            <p style={{  fontWeight: "bold", color: "black" }}>How it affects the environment:</p>
+                            {/* <div className = 'description' style ={{ width: '500px', marginRight:'50%', paddingRight:'20%' }}> */}
+                            <p style={{ fontWeight: "bold", color: "black" }}>{el.environmental_impact}</p>
+                            {/* </div> */}
+                        </div>
+                    </Carousel.Caption>
                 </Carousel.Item>
             )
         })

@@ -9,7 +9,7 @@ export default function About(props) {
 
     return (
         <div className='container mt-5'>
-            <Jumbotron style={{borderRadius: "10px", borderStyle: "solid", borderWidth: "medium", borderColor: "#5680E9", boxShadow: "6px 11px 17px 2px rgba(0,0,0,0.47)"}} fluid >
+            <Jumbotron style={{borderRadius: "10px", borderStyle: "solid", borderWidth: "medium", borderColor: "#7BA098", boxShadow: "6px 11px 17px 2px rgba(0,0,0,0.47)", backgroundColor: "#F0E8DD"}} fluid >
                 <Container style={{textAlign: "center"}}>
                     <h1>About Us</h1>
                     <p>
@@ -21,7 +21,7 @@ export default function About(props) {
                     </p>
                 </Container>
             </Jumbotron>
-            <Jumbotron style={{borderRadius: "10px", borderStyle: "solid", borderWidth: "medium", borderColor: "#5680E9", boxShadow: "6px 11px 17px 2px rgba(0,0,0,0.47)"}} fluid>
+            <Jumbotron style={{borderRadius: "10px", borderStyle: "solid", borderWidth: "medium", borderColor: "#7BA098", boxShadow: "6px 11px 17px 2px rgba(0,0,0,0.47)",  backgroundColor: "#F0E8DD"}} fluid>
                 <Container style={{textAlign: "center"}}>
                     <h1>Meet the Team!</h1>
                     <Row>
