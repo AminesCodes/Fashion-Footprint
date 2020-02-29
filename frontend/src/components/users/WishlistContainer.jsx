@@ -7,7 +7,7 @@ import Feedback from '../Feedback';
 class WishlistContainer extends React.PureComponent {
 	state = {
 		wishListItems: [],
-		networkErr: null,
+		networkErr: null
 	}
 
 	getWishList = async () => {
@@ -26,10 +26,20 @@ class WishlistContainer extends React.PureComponent {
 	handleWish = async (wishlistId) => {
 		try {
 			await axios.patch(`/api/wishlist/vote/${wishlistId}`);
-			this.getWishList()
+			this.getWishList();
 		} catch (err) {
 			this.setState({ networkErr: err });
 		}
+	}
+
+	deleteWish = async (id) => {
+		try {
+			await axios.delete(`/api/wishlist/${id}`);
+			this.getWishList();
+		} carch (err) {
+			this.setState({ networkErr: err });
+		}
+		
 	}
 
 	hideFeedbackDiv = () => {
@@ -48,6 +58,7 @@ class WishlistContainer extends React.PureComponent {
 					key={elem.wishlist_id}
 					wishlist={elem}
 					handleWish={this.handleWish}
+					deleteWish={this.deleteWish}
 				/>)
 			}
         </div>);
