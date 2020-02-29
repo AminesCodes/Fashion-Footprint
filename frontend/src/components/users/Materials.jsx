@@ -50,7 +50,7 @@ class Materials extends PureComponent {
                         src={el.pic}
                         alt="First slide"
                         // style={{ height: "90vh", width: "80vw", objectFit: 'scale-down'}}
-                        style={{height: "700px"}}
+                        style={{height: "90vh"}}
                     />
                     <Carousel.Caption>
                         <div className='' style={{ backgroundColor: "#DCDCDC", opacity: "0.8", borderRadius: "25px", height: '80%'}}>
@@ -71,7 +71,7 @@ class Materials extends PureComponent {
             return <Feedback err={this.state.networkErr} hideFeedbackDiv={this.hideFeedbackDiv} />
         } else {
             return (
-                <div>
+                <div style={{width: "90%"}}>
                     <Carousel>
                         {mappedMaterials}
                     </Carousel>
