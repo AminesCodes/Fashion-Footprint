@@ -25,7 +25,6 @@ router.post('/addVote', async (req, res) => {
     let userId = parseInt(req.body.user_id);
     let productId = parseInt(req.body.product_id);
     try{
-        console.log('lol');
         const newVote = await votesQueries.addNewVote(userId, productId);
         res.json({
             error: false,
@@ -33,7 +32,6 @@ router.post('/addVote', async (req, res) => {
         })
     }
     catch (err) {
-        console.log(err);
             handleErrors(res, err);
     }
 })
