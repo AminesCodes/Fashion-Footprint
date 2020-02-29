@@ -10,55 +10,6 @@ An app that allows brands to share their designs and styles pre-season so that c
 ## Database Structure
 ![database](./assets/database.jpg)
 
-- **Users**
-  - id
-  - email (username) - _Unique_
-  - password
-  - firstname
-  - lastname
-
-- **Brands**
-  - id
-  - email (username) - _Unique_
-  - password
-  - name
-  - businessID
-  
-- **Products**
-  - id
-  - brand_id - _References Brands_
-  - type 
-  - name 
-  - defaultPic
-  - description 
-  - specifications
-  - closingDate
-  - textile_id - _References Textiles_ (ARR)
-
-- **Styles**
-  - id
-  - name
-  - pic
-  - product_id - _References Products_
-
-- **Textiles**
-  - id
-  - name
-  - pic
-  - care 
-  - environmentalImpact (how to recycle, amount of water used)
-
-- **Wishlist**
-  - id
-  - willing to buy (boolean)
-  - user_id - _References Users_
-  - product_id - _References Products_
-  - style_id - _References Styles_
-
-- **Facts (only if there isn't an API)**
-  - id
-  - fact
-
 
 ## API Endpoints
 - **Users**
@@ -138,7 +89,4 @@ An app that allows brands to share their designs and styles pre-season so that c
 
 
 
-### Wireframes 
-![login page](./assets/login.png)
-![product page](./assets/productpage.png)
-![user preferences page](./assets/userpreferences.png)
+[Wireframes](./assets/wireframes.md)

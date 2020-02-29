@@ -38,6 +38,8 @@ router.post('/add/:product_id', async (req, res, next) => {
                 message: "Success added new wish",
                 payload: newWish
             }) 
+            } else {
+                res.status(204).end()
             }
         } catch (err) {
             handleErrors(res, err)
@@ -58,13 +60,14 @@ router.patch('/vote/:wish_id', async (req, res, next) => {
 
     try {
         let updatedWish = await wishlistQueries.updateWishlistItem(wish_id);
-        console.log(updatedWish);
+        console.log('Updated Vote: ', updatedWish);
         if(updatedWish.willing_to_buy){
-            let updatedVote = await wishlistQueries.createVote(wish_id);
-            console.log(updatedVote);
+            updatedVote = await wishlistQueries.createVote(wish_id);
+            console.log('After Update: ', updatedVote);
         }
         else {
-            let updatedVote = await wishlistQueries.deleteVote(wish_id);
+            console.log('ELSE')
+            updatedVote = await wishlistQueries.deleteVote(wish_id);
         }
         res.status(200).json({
             message: `Success updated wish with id ${wish_id}`,
