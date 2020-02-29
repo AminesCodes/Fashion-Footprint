@@ -2,7 +2,6 @@
 DROP DATABASE IF EXISTS fashion_footprint_db;
 
 CREATE DATABASE fashion_footprint_db;
-
 \c fashion_footprint_db;
 
 CREATE TABLE users (
@@ -264,60 +263,60 @@ INSERT INTO types (name)
            ('Women Watches');
 
 INSERT INTO facts(fact)
-    VALUES('The apparel and footwear industries account for a combined estimate of 8% of the world’s greenhouse gas emissions, and fashion is the third highest-polluting industry in the world.'), 
+    VALUES ('The apparel and footwear industries account for a combined estimate of 8 percent of the world’s greenhouse gas emissions, and fashion is the third highest-polluting industry in the world.'), 
            ('A 2016 McKinsey report revealed that three-fifths of all clothing items will end up in an incinerator or landfill within a year after being produced.'),
-           ('If we keep this up, by 2050 the fashion industry could use more than 26 percent of the “carbon budget” associated with a 2o C pathway (a long-term goal to limit global warming to less than 2°C above pre-industrial levels).'),
+           ('If we keep this up, by 2050 the fashion industry could use more than 26 percent of the carbon budget associated with a 2o C pathway (a long-term goal to limit global warming to less than 2 Celsius above pre-industrial levels).'),
            ('We don’t really wear our clothes. Worldwide, clothing utilization (how often we put something on) has decreased by 36 percent compared to 15 years ago.'),
            ('It’s estimated that less than 1 percent of the material used to produce clothing is recycled into something more. That’s about a loss of 100 billion USD worth of materials every year.'),
            ('By 2030, it’s expected that fashion waste will increase to a 148 million ton problem.'),
            ('According  the Global Fashion Agenda, 26 percent of business owners surveyed believe that low consumer willingness to pay a premium for sustainable products was the greatest barrier for them to become more sustainable.'),
-           ('…But consumer attitudes for ethical fashion are increasingly favorable. Sixty percent of millennials say they want to shop more “sustainably.”'),
+           ('…But consumer attitudes for ethical fashion are increasingly favorable. Sixty percent of millennials say they want to shop more sustainably.'),
            ('Many brands are moving to more sustainable production methods. As of May 2018, 12.5 percent of the global fashion market has pledged to make changes by 2020.'),
            ('The clothing brand Patagonia was the first to make polyester fleece out of plastic bottles.'),
            ('Cotton, a popular material in clothing, requires high levels of water and pesticides, which cause issues in developing countries.'),
            ('About 2,000 different chemicals are used in textile processing — yet only 16 are approved by the Environmental Protection Agency.'),
            ('According to the United Nations Economic Commission for Europe, the fashion industry produces 20 percent of global wastewater.'),
            ('Only 15 percent of consumers recycle their used clothing.'),
-           ('The fashion industry (including apparel and footwear) accounts for 8.1% of the world’s greenhouse gas emissions.'),
-           ('As much as 20% to 35% of all primary source microplastics in the marine environment are from synthetic clothing, according to academic estimates.'),
-           ('The value of the ethical clothing market increased by 19.9% in 2018, according to Ethical Consumer magazine.'),
+           ('The fashion industry (including apparel and footwear) accounts for 8.1 percent of the world’s greenhouse gas emissions.'),
+           ('As much as 20 percent to 35 percent of all primary source microplastics in the marine environment are from synthetic clothing, according to academic estimates.'),
+           ('The value of the ethical clothing market increased by 19.9 percent in 2018, according to Ethical Consumer magazine.'),
            ('By 2030, it’s expected that there will be 148 million tons of fashion waste.'),
            ('7,000 liters of water are used in the making of a pair of jeans.'),
-           ('Under 1% of the material used to produce clothing is recycled into new clothing at the end of its life.'),
-           ('12.5% of global fashion companies have pledged to make changes to their process in favor of adopting more sustainable practices by 2020.'),
-           ('59 major textile, apparel, and retailers – including Adidas, Dibella, Eileen Fisher, Gap Inc., H&M, Lindex, MetaWear, Target, and Timberland— aim to increase their use of Recycled Polyester (rPET) by at least 25% by 2020.'),
-           ('Of 71 leading clothing retailers in the UK, 77% believed there was a likelihood of modern slavery occurring at some stage in their supply chains.'),
+           ('Under 1 percent of the material used to produce clothing is recycled into new clothing at the end of its life.'),
+           ('12.5 percent of global fashion companies have pledged to make changes to their process in favor of adopting more sustainable practices by 2020.'),
+           ('59 major textile, apparel, and retailers – including Adidas, Dibella, Eileen Fisher, Gap Inc., H&M, Lindex, MetaWear, Target, and Timberland— aim to increase their use of Recycled Polyester (rPET) by at least 25 percent by 2020.'),
+           ('Of 71 leading clothing retailers in the UK, 77 percent believed there was a likelihood of modern slavery occurring at some stage in their supply chains.'),
            ('A polyester shirt has more than double the carbon footprint of a cotton shirt (5.5 kg CO2e vs. 2.1 kg CO2e).'),
            ('One kilogram of cotton – equivalent to the weight of a shirt and pair of jeans – can take as much as 10,000–20,000 liters of water to produce.'),
-           ('The fashion industry is projected to use 35% more land for fibre production by 2030—an extra 115 million hectares that could be left for biodiversity or used to grow crops to feed an expanding population.'),
+           ('The fashion industry is projected to use 35 percent more land for fibre production by 2030—an extra 115 million hectares that could be left for biodiversity or used to grow crops to feed an expanding population.'),
            ('Textile production is a major contributor to climate change. It produces an estimated 1.2 billion tonnes of CO2 equivalent (CO2e) per year – more than international flights and maritime shipping combined.'),
-           ('Worldwide clothing utilization has dropped by 36% compared to how much we used our clothes 15 years ago.'),
-           ('Only 15% of people recycle their old or used clothing.'),
-           ('An increase of 10% in second-hand clothing sales could deliver environmental benefits, cutting carbon emissions per tonne of clothing by 3% and water use by 4%.'),
-           ('Extending the life of clothing by an extra nine months could reduce carbon, waste and water footprints by around 20–30% each.'),
+           ('Worldwide clothing utilization has dropped by 36 percent compared to how much we used our clothes 15 years ago.'),
+           ('Only 15 percent of people recycle their old or used clothing.'),
+           ('An increase of 10 percent in second-hand clothing sales could deliver environmental benefits, cutting carbon emissions per tonne of clothing by 3 percent and water use by 4 percent.'),
+           ('Extending the life of clothing by an extra nine months could reduce carbon, waste and water footprints by around 20–30 percent each.'),
            ('Approximately 1,130,000 tonnes of clothing were purchased in the UK in 2016, an increase of almost 200,000 tonnes since 2012.'),
-           ('In the UK alone, around three hundred thousand tonnes of clothing still ends up in household bins every year with around 20% of this going to landfill and 80% incinerated.'),
+           ('In the UK alone, around three hundred thousand tonnes of clothing still ends up in household bins every year with around 20 percent of this going to landfill and 80 percent incinerated.'),
            ('Eight to 10 percent of global greenhouse gas emissions comes from the fashion industry, which is more than the aviation and maritime shipping industries combined.'),
            ('The fashion industry produces and sells somewhere between 80 billion and 150 billion garments a year globally.'),
            ('Nearly three-fifths of all clothing produced ends up in incinerators or landfills within years of being made.'),
            ('Sales of clothing have almost doubled from one trillion dollars in 2002 to 1.8 trillion dollars in 2015.'),
            ('Fashion consumption is expected to grow, with sales of clothing projected to rise to $2.1 trillion by 2025'),
-           ('Apparel consumption is expected to rise by 63%  from 62 million tons today to 102 million tons in 2030.'),
-           ('The average person buys 60% more items of clothing and keeps them for about half as long as 15 years ago.'),
+           ('Apparel consumption is expected to rise by 63 percent  from 62 million tons today to 102 million tons in 2030.'),
+           ('The average person buys 60 percent more items of clothing and keeps them for about half as long as 15 years ago.'),
            ('On average a person consumes 11.4kg of apparel each year.'),
-           ('30% of clothing in the average UK wardrobe has not been worn in the past year or so. This equates to around 1.7 billion items of clothing not been worn for at least a year.'),
-           ('The average Australian consumer spends $2,288 on clothing and footwear per year.'),
+           ('30 percent of clothing in the average UK wardrobe has not been worn in the past year or so. This equates to around 1.7 billion items of clothing not been worn for at least a year.'),
+           ('The average Australian consumer spends 2,288 on clothing and footwear per year.'),
            ('Australia is the second-largest consumers of new textiles, each person buying an average of 27kg of new textiles.'),
            ('North Americans is the largest consumers of new textiles, consuming 37kgs each.'),
            ('Western Europeans consume 22kg of new textiles each.'),
            ('The average UK household spends £1,700 on purchasing clothing annually.'),
-           ('The contents of the average UK household wardrobe are worth £4,000 or more.'),
+           ('The contents of the average UK household wardrobe are worth 4,000 or more.'),
            ('The carbon emissions generated by the clothing of the average UK household is equivalent to driving an average modern car 6,000 miles.'),
            ('On average, the global water footprint of a UK household’s clothing exceeds 200,000 litres per year – enough to fill over 1,000 bathtubs.'),
            ('In the UK, the estimated average lifetime for a garment of clothing is 2.2 years, or just under two years and three months.'),
            ('Americans consume nearly 20 billion garments a year, equivalent to 62 garments each.'),
            ('Global average consumption of new textiles is 13kg per person.'),
-           ('In the past 15 years, the average number of times a garment is worn before it ceases to be used has decreased by 36%.');
+           ('In the past 15 years, the average number of times a garment is worn before it ceases to be used has decreased by 36 percent.');
 
 INSERT INTO textiles (name, pic, care, environmental_impact)
       VALUES('Cotton', 'https://image.made-in-china.com/2f0j00hukGmbePfHon/Knitting-Fabric-Solid-Cotton-Fabric-Cotton-Spandex-Fabric-for-T-Shirt-Pullover.jpg', 'Hot Water Wash — Tumble Dry Warm', 'Cotton fabric is made from yarn spun from the fibres of the cotton seedpod, called a boll. Most of the worlds cotton is grown in India and China, usually on farms that rely heavily on pesticides, fertilisers and intensive irrigation. Growing 1 kilogram of non-organic cotton lint (the raw cotton fibre) uses about 2,120 litres of water from irrigation, according to Textile Exchange, a not-for-profit group promoting sustainable practices within the industry. Cotton is generally harvested by machine, then undergoes ginning, a mechanical process that removes the fibres from their seeds. These fluffy fibres are then subject to a series of processes, such as carding and combing, to smooth and refine them until they are ready to be spun into yarn. A Textile Exchange life cycle analysis published last year found organic cotton — which is usually grown using water-conserving practices and without pesticides and fertilisers — had reduced potential for global warming, acidification, soil erosion, water consumption and non-renewable energy compared with conventional cotton production.'),
@@ -330,12 +329,12 @@ INSERT INTO textiles (name, pic, care, environmental_impact)
 
 INSERT INTO  products(brand_id, type_id, name, default_pic, description, closing_date, textile_id)
     VALUES 
-      (2,	54,	'2020 - Polo', '/images/products/1582937542079-Levis-M-2.jpg',	'100% cotton Perfect for everyday use',	'2020-05-01',	1),
-      (2,	63,	'2020 - Legendary T-Shirt',	'/images/products/1582937659237-Levis-M-1.jpeg',	'100% cotton Perfect for everyday life and active persons',	'2020-04-01',	1),
-      (2,	48,	'501', '/images/products/1582937776179-Levis-P-M-1.jpg', '100% Cotton',	'2020-06-01', 1),
+      (2,	54,	'2020 - Polo', '/images/products/1582937542079-Levis-M-2.jpg',	'100 percent cotton Perfect for everyday use',	'2020-05-01',	1),
+      (2,	63,	'2020 - Legendary T-Shirt',	'/images/products/1582937659237-Levis-M-1.jpeg',	'100 percent cotton Perfect for everyday life and active persons',	'2020-04-01',	1),
+      (2,	48,	'501', '/images/products/1582937776179-Levis-P-M-1.jpg', '100 percent Cotton',	'2020-06-01', 1),
       (2,	53,	'2020 Spring', '/images/products/1582939261714-Levis-P-M-2.jpg', 'Casual', '2020-05-01', 3),
       (2,	90,	'2020 - Spring', '/images/products/1582939436910-Levis-W-1.jpg', 'Confi', '2020-03-01',	1),
-      (2,	90,	'2020 - Summer', '/images/products/1582939547645-Levis-W-2.jpeg', 'Confi 100% cotton', '2020-04-01', 1),
+      (2,	90,	'2020 - Summer', '/images/products/1582939547645-Levis-W-2.jpeg', 'Confi 100 percent cotton', '2020-04-01', 1),
       (2,	83,	'Stylish', '/images/products/1582939711780-Levis-2-W-2.jpg',	'Stylish', '2020-06-01', 3),
       (2,	79,	'2020 - Summer', '/images/products/1582939843745-Levis-P-W-2.jpg', 'Style',	'2020-03-01', 1);
 
