@@ -28,7 +28,7 @@ export default function ProductCard(props) {
 		return <Feedback err={networkErr} hideFeedbackDiv={hideFeedbackDiv}/> 
 	}
 
-    return(
+	return(
         <div className="card col-sm-3 wishlist-card m-3">
 			<div className='d-flex justify-content-around'>
                 <button className='btn btn-danger' onClick={() => props.handleDeleteProduct(props.product.id)} >Delete</button>
@@ -43,15 +43,15 @@ export default function ProductCard(props) {
 				</div>
 				{
 					props.product.going_to_production
-					?	<button 
-							className='btn btn-success w-100' 
-							onClick={() => props.handleApprobation(props.product.id)}
-							>Approve!
-						</button>
-					:   <button 
+					?   <button 
 							className='btn btn-danger w-100' 
 							onClick={() => props.handleApprobation(props.product.id)}
 							>Discard!
+						</button>
+					:	<button 
+							className='btn btn-success w-100' 
+							onClick={() => props.handleApprobation(props.product.id)}
+							>Approve!
 						</button>
 				}
 	 		</div>

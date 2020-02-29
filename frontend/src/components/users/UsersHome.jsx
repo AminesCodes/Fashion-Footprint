@@ -142,6 +142,45 @@ class UsersHome extends React.Component {
         this.handleProductByFilter(brand_id, material_id, type_id)
     }
 
+    handleVote = async (productId) =>{
+        try{
+            await axios.post('/api/votes/addVote', {user_id: this.props.loggedUser.id, product_id: productId});
+            this.setState((state, props) => {
+                return {currentProductIndex: state.currentProductIndex >= state.productsArr.length - 1
+                    ? 0
+                    : state.currentProductIndex + 1
+                };
+              });
+        }
+        catch(err){
+            console.dir(err);
+        }
+    }
+
+    handleAddToWishlist = async (productId) => { 
+        try {
+            await axios.post(`/api/wishlist/add/${productId}`, {user_id: this.props.loggedUser.id});
+            this.setState((state, props) => {
+                return {currentProductIndex: state.currentProductIndex >= state.productsArr.length - 1
+                    ? 0
+                    : state.currentProductIndex + 1
+                };
+            });
+        }
+        catch(err){
+            console.dir(err);
+        }
+    } 
+
+    handleIgnore = () =>{
+        this.setState((state, props) => {
+            return {currentProductIndex: state.currentProductIndex >= state.productsArr.length - 1
+                ? 0
+                : state.currentProductIndex + 1
+            };
+        });
+    }
+
 
     render() {
         const { brandOptions, typeOptions, materialOptions } = this.state
@@ -182,7 +221,10 @@ class UsersHome extends React.Component {
                         this.state.productsArr.length
                         ? <UsersProductCardComponent 
                                 product={this.state.productsArr[this.state.currentProductIndex]}
-                                userId={this.props.loggedUser.id}
+                                // userId={this.props.loggedUser.id}
+                                handleVote={this.handleVote}
+                                handleAddToWishlist={this.handleAddToWishlist}
+                                handleIgnore={this.handleIgnore}
                             />
                         : null
                     }

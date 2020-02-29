@@ -40,7 +40,7 @@ class Wishlist extends React.Component {
 
 	let theText = this.props.wishlist.going_to_production ? <p className='going_to_production_true'>In Production!</p> : null;
 	return (
-		<div className="card col-sm-3 wishlist-card mx-3">
+		<div className="card col-sm-3 wishlist-card m-3">
  			<img src={this.props.wishlist.default_pic} className="card-img-top " alt={this.props.wishlist.name} style={{height: '200px', objectFit: 'scale-down'}}/>
 	  		<div className="card-body">
 		    	<h5 className="card-title">{this.props.wishlist.name}</h5>
