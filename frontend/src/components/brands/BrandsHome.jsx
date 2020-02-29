@@ -261,7 +261,7 @@ export default function BrandsHome (props) {
                     }
                 </div>
 
-                <button className='btn btn-primary mb-2 mr-sm-2'>Submit</button>              
+                <button className='btn btn-dark mb-2 mr-sm-2'>Submit</button>              
             </form>
             
             <div className='row text-center'>

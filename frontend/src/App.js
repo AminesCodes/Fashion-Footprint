@@ -6,7 +6,9 @@ import Feedback from './components/Feedback';
 import LandingPage from './components/LandingPage';
 import TopBar from './components/ToBar';
 import UsersRouting from './components/users/UsersRouting';
+import UsersSideBar from './components/users/UsersSideBar';
 import BrandsRouting from './components/brands/BrandsRouting';
+import BrandsSideBar from './components/brands/BrandsSideBar';
 
 
 function App(props) {
@@ -70,28 +72,38 @@ function App(props) {
 
   if (loggedUser.business_id) {
     return (
-      <div className='container-fluid-md myApp'>
-        <div className='text-center'>
-          {/* <TopBar /> */}
-          <h1 className='text-center'>Fashion Footprint</h1>
-        </div>
-        <div className='row mx-auto overflow-auto myPage'>
-          <BrandsRouting loggedUser={loggedUser} handleLogout={handleLogout} setUser={setUser} />
+      <div className='container-fluid-md myApp row'>
+        <nav className='col-2 sideBar'>
+          <BrandsSideBar loggedUser={loggedUser} handleLogout={handleLogout}/>
+        </nav>
+        <div className='col-10 p-3 overflow-auto mainContent'>
+          <div className='text-center'>
+            {/* <TopBar /> */}
+            <h1 className='text-center'>Fashion Footprint</h1>
+          </div>
+          <div className='row mx-auto overflow-auto myPage'>
+            <BrandsRouting loggedUser={loggedUser} handleLogout={handleLogout} setUser={setUser} />
+          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className='container-fluid-md myApp' >
-      <div className='text-center'>
-        {/* <TopBar /> */}
-        <h1 className='text-center'>Fashion Footprint</h1>
+    <div className='container-fluid-md myApp row'>
+        <nav className='col-2 sideBar'>
+          <UsersSideBar loggedUser={loggedUser} handleLogout={handleLogout}/>
+        </nav>
+        <div className='col-10 p-3 overflow-auto mainContent'>
+          <div className='text-center'>
+            {/* <TopBar /> */}
+            <h1 className='text-center'>Fashion Footprint</h1>
+          </div>
+          <div className='row mx-auto overflow-auto myPage'>
+            <UsersRouting loggedUser={loggedUser} handleLogout={handleLogout} setUser={setUser} />
+          </div>
+        </div>
       </div>
-      <div className='row mx-auto overflow-auto myPage'>
-        <UsersRouting loggedUser={loggedUser} handleLogout={handleLogout} setUser={setUser} />
-      </div>
-    </div>
   );
 }
 

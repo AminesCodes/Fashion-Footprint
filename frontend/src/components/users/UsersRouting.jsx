@@ -11,10 +11,10 @@ import Materials from './Materials';
 export default function UsersRouting(props) {
     return (
         <>
-            <nav className='col-2 sideBar'>
+            {/* <nav className='col-2 sideBar'>
                 <UsersSideBar loggedUser={props.loggedUser} handleLogout={props.handleLogout}/>
             </nav>
-            <div className='col-10 p-3 overflow-auto mainContent'>
+            <div className='col-10 p-3 overflow-auto mainContent'> */}
                 <Switch>
                     <Route path='/users/profile/:userId' render={routeProps => 
                         <UserProfile  
@@ -35,7 +35,7 @@ export default function UsersRouting(props) {
                     <Route path='/materials' component={Materials}>
                     </Route>
                 </Switch>
-            </div>
+            {/* </div> */}
         </>
     )
 }

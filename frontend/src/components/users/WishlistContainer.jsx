@@ -4,24 +4,16 @@ import Wishlist from './Wishlist';
 import Feedback from '../Feedback';
 
 
-class WishlistContainer extends React.Component {
-	constructor(){
-		super()
-		this.state = {
-			wishListItems: [],
-			stopRefresh: true,
-			networkErr: null
-		}
+class WishlistContainer extends React.PureComponent {
+	state = {
+		wishListItems: [],
+		networkErr: null
 	}
 
 	getWishList = async () => {
 		try {
-			if(this.state.stopRefresh){
-
 			const response = await axios.get(`/api/wishlist/${this.props.loggedUser.id}`);
-			this.setState({ wishListItems: response.data.payload,
-							stopRefresh: false });
-			}
+			this.setState({ wishListItems: response.data.payload });
 		} catch (err) {
 			this.setState({ networkErr: err });
 		}
@@ -30,24 +22,23 @@ class WishlistContainer extends React.Component {
 	componentDidMount = () => {
 		this.getWishList();
 	}
-	componentDidUpdate = () => {
-		this.getWishList();
-	}
 
 	handleWish = async (wishlistId) => {
 		try {
 			await axios.patch(`/api/wishlist/vote/${wishlistId}`);
-			this.getWishList()
+			this.getWishList();
 		} catch (err) {
 			this.setState({ networkErr: err });
 		}
 	}
 
 	deleteWish = async (id) => {
-		let response = await axios.delete(`/api/wishlist/${id}`);
-		this.setState({
-			stopRefresh: true
-		});
+		try {
+			await axios.delete(`/api/wishlist/${id}`);
+			this.getWishList();
+		} catch (err) {
+			this.setState({ networkErr: err });
+		}
 	}
 
 	hideFeedbackDiv = () => {
