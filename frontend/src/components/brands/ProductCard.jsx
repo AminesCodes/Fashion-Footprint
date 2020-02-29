@@ -29,7 +29,7 @@ export default function ProductCard(props) {
 	}
 
     return(
-        <div className="card col-sm-3 wishlist-card mx-3">
+        <div className="card col-sm-3 wishlist-card m-3">
 			<div className='d-flex justify-content-around'>
                 <button className='btn btn-danger' onClick={() => props.handleDeleteProduct(props.product.id)} >Delete</button>
                 <button className='btn btn-warning' onClick={() => props.handleUpdateProduct(props.product)}>Edit</button>
