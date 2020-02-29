@@ -341,14 +341,14 @@ INSERT INTO textiles (name, pic, care, environmental_impact)
 
 INSERT INTO  products(brand_id, type_id, name, default_pic, description, closing_date, textile_id)
     VALUES 
-      (2,	54,	'2020 - Polo',	'/images/products/1582937542079-Levis-M-2.jpg',	'100% cotton Perfect for everyday use',	'2020-05-01',	1),
+      (2,	54,	'2020 - Polo', '/images/products/1582937542079-Levis-M-2.jpg',	'100% cotton Perfect for everyday use',	'2020-05-01',	1),
       (2,	63,	'2020 - Legendary T-Shirt',	'/images/products/1582937659237-Levis-M-1.jpeg',	'100% cotton Perfect for everyday life and active persons',	'2020-04-01',	1),
-      (2,	48,	'501',	'/images/products/1582937776179-Levis-P-M-1.jpg',	'100% Cotton',	'2020-06-01',	1),
-      (2,	53,	'2020 Spring',	'/images/products/1582939261714-Levis-P-M-2.jpg',	'Casual',	'2020-05-01',	3),
-      (2,	90,	'2020 - Spring',	'/images/products/1582939436910-Levis-W-1.jpg',	'Confi',	'2020-03-01',	1),
-      (2,	90,	'2020 - Summer',	'/images/products/1582939547645-Levis-W-2.jpeg',	'Confi 100% cotton',	'2020-04-01',	1),
-      (2,	83,	'Stylish',	'/images/products/1582939711780-Levis-2-W-2.jpg',	'Stylish', '2020-06-01',	3),
-      (2,	79,	'2020 - Summer',	'/images/products/1582939843745-Levis-P-W-2.jpg',	'Style',	'2020-03-01',	1);
+      (2,	48,	'501', '/images/products/1582937776179-Levis-P-M-1.jpg', '100% Cotton',	'2020-06-01', 1),
+      (2,	53,	'2020 Spring', '/images/products/1582939261714-Levis-P-M-2.jpg', 'Casual', '2020-05-01', 3),
+      (2,	90,	'2020 - Spring', '/images/products/1582939436910-Levis-W-1.jpg', 'Confi', '2020-03-01',	1),
+      (2,	90,	'2020 - Summer', '/images/products/1582939547645-Levis-W-2.jpeg', 'Confi 100% cotton', '2020-04-01', 1),
+      (2,	83,	'Stylish', '/images/products/1582939711780-Levis-2-W-2.jpg',	'Stylish', '2020-06-01', 3),
+      (2,	79,	'2020 - Summer', '/images/products/1582939843745-Levis-P-W-2.jpg', 'Style',	'2020-03-01', 1);
 
 INSERT INTO wishlists(willing_to_buy, user_id, product_id) 
     VALUES (true, 1, 2), (false, 2, 1), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2);
