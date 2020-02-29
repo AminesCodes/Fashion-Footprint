@@ -5,11 +5,8 @@ const getAllVotesByProduct = async (ProductId) => {
 }
 
 const addNewVote = async (userId, productId) => {
-	let voteQuery = `INSERT INTO votes(product_id, user_id)
-							VALUES ($1, $2) RETURNING *`;
-	let response = await db.any(voteQuery, [productId, userId]);
-	console.log(response);
-	return response;
+	const voteQuery = `INSERT INTO votes(product_id, user_id) VALUES ($1, $2) RETURNING *`;
+	return await db.any(voteQuery, [productId, userId]);
 }
 
 
