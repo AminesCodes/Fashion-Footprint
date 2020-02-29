@@ -38,15 +38,9 @@ code {
   align-items: center;
 }
 
-@media only screen and (max-width: 600px) {
-  .productImg {
-       width: 100%;   
-    }   
-}
-
 .productImg {
-  width: 50%;
-  height: 500px;
+  height: 55vh;
+  object-fit: scale-down;
 }
 
 
