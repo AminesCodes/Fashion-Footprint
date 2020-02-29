@@ -46,7 +46,7 @@ const deleteVote = async (id) => {
 };
 
 const deleteWishlistItem = async (id) => {
-    return db.one('DELETE FROM wishlist WHERE id=$1 RETURNING *', id)
+    return db.one('DELETE FROM wishlists WHERE id=$1 RETURNING *', id)
 
 }
 

@@ -76,7 +76,8 @@ router.patch('/vote/:wish_id', async (req, res, next) => {
 /* DELETE wish */
 router.delete('/:wish_id', async (req, res, next) => {
 
-    let wish_id = req.params.wish_id
+    let wish_id = req.params.wish_id;
+    console.log(wish_id);
 
     try {
         let deletedWish = await wishlistQueries.deleteWishlistItem(wish_id)
