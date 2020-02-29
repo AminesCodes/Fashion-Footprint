@@ -45,7 +45,6 @@ class Materials extends PureComponent {
             return (
                 <Carousel.Item style={{ textAlign: "center", overflow: 'auto'}} >
                     <img
-                        // className="d-block mx-auto"
                         className="d-block w-100"
                         src={el.pic}
                         alt="First slide"
@@ -70,7 +69,7 @@ class Materials extends PureComponent {
             return <Feedback err={this.state.networkErr} hideFeedbackDiv={this.hideFeedbackDiv} />
         } else {
             return (
-                <div>
+                <div style={{width: "90%"}}>
                     <Carousel>
                         {mappedMaterials}
                     </Carousel>
