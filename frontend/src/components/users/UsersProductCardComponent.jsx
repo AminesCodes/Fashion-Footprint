@@ -7,7 +7,7 @@ import { faForward } from '@fortawesome/free-solid-svg-icons'
 
 const UsersProductCardComponent = (props) => {
     return (
-        <div className='productCard'>
+        <div className='productCard' style={{borderRadius: "10px", backgroundColor: "white"}}>
             <img className='productImg' src={props.product.default_pic} alt={props.product.name} />
             <div className='secondaryButtonsDiv'>
                 <button className="btn btn-info " onClick={() => props.handleVote(props.product.id)}>
