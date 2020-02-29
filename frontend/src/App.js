@@ -73,7 +73,7 @@ function App(props) {
       <div className='container-fluid-md myApp'>
         <div className='text-center'>
           {/* <TopBar /> */}
-          <h1 className='text-center'>>Fashion Footprint</h1>
+          <h1 className='text-center'>Fashion Footprint</h1>
         </div>
         <div className='row mx-auto overflow-auto myPage'>
           <BrandsRouting loggedUser={loggedUser} handleLogout={handleLogout} setUser={setUser} />

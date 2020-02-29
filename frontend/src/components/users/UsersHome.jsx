@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import UsersProductCardComponent from './UsersProductCardComponent'
 
-class UsersHome extends React.Component {
+class UsersHome extends React.PureComponent {
     constructor() {
         super()
         this.state = {

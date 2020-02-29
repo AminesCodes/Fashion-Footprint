@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import axios from 'axios';
 import Feedback from '../Feedback';
 import Card from 'react-bootstrap/Card'
 import Carousel from 'react-bootstrap/Carousel';
 
 
-class Materials extends Component {
+class Materials extends PureComponent {
     constructor() {
         super()
         this.state = {
