@@ -11,15 +11,15 @@ const Wishlist = (props) => {
 	
 	
 	return (
-		<div className="card col-sm-3 wishlist-card m-3">
+		<div className="card col-sm-4 wishlist-card m-3">
  			<img src={props.wishlist.default_pic} className="card-img-top " alt={props.wishlist.name} style={{height: '200px', objectFit: 'scale-down'}}/>
 	  		<div className="card-body">
 		    	<h5 className="card-title">{props.wishlist.name}</h5>
 		    	<p className="card-text">{props.wishlist.description}</p>
 
-		    	<div className='secondaryButtonsDiv'>
+		    	<div className='secondaryButtonsDiv wishlist-buttons'>
 	          		{button}
-	          		<button className='btn btn-danger' onClick={() => props.deleteWish(props.wishlist.wishlist_id)}>Delete</button>
+	          		<button className='btn btn-danger' onClick={() =>{props.deleteWish(props.wishlist.wishlist_id)}}>Delete</button>
           		</div>
 
 		    	{theText}

@@ -38,10 +38,26 @@ code {
   align-items: center;
 }
 
-.productImg {
-  height: 55vh;
-  object-fit: scale-down;
-}
+@media screen and (max-width: 400px) {
+    .productImg {
+      height: 35vh;
+      object-fit: scale-down;
+    }
+  }
+
+@media screen and (max-width: 600px) and (min-width: 400px) {
+    .productImg {
+      height: 45vh;
+      object-fit: scale-down;
+    }
+  }
+
+@media screen and (min-width: 600px) {
+   .productImg {
+      height: 55vh;
+      object-fit: scale-down;
+    }
+  }
 
 
 
@@ -55,3 +71,14 @@ code {
 	background-color: red;
 	color: red;
 }
+
+.card-body {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+/*.wishlist-buttons {
+  position: absolute;
+  bottom: 0px;
+}
+*/
