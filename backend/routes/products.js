@@ -45,20 +45,20 @@ router.get('/:brand_id/all', async (req, res, next) => {
 })
 
 /* GET all product by type Id */
-router.get('/fitler/:brand_id/:material_id/:type_id', async (req, res) => {
-    let {brand_id, material_id, type_id} = req.params
+// router.get('/fitler/:brand_id/:material_id/:type_id', async (req, res) => {
+//     let {brand_id, material_id, type_id} = req.params
 
-    try {
-        let productByType = await productQueries.getProductByFilter(Number(brand_id), Number(material_id), Number(type_id))
-        res.status(200).json({
-            message: `Success, retrieved all products with filter id #${'brand_id ' + brand_id} ${'material_id ' + material_id} ${'type_id ' + type_id}`,
-            payload: productByType
-        })
+//     try {
+//         let productByType = await productQueries.getProductByFilter(Number(brand_id), Number(material_id), Number(type_id))
+//         res.status(200).json({
+//             message: `Success, retrieved all products with filter id #${'brand_id ' + brand_id} ${'material_id ' + material_id} ${'type_id ' + type_id}`,
+//             payload: productByType
+//         })
 
-    } catch (err) {
-        handleErrors(res, err)
-    }
-})
+//     } catch (err) {
+//         handleErrors(res, err)
+//     }
+// })
 
 /* GET all product by type Id */
 router.get('/type/:type_id', async (req, res) => {
