@@ -40,14 +40,15 @@ class WishlistContainer extends React.PureComponent {
 		if (this.state.networkErr) {
 			return <Feedback err={this.state.networkErr} hideFeedbackDiv={this.hideFeedbackDiv}/> 
 		}
+
 		return (
 		<div className = 'row'>
            {this.state.wishListItems.map((elem) => 
-				   <Wishlist 
-				   		key={elem.wishlist_id}
-						wishlist={elem}
-						handleWish={this.handleWish}
-					/>)
+				<Wishlist 
+					key={elem.wishlist_id}
+					wishlist={elem}
+					handleWish={this.handleWish}
+				/>)
 			}
         </div>);
 	}
