@@ -153,7 +153,7 @@ console.log(props)
                     : null
                 }
                 <div className='text-right'>
-                    <button className='btn btn-primary mb-2 mr-sm-2'>Submit</button>
+                    <button className='btn btn-dark mb-2 mr-sm-2'>Submit</button>
                 </div>
                 {formSubmitted
                     ? formSuccess
