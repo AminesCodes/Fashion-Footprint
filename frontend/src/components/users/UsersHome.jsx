@@ -89,11 +89,8 @@ class UsersHome extends React.Component {
     }
 
 
-
     handleProductByFilter = async (brand_id, material_id, type_id) => {
-        // const {brand_id, material_id, type_id} = this.state
         let getProductsQuery = `/api/products/filters/${brand_id}/${material_id}/${type_id}`
-        console.log(getProductsQuery)
         try {
             let productData = await axios.get(getProductsQuery)
             console.log(productData)
@@ -147,7 +144,6 @@ class UsersHome extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        console.log('submitted')
         const {brand_id, material_id, type_id} = this.state
         this.handleProductByFilter(brand_id, material_id, type_id)
     }

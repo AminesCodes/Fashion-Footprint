@@ -1,6 +1,9 @@
 html, body, #root {
   height: 100%;
+  background: rgb(132,206,235);
+  background: linear-gradient(0deg, rgba(132,206,235,1) 6%, rgba(193,199,228,1) 65%) fixed;
 }
+
 
 body {
   margin: 0;

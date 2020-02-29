@@ -3,7 +3,7 @@ import React from 'react'
 export default function TopBar(props) {
     return (
         <>
-            <div className='col-3'>
+            <div className='col-3' >
                 <img 
                     className='d-block mx-auto m-2'
                     src={require('../assets/tshirt-solid.svg')} 
