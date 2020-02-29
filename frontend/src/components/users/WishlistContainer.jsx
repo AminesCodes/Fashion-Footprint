@@ -4,7 +4,7 @@ import Wishlist from './Wishlist';
 import Feedback from '../Feedback';
 
 
-class WishlistContainer extends React.Component {
+class WishlistContainer extends React.PureComponent {
 	state = {
 		wishListItems: [],
 		networkErr: null
