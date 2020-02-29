@@ -26,20 +26,19 @@ router.post('/add/:product_id', async (req, res, next) => {
 
     let product_id = req.params.product_id
     let user_id = req.body.user_id
-    let style_id = req.body.style_id
+    console.log(product_id, user_id)
 
-    if (product_id && user_id && style_id) {
+    if (product_id && user_id) {
+        try {
+            let newWish = await wishlistQueries.createWishlistItem(product_id, user_id)
+            res.status(200).json({
+                message: "Success added new wish",
+                payload: newWish
+            })
 
-    try {
-        let newWish = await wishlistQueries.createWishlistItem(product_id, user_id, style_id)
-        res.status(200).json({
-            message: "Success added new wish",
-            payload: newWish
-        })
-
-    } catch (err) {
-        handleErrors(res, err)
-    }
+        } catch (err) {
+            handleErrors(res, err)
+        }
 
     } else {
         res.status(403).json({

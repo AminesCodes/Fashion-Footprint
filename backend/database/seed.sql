@@ -35,12 +35,6 @@ CREATE TABLE types (
   name VARCHAR
 );
 
-
-CREATE TABLE styles  (
-  id SERIAL PRIMARY KEY, 
-  name VARCHAR
-);
-
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     brand_id INT REFERENCES brands(id) ON DELETE CASCADE,
@@ -63,8 +57,7 @@ CREATE TABLE wishlists (
   id SERIAL PRIMARY KEY,
   willing_to_buy BOOLEAN DEFAULT false,
   user_id INT REFERENCES users(id) ON DELETE CASCADE,
-  product_id INT  REFERENCES products(id) ON DELETE CASCADE,
-  style_id INT REFERENCES styles(id) ON DELETE CASCADE
+  product_id INT  REFERENCES products(id) ON DELETE CASCADE
 );
 
 CREATE TABLE facts (
@@ -176,10 +169,6 @@ INSERT INTO brands (email, password, name, business_id)
 ('info@swatch.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Swatch', 1234663),
 ('info@cavalli.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Cavalli', 1234664),
 ('info@brunello cucinelli.com', '$2b$12$BnlkuACZiHUs8h0TLWejv.NaSyBXQGNWnczdYt8KrdDEDV9VHQ4/O', 'Brunello Cucinelli', 1234665);
-
-
-INSERT INTO styles (name)
-    VALUES ('red stuff');
 
 INSERT INTO types (name)
     VALUES ('Baby Boys Shoes'),
