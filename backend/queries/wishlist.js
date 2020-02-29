@@ -49,6 +49,9 @@ const deleteWishlistItem = async (id) => {
     return db.one('DELETE FROM wishlists WHERE id=$1 RETURNING *', id)
 
 }
+const checkIfWishExists = async (prodId, userId) => {
+    return db.oneOrNone('SELECT * FROM wishlists WHERE product_id = $1 AND user_id = $2', [prodId, userId]);
+}
 
 module.exports = {
     getWishlistByUserId, 
@@ -56,7 +59,8 @@ module.exports = {
     updateWishlistItem,
     deleteWishlistItem,
     createVote,
-    deleteVote
+    deleteVote,
+    checkIfWishExists
 
 }
 

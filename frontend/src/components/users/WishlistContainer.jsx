@@ -51,7 +51,7 @@ class WishlistContainer extends React.PureComponent {
 		}
 
 		return (
-		<div className = 'row'>
+		<div className = 'row wishlist-row'>
            {this.state.wishListItems.map((elem) => 
 				<Wishlist 
 					key={elem.wishlist_id}

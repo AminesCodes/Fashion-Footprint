@@ -49,8 +49,12 @@ class Materials extends PureComponent {
                         className="d-block w-100"
                         src={el.pic}
                         alt="First slide"
+<<<<<<< HEAD
                         // style={{ height: "90vh", width: "80vw", objectFit: 'scale-down'}}
                         style={{height: "90vh"}}
+=======
+                        style={{ height: "90vh", width: "80vw", objectFit: 'cover'}}
+>>>>>>> 7168eed182e8874849691cd7f1f50f8fe7d6c9ee
                     />
                     <Carousel.Caption>
                         <div className='' style={{ backgroundColor: "#DCDCDC", opacity: "0.8", borderRadius: "25px", height: '80%'}}>
