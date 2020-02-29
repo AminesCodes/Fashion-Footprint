@@ -1,10 +1,12 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+// import fflogo from '../../assets/FFlogo.png'
 
 export default function SideBar(props) {
     return (
         <>
-            <ul className='navbar-nav'>
+    
+            <ul className='navbar-nav' >
                 <li className='nav-item'>
                     <NavLink className='nav-link d-block m-2' to={`/users/${props.loggedUser.id}`} > Home </NavLink>
                 </li>
