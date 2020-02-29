@@ -36,7 +36,7 @@ class WishlistContainer extends React.PureComponent {
 		try {
 			await axios.delete(`/api/wishlist/${id}`);
 			this.getWishList();
-		} carch (err) {
+		} catch (err) {
 			this.setState({ networkErr: err });
 		}
 		
