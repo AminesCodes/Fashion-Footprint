@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import UsersProductCardComponent from './UsersProductCardComponent'
 
-class UsersHome extends React.Component {
+class UsersHome extends React.PureComponent {
     constructor() {
         super()
         this.state = {
@@ -198,19 +198,19 @@ class UsersHome extends React.Component {
         ))
 
         return (
-            <div className='container mt-5'>
+            <div className='container'>
                 <form onSubmit={this.handleSubmit}>
-                    <select name='brand_id' onChange={this.handleInput}>
+                    <select className='custom-select m-1' name='brand_id' onChange={this.handleInput}>
                         <option value='0'>Select a brand</option>
                         {brandName}
                     </select>
 
-                    <select name='type_id' onChange={this.handleInput}>
+                    <select className='custom-select m-1' name='type_id' onChange={this.handleInput}>
                         <option value='0'>Select a type</option>
                         {typeName}
                     </select>
 
-                    <select name='material_id' onChange={this.handleInput}>
+                    <select className='custom-select m-1' name='material_id' onChange={this.handleInput}>
                         <option value='0'>Select a material</option>
                         {materialName}
                     </select>

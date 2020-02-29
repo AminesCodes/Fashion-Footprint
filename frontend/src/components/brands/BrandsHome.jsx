@@ -191,7 +191,7 @@ export default function BrandsHome (props) {
 
                 <div className='col-md-6'>
                     <select
-                        className='mb-2 mr-sm-2'
+                        className='custom-select mb-2 mr-sm-2'
                         value={targetType} 
                         onChange={e => setTargetType(e.target.value)}>
                             <option value='0'>-- Please Select a Type --</option>
@@ -224,7 +224,7 @@ export default function BrandsHome (props) {
                     />
 
                     <select
-                        className='mb-2 mr-sm-2'
+                        className='custom-select mb-2 mr-sm-2'
                         value={targetMaterial} 
                         onChange={e => setTargetMaterial(e.target.value)}>
                             <option value='0'>-- Main Material --</option>
