@@ -45,20 +45,19 @@ class Materials extends PureComponent {
             return (
                 <Carousel.Item style={{ textAlign: "center" }} >
                     <img
-                        className="d-block w-100"
-                        // width="800px"
+                        className="d-block mx-auto"
                         src={el.pic}
                         alt="First slide"
-                        height="800px"
+                        style={{ height: "90vh", width: "80vw", objectFit: 'scale-down'}}
                     />
                     <Carousel.Caption>
-                        <div class='jumbotron'style={{ backgroundColor: "#DCDCDC", opacity: "0.9", borderRadius: "25px", textAlign: "center"}}>
+            <div class='jumbotron overflow-auto' style={{ backgroundColor: "#DCDCDC", opacity: "0.8", borderRadius: "25px"/*, textAlign: "center"*/}}>
                             <h3 style={{ color: "black" }}>{el.name}</h3>
                             <p style={{  fontWeight: "bold", color: "black" }}>How to care: </p>
-                            <p style={{  fontWeight: "bold", color: "black" }}>{el.care}</p>
+                            <p style={{  /*fontWeight: "bold",*/ color: "black" }}>{el.care}</p>
                             <p style={{  fontWeight: "bold", color: "black" }}>How it affects the environment:</p>
                             {/* <div className = 'description' style ={{ width: '500px', marginRight:'50%', paddingRight:'20%' }}> */}
-                            <p style={{ fontWeight: "bold", color: "black" }}>{el.environmental_impact}</p>
+                            <p style={{ /*fontWeight: "bold",*/ color: "black" }}>{el.environmental_impact}</p>
                             {/* </div> */}
                         </div>
                     </Carousel.Caption>
