@@ -4,22 +4,33 @@ import Wishlist from './Wishlist';
 import Feedback from '../Feedback';
 
 
-class WishlistContainer extends React.PureComponent {
-	state = {
-		wishListItems: [],
-		networkErr: null,
+class WishlistContainer extends React.Component {
+	constructor(){
+		super()
+		this.state = {
+			wishListItems: [],
+			stopRefresh: true,
+			networkErr: null
+		}
 	}
 
 	getWishList = async () => {
 		try {
+			if(this.state.stopRefresh){
+
 			const response = await axios.get(`/api/wishlist/${this.props.loggedUser.id}`);
-			this.setState({ wishListItems: response.data.payload });
+			this.setState({ wishListItems: response.data.payload,
+							stopRefresh: false });
+			}
 		} catch (err) {
 			this.setState({ networkErr: err });
 		}
 	}
 
 	componentDidMount = () => {
+		this.getWishList();
+	}
+	componentDidUpdate = () => {
 		this.getWishList();
 	}
 
@@ -30,6 +41,13 @@ class WishlistContainer extends React.PureComponent {
 		} catch (err) {
 			this.setState({ networkErr: err });
 		}
+	}
+
+	deleteWish = async (id) => {
+		let response = await axios.delete(`/api/wishlist/${id}`);
+		this.setState({
+			stopRefresh: true
+		});
 	}
 
 	hideFeedbackDiv = () => {
@@ -48,6 +66,7 @@ class WishlistContainer extends React.PureComponent {
 					key={elem.wishlist_id}
 					wishlist={elem}
 					handleWish={this.handleWish}
+					deleteWish={this.deleteWish}
 				/>)
 			}
         </div>);
