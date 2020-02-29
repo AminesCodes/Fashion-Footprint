@@ -1,16 +1,15 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-// import fflogo from '../../assets/FFlogo.png'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default function SideBar(props) {
     return (
         <>
             <img 
-                className='d-block mx-auto m-2'
+                className='d-block mx-auto'
                 src={require('../../assets/FFlogo.png')} 
                 alt='App logo' 
                 style={{
-                    height: '200px', 
+                    height: '150px', 
                     objectFit: 'scale-down',
                     marginLeft: '0'
                 }}

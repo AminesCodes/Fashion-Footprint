@@ -9,10 +9,10 @@ import BrandProfile from './BrandProfile';
 export default function BrandRouting(props) {
     return (
         <>
-            <nav className='col-2 sideBar'>
+            {/* <nav className='col-2 sideBar'>
                 <BrandsSideBar loggedUser={props.loggedUser} handleLogout={props.handleLogout}/>
             </nav>
-            <div className='col-10 p-3 overflow-auto mainContent'>
+            <div className='col-10 p-3 overflow-auto mainContent'> */}
                 <Switch>
                     <Route path='/brands/Profile/:brandId' render={routeProps => 
                         <BrandProfile 
@@ -28,7 +28,7 @@ export default function BrandRouting(props) {
                         <About loggedUser={props.loggedUser} {...routeProps} />} >
                     </Route>
                 </Switch>
-            </div>
+            {/* </div> */}
         </>
     )
 }
