@@ -31,6 +31,32 @@ code {
   background-color: aliceblue;
 }
 
+.productCard {
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .productImg {
+       width: 100%;   
+    }   
+}
+
+.productImg {
+  width: 50%;
+  height: 500px;
+}
+
+
+
+.secondaryButtonsDiv {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
 .red {
 	background-color: red;
 	color: red;

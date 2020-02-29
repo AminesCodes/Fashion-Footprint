@@ -1,54 +1,49 @@
 import React from 'react'
 import axios from 'axios'
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import '../../index.css';
 
-class UsersProductCardComponent extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            name: '',
-            description: '',
-            image: []
+
+
+const UsersProductCardComponent = (props) => {
+  
+
+    const handleVote = async () =>{
+        console.log('voted clicked')
+       try{
+        let response = await axios.post('/api/votes/addVote', {user_id: props.userId, product_id: props.product.product_id});
+        }
+        catch(err){
+            console.dir(err);
         }
     }
 
-    handleCardInfo = () =>{
-        
-    }
-    handleVote = () =>{
-        console.log('voted clicked')
-    }
 
-    handleIgnore = () =>{
+   const handleIgnore = () =>{
         console.log('go to next item')
     }
 
-    handleAddToWishlist = () =>{
+  const handleAddToWishlist = async () => { 
         console.log('added to Wishlist')
-    }
-
-
-    
-
-
-    render() {
-       
+        try {
+            let response = await axios.post(`/api/wishlist/add/${props.product.product_id}`, {style_id: props.product.style_id, user_id: props.userId});
+            console.log(response);
+        }
+        catch(err){
+            console.dir(err);
+        }
+    } 
         return (
-            <div>
 
-                <Card>
-                    <button onClick = {this.handleVote}>Vote</button>
-                    <Card.Img src = 'https://12ax7web.s3.amazonaws.com/accounts/1/products/1986199879943/Ramen-Panda-tahiti-blue-light-t-shirt-teeturtle-full-21-1000x1000.jpg'></Card.Img>
-                    <button onClick ={this.handleIgnore}>Ignore</button>
-                    <button onClick={this.handleAddToWishlist}>Wishlist</button>
-                </Card>
-
-
-
+            <div className = 'productCard'>
+                    <img className='productImg' src = {props.product.default_pic} alt={props.product.name}/>
+                    <div className='secondaryButtonsDiv'>
+                        <button className= "btn btn-success " onClick = {handleVote}>Vote</button>
+                        <button  className="btn btn-danger " onClick ={handleIgnore}>Ignore</button>
+                    </div>
+                    <button  className='btn btn-warning' onClick={handleAddToWishlist}>Wishlist</button>
             </div>
         )
-
-    }
 
 
 }

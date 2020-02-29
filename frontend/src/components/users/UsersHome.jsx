@@ -12,7 +12,8 @@ class UsersHome extends React.Component {
             brandOptions: [],
             materialOptions: [],
             typeOptions: [], 
-            productsArr:[]
+            productsArr:[],
+            currentProductIndex: 0,
         }
     }
 
@@ -29,8 +30,6 @@ class UsersHome extends React.Component {
             this.setState({
                 brandOptions: data.payload
             })
-            console.log(data.payload)
-            console.log(this.state)
         } catch (error) {
             console.log(error)
         }
@@ -41,7 +40,6 @@ class UsersHome extends React.Component {
         let allTypes = '/api/types/all'
         try {
             let { data } = await axios.get(allTypes)
-            console.log(data.payload)
             this.setState({
                 typeOptions: data.payload
             })
@@ -54,7 +52,6 @@ class UsersHome extends React.Component {
         let allMaterials = '/api/materials/all'
         try {
             let { data } = await axios.get(allMaterials)
-            console.log(data.payload)
             this.setState({
                 materialOptions: data.payload
             })
@@ -64,9 +61,6 @@ class UsersHome extends React.Component {
     }
 
     handleInput = (event) => {
-        // event.preventDefault()
-        // brand_id, material_id, type_id
-        console.log(event.target.value)
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -93,53 +87,51 @@ class UsersHome extends React.Component {
         let getProductsQuery = `/api/products/filters/${brand_id}/${material_id}/${type_id}`
         try {
             let productData = await axios.get(getProductsQuery)
-            console.log(productData)
             this.setState({
                 productsArr: productData.data.payload
             })
-            console.log(this.state)
         } catch (error) {
             console.log(error)
         }
 
     }
     
-    handleProductByBrand = async () => {
-        const { brand_id } = this.state
-        let brandId = Number(brand_id)
-        let getProductsQuery = `/api/products/brand/${brandId}/all`
+    // handleProductByBrand = async () => {
+    //     const { brand_id } = this.state
+    //     let brandId = Number(brand_id)
+    //     let getProductsQuery = `/api/products/brand/${brandId}/all`
 
-        try {
-            let productData = await axios.get(getProductsQuery)
-            console.log(productData)
-        } catch (error) {
-            console.log(error)
-        }
+    //     try {
+    //         let productData = await axios.get(getProductsQuery)
+    //         console.log(productData)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
 
-    }
+    // }
 
-    handleProductByMaterial = async() => {
-        const {material_id} = this.state
-        let getProductByMaterialQuery = `/api/products/materials/${material_id}`
-        try{
-            let productInfo = await axios.get(getProductByMaterialQuery)
-            console.log(productInfo)
-        } catch(error){
-            console.log(error)
-        }
+    // handleProductByMaterial = async() => {
+    //     const {material_id} = this.state
+    //     let getProductByMaterialQuery = `/api/products/materials/${material_id}`
+    //     try{
+    //         let productInfo = await axios.get(getProductByMaterialQuery)
+    //         console.log(productInfo)
+    //     } catch(error){
+    //         console.log(error)
+    //     }
 
-    }
+    // }
 
-    handleProductByType = async() =>{
-        const {type_id} = this.state
-        let getProductsByTypeQuery = `/api/products/type/${type_id}`
-        try{
-            let productByType = await axios.get(getProductsByTypeQuery)
-            console.log(productByType)
-        } catch(error){
-            console.log(error)
-        }
-    }
+    // handleProductByType = async() =>{
+    //     const {type_id} = this.state
+    //     let getProductsByTypeQuery = `/api/products/type/${type_id}`
+    //     try{
+    //         let productByType = await axios.get(getProductsByTypeQuery)
+    //         console.log(productByType)
+    //     } catch(error){
+    //         console.log(error)
+    //     }
+    // }
 
 
     handleSubmit = (event) => {
@@ -184,8 +176,14 @@ class UsersHome extends React.Component {
                 </form>
 
                 <div className='card-holder'>
-                    <UsersProductCardComponent />
-
+                    {
+                        this.state.productsArr.length
+                        ? <UsersProductCardComponent 
+                                product={this.state.productsArr[this.state.currentProductIndex]}
+                                userId={this.props.loggedUser.id}
+                            />
+                        : null
+                    }
                 </div>
             </div>
         )
