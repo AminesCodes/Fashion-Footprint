@@ -6,9 +6,9 @@ class UsersHome extends React.Component {
     constructor() {
         super()
         this.state = {
-            brand_id: '',
-            material_id: '',
-            type_id: '',
+            brand_id: '0',
+            material_id: '0',
+            type_id: '0',
             brandOptions: [],
             materialOptions: [],
             typeOptions: [], 
@@ -64,24 +64,40 @@ class UsersHome extends React.Component {
     }
 
     handleInput = (event) => {
-        event.preventDefault()
+        // event.preventDefault()
+        // brand_id, material_id, type_id
         console.log(event.target.value)
         this.setState({
             [event.target.name]: event.target.value
         })
-        console.log(this.state)
+
+        switch (event.target.name) {
+            case 'brand_id':
+                this.handleProductByFilter(event.target.value, this.state.material_id, this.state.type_id)
+                
+                break;
+            case 'material_id':
+                this.handleProductByFilter(this.state.brand_id, event.target.value, this.state.type_id)
+                break;
+
+            case 'type_id':
+                this.handleProductByFilter(this.state.brand_id, this.state.material_id, event.target.value)
+                break;
+            default:
+                break;
+        }
     }
 
 
-
-    handleProductByFilter = async () => {
-        const {brand_id, material_id, type_id} = this.state
-        // let brandId = Number(brand_id)
-        let getProductsQuery = `/api/products/filter/${brand_id}/${material_id}/${type_id}`
-
+    handleProductByFilter = async (brand_id, material_id, type_id) => {
+        let getProductsQuery = `/api/products/filters/${brand_id}/${material_id}/${type_id}`
         try {
             let productData = await axios.get(getProductsQuery)
             console.log(productData)
+            this.setState({
+                productsArr: productData.data.payload
+            })
+            console.log(this.state)
         } catch (error) {
             console.log(error)
         }
@@ -128,17 +144,8 @@ class UsersHome extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault()
-        console.log('submitted')
-        this.handleProductByFilter()
-        // if(Number(brand_id) !== 0){
-        //     this.handleProductByBrand()
-        // } 
-        // if (Number(material_id) !== 0){
-        //     this.handleProductByMaterial()
-        // }  
-        // if(Number(type_id) !==0){
-        //     this.handleProductByType()
-        // }
+        const {brand_id, material_id, type_id} = this.state
+        this.handleProductByFilter(brand_id, material_id, type_id)
     }
 
 
@@ -160,21 +167,20 @@ class UsersHome extends React.Component {
         return (
             <div className='container mt-5'>
                 <form onSubmit={this.handleSubmit}>
-                    <select id='brand' onChange={this.handleInput}>
-                        <option>Select a brand</option>
+                    <select name='brand_id' onChange={this.handleInput}>
+                        <option value='0'>Select a brand</option>
                         {brandName}
                     </select>
 
-                    <select id='type' onChange={this.handleInput}>
-                        <option>Select a type</option>
+                    <select name='type_id' onChange={this.handleInput}>
+                        <option value='0'>Select a type</option>
                         {typeName}
                     </select>
 
-                    <select id='material' onChange={this.handleInput}>
-                        <option>Select a material</option>
+                    <select name='material_id' onChange={this.handleInput}>
+                        <option value='0'>Select a material</option>
                         {materialName}
                     </select>
-                    <button>Submit</button>
                 </form>
 
                 <div className='card-holder'>
