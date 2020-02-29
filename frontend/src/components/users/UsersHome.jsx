@@ -21,6 +21,8 @@ class UsersHome extends React.Component {
         this.handleBrandOptions()
         this.handleTypeOfGarnment()
         this.handleAllMaterials()
+        this.handleProductByFilter(this.state.brand_id, this.state.material_id, this.state.type_id)
+        
     }
 
     handleBrandOptions = async () => {
@@ -84,7 +86,7 @@ class UsersHome extends React.Component {
 
 
     handleProductByFilter = async (brand_id, material_id, type_id) => {
-        let getProductsQuery = `/api/products/filters/${brand_id}/${material_id}/${type_id}`
+        let getProductsQuery = `/api/products/filters/${brand_id}/${type_id}/${material_id}`
         try {
             let productData = await axios.get(getProductsQuery)
             this.setState({
