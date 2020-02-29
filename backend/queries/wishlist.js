@@ -6,7 +6,7 @@ const getWishlistByUserId = async (id) => {
 
 const createWishlistItem = async (product_id, user_id, style_id) => {
     const insertQuery = `
-        INSERT INTO wishlist
+        INSERT INTO wishlists
             (product_id, user_id, style_id)
         VALUES
             ($1, $2, $3) 

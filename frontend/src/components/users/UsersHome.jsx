@@ -178,7 +178,7 @@ class UsersHome extends React.Component {
                 </form>
 
                 <div className='card-holder'>
-                    <UsersProductCardComponent />
+                    <UsersProductCardComponent productId = {2} styleId = {1} userId= {this.props.loggedUser.id} />
 
                 </div>
             </div>
