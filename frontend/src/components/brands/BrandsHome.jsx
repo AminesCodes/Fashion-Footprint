@@ -263,16 +263,18 @@ export default function BrandsHome (props) {
 
                 <button className='btn btn-primary mb-2 mr-sm-2'>Submit</button>              
             </form>
-
-            {productsList.map(product => 
-                    <ProductCard 
-                        key={product.id+product.name+product.default_pic}
-                        product={product}
-                        handleApprobation={handleApprobation}
-                        handleDeleteProduct={handleDeleteProduct}
-                        handleUpdateProduct={handleUpdateProduct}
-                    />
-                )}
+            
+            <div className='row text-center'>
+                {productsList.map(product => 
+                        <ProductCard 
+                            key={product.id+product.name+product.default_pic}
+                            product={product}
+                            handleApprobation={handleApprobation}
+                            handleDeleteProduct={handleDeleteProduct}
+                            handleUpdateProduct={handleUpdateProduct}
+                        />
+                    )}
+            </div>
         </div>
     )
 }

@@ -23,6 +23,7 @@ const checkValidParams = (response, param) => {
 }
 
 const handleErrors = (response, err) => {
+    console.log('ERROR: - ', err)
     if (err.code === "23505" && err.detail.includes("already exists")) {
         console.log('Attempt to register a new user/brand with a taken email')
         response.status(403).json({
@@ -44,7 +45,6 @@ const handleErrors = (response, err) => {
           payload: null,
         }) 
     } else {
-        console.log(err)
         response.status(500).json({
           error: true,
           message: 'Sorry, something went wrong (D-B)',
