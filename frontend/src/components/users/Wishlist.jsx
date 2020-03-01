@@ -10,7 +10,7 @@ const Wishlist = (props) => {
 		? <button className="btn btn-light" onClick={() => props.handleWish(props.wishlist.wishlist_id)}>
 			<span className='h6'>Un-vote</span></button>
 		: <button className="btn btn-info" onClick={() => props.handleWish(props.wishlist.wishlist_id)}>
-			<FontAwesomeIcon icon={faVoteYea} /><span className='h6'>Voted</span></button>
+			<FontAwesomeIcon icon={faVoteYea} /><span className='h6'>Vote</span></button>
 
 	const theText = props.wishlist.going_to_production 
 		? <p className='going_to_production_true'>In Production!</p> 
