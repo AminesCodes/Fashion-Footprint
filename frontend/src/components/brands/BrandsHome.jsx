@@ -186,7 +186,7 @@ export default function BrandsHome (props) {
     }
 
     return(
-        <div className='container mt-5'>
+        <div className='container m-1'>
             <form className='row md-form' onSubmit={handleFormSubmit}>
 
                 <div className='col-md-6'>

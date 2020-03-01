@@ -9,8 +9,13 @@ const addNewVote = async (userId, productId) => {
 	return await db.any(voteQuery, [productId, userId]);
 }
 
+const checkIfVoteExists = async (productId, userId) => {
+    return db.oneOrNone('SELECT * FROM votes WHERE product_id = $1 AND user_id = $2', [productId, userId]);
+}
+
 
 module.exports = {
     getAllVotesByProduct,
-    addNewVote
+    addNewVote,
+    checkIfVoteExists,
 }

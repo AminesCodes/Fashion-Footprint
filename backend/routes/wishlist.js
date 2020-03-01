@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const wishlistQueries = require('../queries/wishlist');
+const votesQueries = require('../queries/votes');
 const {handleErrors} = require('./helpers/helpers');
 
 
@@ -56,22 +57,24 @@ router.post('/add/:product_id', async (req, res, next) => {
 router.patch('/vote/:wish_id', async (req, res, next) => {
 
     let wish_id = parseInt(req.params.wish_id);
-    console.log(typeof wish_id);
+    let wishItem = null;
 
     try {
-        let updatedWish = await wishlistQueries.updateWishlistItem(wish_id);
-        console.log('Updated Vote: ', updatedWish);
-        if(updatedWish.willing_to_buy){
+        wishItem = await wishlistQueries.updateWishlistItem(wish_id);
+
+        if(wishItem.willing_to_buy){
             updatedVote = await wishlistQueries.createVote(wish_id);
-            console.log('After Update: ', updatedVote);
         }
         else {
-            console.log('ELSE')
-            updatedVote = await wishlistQueries.deleteVote(wish_id);
+            const voteExists = await votesQueries.checkIfVoteExists(wishItem.product_id, wishItem.user_id)
+            if (voteExists) {
+                await wishlistQueries.deleteVote(wish_id);
+            }
         }
+
         res.status(200).json({
             message: `Success updated wish with id ${wish_id}`,
-            payload: updatedWish
+            payload: wishItem
         })
 
     } catch (err) {
@@ -81,9 +84,7 @@ router.patch('/vote/:wish_id', async (req, res, next) => {
 
 /* DELETE wish */
 router.delete('/:wish_id', async (req, res, next) => {
-
     let wish_id = req.params.wish_id;
-    console.log(wish_id);
 
     try {
         let deletedWish = await wishlistQueries.deleteWishlistItem(wish_id)
