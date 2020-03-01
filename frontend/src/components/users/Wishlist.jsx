@@ -7,11 +7,10 @@ import { faBan } from '@fortawesome/free-solid-svg-icons'
 
 const Wishlist = (props) => {
 	const button = props.wishlist.willing_to_buy
-		? <button className="btn btn-info " onClick={() => props.handleWish(props.wishlist.wishlist_id)}>
-			<FontAwesomeIcon icon={faVoteYea} />
-			Vote
-			</button>
-		: <button className="btn btn-light" onClick={() => props.handleWish(props.wishlist.wishlist_id)}>Un-vote</button>;
+		? <button className="btn btn-light" onClick={() => props.handleWish(props.wishlist.wishlist_id)}>
+			<span className='h6'>Un-vote</span></button>
+		: <button className="btn btn-info" onClick={() => props.handleWish(props.wishlist.wishlist_id)}>
+			<FontAwesomeIcon icon={faVoteYea} /><span className='h6'>Voted</span></button>
 
 	const theText = props.wishlist.going_to_production 
 		? <p className='going_to_production_true'>In Production!</p> 
@@ -19,7 +18,7 @@ const Wishlist = (props) => {
 	
 	
 	return (
-		<div className="card col-sm-4 wishlist-card m-3">
+		<div className="card col-sm-4 wishlist-card m-2">
  			<img src={props.wishlist.default_pic} className="card-img-top " alt={props.wishlist.name} style={{height: '200px', objectFit: 'scale-down'}}/>
 	  		<div className="card-body">
 		    	<h5 className="card-title">{props.wishlist.name}</h5>
