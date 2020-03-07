@@ -193,24 +193,19 @@ router.patch('/:productId', async (req, res) => {
     if (checkValidId(res, productId)) {
         try {
             const updatedProduct = await productQueries.updateProductStatus(productId);
-            console.log(0, updatedProduct)
             if (updatedProduct.going_to_production) {
                 const allVotesForProduct = await voteQueries.getAllVotesByProduct(updatedProduct.id);
-                console.log(1, allVotesForProduct)
                 const promises = [];
                 allVotesForProduct.forEach(vote => promises.push(voteQueries.addCoupon(vote.id, generateCoupon())))
-                console.log(2, 'HERE')
-                const allVotes = await Promise.all(promises)
-                console.log(2, allVotes)
-            } else {
+                await Promise.all(promises)
+            } 
+            else {
                 const allVotesForProduct = await voteQueries.getAllVotesByProduct(updatedProduct.id);
-                console.log(3, allVotesForProduct)
                 const promises = [];
                 allVotesForProduct.forEach(vote => promises.push(voteQueries.deleteCoupon(vote.id)))
-                console.log(4, 'HERE')
-                const allVotes = await Promise.all(promises)
-                console.log(4, allVotes)
+                await Promise.all(promises)
             }
+
             res.status(200).json({
                 message: `Success updated product with id ${productId}`,
                 payload: updatedProduct
