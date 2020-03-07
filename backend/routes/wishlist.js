@@ -24,15 +24,12 @@ router.get('/:user_id', async (req, res, next) => {
 
 /* POST add new wish */
 router.post('/add/:product_id', async (req, res, next) => {
-
     let product_id = req.params.product_id
     let user_id = req.body.user_id
-    console.log(product_id, user_id)
 
     if (product_id && user_id) {
         try {
             let doesWishExist = await wishlistQueries.checkIfWishExists(product_id, user_id);
-            console.log(doesWishExist);
             if(!doesWishExist){
                 let newWish = await wishlistQueries.createWishlistItem(product_id, user_id)
                 res.status(200).json({

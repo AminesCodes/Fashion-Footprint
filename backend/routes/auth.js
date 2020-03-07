@@ -68,7 +68,6 @@ const updateInfo = async(request, response, next) => {
             } else if (userType === 'users' && checkValidParams(response, firstName) && checkValidParams(response, lastName)) {
                 await userQueries.updateUserInfo(targetId, email.toLowerCase(), firstName, lastName);
             }
-            console.log('Went well')
             next()
 
         } catch (err) {

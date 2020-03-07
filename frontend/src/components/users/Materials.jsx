@@ -18,11 +18,8 @@ class Materials extends PureComponent {
         const url = `/api/materials/all`
         try {
             const { data: { payload } } = await axios.get(url);
-            // console.log(payload)
-            let newPayload = payload.splice(0, payload.length - 1)
-            console.log(newPayload)
             this.setState({
-                materials: newPayload
+                materials: payload
             })
         } catch (err) {
             this.setState({
@@ -40,7 +37,6 @@ class Materials extends PureComponent {
 
     render() {
         const { materials } = this.state
-        console.log(this.state)
         let mappedMaterials = materials.map(el => {
             return (
                 <Carousel.Item style={{ textAlign: "center", overflow: 'auto'}} >

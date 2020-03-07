@@ -12,7 +12,6 @@ const createWishlistItem = async (product_id, user_id) => {
             ($1, $2) 
         RETURNING *
     `
-    console.log(insertQuery)
     return await db.one(insertQuery, [product_id, user_id])
 }
 

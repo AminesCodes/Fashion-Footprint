@@ -4,7 +4,6 @@ import axios from 'axios';
 import Feedback from '../Feedback';
 
 export default function UsersHome (props) {
-console.log(props)
     const [email, setEmail] = useState(props.loggedUser.email);
     const [password, setPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');

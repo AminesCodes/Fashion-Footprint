@@ -8,7 +8,6 @@ passport.use(new LocalStrategy({usernameField: 'email', passwordField : 'passwor
   async (request, username, password, done) => {
 
     let user = null;
-    console.log(request.params.userType, username.toLowerCase())
   try {
     if (request.params.userType === 'brands') {
       user = await brandQueries.getBrandByEmail(username.toLowerCase());
