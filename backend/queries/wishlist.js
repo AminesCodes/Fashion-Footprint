@@ -1,7 +1,23 @@
 const db = require('../database/db')
 
 const getWishlistByUserId = async (id) => {
-    return await db.any(' Select wishlists.id AS wishlist_id, * FROM wishlists INNER JOIN users ON wishlists.user_id = users.id  INNER JOIN products ON wishlists.product_id = products.id WHERE user_id = $1', id)
+    const selectQuery = `
+        Select 
+            wishlists.id AS wishlist_id,
+            brands.name AS brand_name,
+            products.name AS product_name,
+            default_pic,
+            description,
+            closing_date,
+            textiles.name AS material,
+            going_to_production,
+            willing_to_buy
+        FROM wishlists JOIN products ON wishlists.product_id = products.id
+            JOIN brands ON brand_id = brands.id
+            JOIN textiles ON textile_id = textiles.id
+        WHERE user_id = $1
+    `
+    return await db.any(selectQuery, id)
 }
 
 const createWishlistItem = async (product_id, user_id) => {

@@ -89,7 +89,6 @@ class UsersHome extends React.PureComponent {
         let getProductsQuery = `/api/products/filters/${brand_id}/${type_id}/${material_id}`
         try {
             let productData = await axios.get(getProductsQuery)
-            console.log(productData.data.payload)
             this.setState({
                 productsArr: productData.data.payload
             })

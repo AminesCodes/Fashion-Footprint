@@ -1,5 +1,5 @@
 import React from 'react';
-import {OverlayTrigger, Tooltip, Button} from 'react-bootstrap'
+import {OverlayTrigger, Tooltip} from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faVoteYea, faForward, faInfoCircle } from '@fortawesome/free-solid-svg-icons'
 
