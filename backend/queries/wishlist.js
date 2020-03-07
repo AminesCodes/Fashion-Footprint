@@ -11,11 +11,14 @@ const getWishlistByUserId = async (id) => {
             closing_date,
             textiles.name AS material,
             going_to_production,
-            willing_to_buy
+            willing_to_buy,
+            coupon
         FROM wishlists JOIN products ON wishlists.product_id = products.id
             JOIN brands ON brand_id = brands.id
             JOIN textiles ON textile_id = textiles.id
-        WHERE user_id = $1
+            LEFT JOIN votes ON wishlists.product_id = votes.product_id
+                AND wishlists.user_id = votes.user_id
+        WHERE wishlists.user_id = $1
     `
     return await db.any(selectQuery, id)
 }
@@ -53,11 +56,10 @@ const createVote = async (id) =>  {
 const deleteVote = async (id) => {
     const deletedVote = `
     DELETE FROM votes 
-    WHERE product_id = (SELECT product_id FROM wishlists WHERE id=$1) 
-    AND user_id = (SELECT user_id FROM wishlists WHERE id=$1) 
+    WHERE id = $1 
     RETURNING *
 `;
-    return await db.one(deletedVote, [id]);
+    return await db.one(deletedVote, id);
 };
 
 const deleteWishlistItem = async (id) => {

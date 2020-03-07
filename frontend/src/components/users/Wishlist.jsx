@@ -19,6 +19,7 @@ const Wishlist = (props) => {
 	
 	return (
 		<div className='card col-sm-4 wishlist-card m-2'>
+			<div className='text-right'>Coupon: <span className='text-success'>{props.wishlist.coupon}</span></div>
 			<img src={props.wishlist.default_pic} className='card-img-top ' alt={props.wishlist.product_name} 
 			 	style={{height: '200px', objectFit: 'scale-down'}}/>
 			<OverlayTrigger

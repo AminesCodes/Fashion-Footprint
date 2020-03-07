@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const productQueries = require('../queries/products');
+const voteQueries = require('../queries/votes');
 const { handleErrors, checkValidId } = require('./helpers/helpers');
 const multer = require('multer')
 
@@ -26,6 +27,16 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
     storage, fileFilter
 })
+
+const generateCoupon = () => {
+    const str = 'QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm';
+    let coupon = '';
+    for (let i=0; i<7; i++) {
+        const randomIndex = Math.floor(Math.random() * str.length);
+        coupon += str[randomIndex];
+    }
+    return coupon;
+}
 
 /* GET all product by Brand Id */
 router.get('/:brand_id/all', async (req, res, next) => {
@@ -181,7 +192,25 @@ router.patch('/:productId', async (req, res) => {
     const productId = req.params.productId
     if (checkValidId(res, productId)) {
         try {
-            let updatedProduct = await productQueries.updateProductStatus(productId)
+            const updatedProduct = await productQueries.updateProductStatus(productId);
+            console.log(0, updatedProduct)
+            if (updatedProduct.going_to_production) {
+                const allVotesForProduct = await voteQueries.getAllVotesByProduct(updatedProduct.id);
+                console.log(1, allVotesForProduct)
+                const promises = [];
+                allVotesForProduct.forEach(vote => promises.push(voteQueries.addCoupon(vote.id, generateCoupon())))
+                console.log(2, 'HERE')
+                const allVotes = await Promise.all(promises)
+                console.log(2, allVotes)
+            } else {
+                const allVotesForProduct = await voteQueries.getAllVotesByProduct(updatedProduct.id);
+                console.log(3, allVotesForProduct)
+                const promises = [];
+                allVotesForProduct.forEach(vote => promises.push(voteQueries.deleteCoupon(vote.id)))
+                console.log(4, 'HERE')
+                const allVotes = await Promise.all(promises)
+                console.log(4, allVotes)
+            }
             res.status(200).json({
                 message: `Success updated product with id ${productId}`,
                 payload: updatedProduct

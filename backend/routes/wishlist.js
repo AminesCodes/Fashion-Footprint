@@ -33,9 +33,9 @@ router.post('/add/:product_id', async (req, res, next) => {
             if(!doesWishExist){
                 let newWish = await wishlistQueries.createWishlistItem(product_id, user_id)
                 res.status(200).json({
-                message: "Success added new wish",
-                payload: newWish
-            }) 
+                    message: "Success added new wish",
+                    payload: newWish
+                }) 
             } else {
                 res.status(204).end()
             }
@@ -65,7 +65,7 @@ router.patch('/vote/:wish_id', async (req, res, next) => {
         else {
             const voteExists = await votesQueries.checkIfVoteExists(wishItem.product_id, wishItem.user_id)
             if (voteExists) {
-                await wishlistQueries.deleteVote(wish_id);
+                await wishlistQueries.deleteVote(voteExists.id);
             }
         }
 
