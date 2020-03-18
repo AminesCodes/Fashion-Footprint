@@ -25,16 +25,29 @@ const getProductByFilter = async(brand, material, type,) => await db.any(`
 `, [brand, material, type])
 
 const getFilteredProducts = async (brandId, typeId, textileId) => {
+    const basicQuery = `
+        SELECT 
+            products.id AS id,
+            brands.name AS brand_name,
+            products.name AS name,
+            default_pic,
+            description,
+            closing_date,
+            textiles.name AS material,
+            going_to_production
+        FROM products JOIN textiles ON textile_id = textiles.id
+            JOIN brands ON brand_id = brands.id
+    `
     if (brandId === '0' && typeId === '0' && textileId === '0') {
-        return await db.any('SELECT * FROM products')
+        return await db.any(`${basicQuery}`)
     } 
 
     else if (brandId === '0' && typeId === '0') {
-        return await db.any(`SELECT * FROM products WHERE textile_id=$1`, textileId)
+        return await db.any(`${basicQuery} WHERE textile_id=$1`, textileId)
     } 
 
     else if (brandId === '0' && textileId === '0') {
-        return await db.any('SELECT * FROM products WHERE type_id=$1', typeId)
+        return await db.any(`${basicQuery} WHERE type_id=$1`, typeId)
     } 
 
     else if (typeId === '0' && textileId === '0') {
@@ -42,18 +55,18 @@ const getFilteredProducts = async (brandId, typeId, textileId) => {
     } 
 
     else if (brandId === '0') {
-        return await db.any('SELECT * FROM products WHERE type_id=$1 AND textile_id=$2', [typeId, textileId])
+        return await db.any(`${basicQuery} WHERE type_id=$1 AND textile_id=$2`, [typeId, textileId])
     } 
 
     else if (typeId === '0') {
-        return await db.any('SELECT * FROM products WHERE brand_id=$1 AND textile_id=$2', [brandId, textileId])
+        return await db.any(`${basicQuery} WHERE brand_id=$1 AND textile_id=$2`, [brandId, textileId])
     } 
 
     else if (textileId === '0') {
-        return await db.any('SELECT * FROM products WHERE brand_id=$1 AND type_id=$2', [brandId, typeId])
+        return await db.any(`${basicQuery} WHERE brand_id=$1 AND type_id=$2`, [brandId, typeId])
     } 
         
-    return await db.any('SELECT * FROM products WHERE brand_id=$1 AND type_id=$2 AND textile_id=$3', [brandId, typeId, textileId])
+    return await db.any(`${basicQuery} WHERE brand_id=$1 AND type_id=$2 AND textile_id=$3`, [brandId, typeId, textileId])
 }
 
 const createProduct = async (brand, type, name, defaultPic, description, closingDate, material) =>{

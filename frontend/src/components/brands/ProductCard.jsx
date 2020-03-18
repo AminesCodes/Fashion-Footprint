@@ -49,7 +49,7 @@ export default function ProductCard(props) {
 		    	<div className="card-text">
 					<p><strong>Closing Date:</strong>
 					<br></br>
-					{new Date(props.product.closing_date).toLocaleString()}</p>
+					{new Date(props.product.closing_date).toLocaleDateString()}</p>
 					<p><strong>Votes:</strong> {votes.length}</p>
 				</div>
 				{

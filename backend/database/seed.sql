@@ -49,7 +49,8 @@ CREATE TABLE products (
 CREATE TABLE votes  (
     id SERIAL PRIMARY KEY,
     product_id INT REFERENCES products(id) ON DELETE CASCADE,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    coupon VARCHAR(9) DEFAULT NULL
 );
 
 CREATE TABLE wishlists (

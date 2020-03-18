@@ -14,7 +14,6 @@ router.get('/random', async (request, response) => {
             payload: allFacts[randomId],
         })
     } catch (err) {
-        console.log('facts route running')
         handleErrors(response, err)
     }
 })
