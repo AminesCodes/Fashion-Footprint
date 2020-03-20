@@ -15,7 +15,6 @@ const typesRouter = require('./routes/types');
 const productsRouter = require('./routes/products');
 const votesRouter = require('./routes/votes');
 
-const secret = require('./secret');
 const { checkUserLogged } = require('./auth/helpers');
 
 const app = express();
@@ -29,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-    secret: secret,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true
   }))
