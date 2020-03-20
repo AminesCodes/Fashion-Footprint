@@ -1,8 +1,18 @@
 
-DROP DATABASE IF EXISTS fashion_footprint_db;
+-- DROP DATABASE IF EXISTS fashion_footprint_db;
 
 CREATE DATABASE fashion_footprint_db;
-\c fashion_footprint_db;
+-- \c fashion_footprint_db;
+
+DROP TABLE IF EXISTS facts;
+DROP TABLE IF EXISTS wishlists;
+DROP TABLE IF EXISTS votes;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS types;
+DROP TABLE IF EXISTS textiles;
+DROP TABLE IF EXISTS brands;
+DROP TABLE IF EXISTS users;
+
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
