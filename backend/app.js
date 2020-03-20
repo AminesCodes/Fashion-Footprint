@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// app.use(express.static(path.join(__dirname, '../frontend/build')));
+app.use(express.static(path.join(__dirname, '../frontend/build')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
@@ -41,15 +41,15 @@ app.use(session({
 app.use('/api/auth', authRouter);
 app.use('/api/brands', checkUserLogged, brandsRouter);
 app.use('/api/materials', /*checkUserLogged,*/ materialsRouter);
-app.use('/api/wishlist', /*checkUserLogged,*/ wishlistRouter);
+app.use('/api/wishlist', checkUserLogged, wishlistRouter);
 app.use('/api/facts', factsRouter);
 app.use('/api/types', checkUserLogged, typesRouter);
-app.use('/api/products', /*checkUserLogged,*/ productsRouter);
-app.use('/api/votes', /*checkUserLogged,*/ votesRouter);
+app.use('/api/products', checkUserLogged, productsRouter);
+app.use('/api/votes', checkUserLogged, votesRouter);
 
 
-// app.use('*', (req, res) => {
-//     res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
-// });
+app.use('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'));
+});
 
 module.exports = app;
