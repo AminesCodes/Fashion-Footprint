@@ -25,6 +25,7 @@ const s3 = new AWS.S3({
     accessKeyId: process.env.KEY_ID,
     secretAccessKey: process.env.SECRET_KEY,
     region: 'us-east-2',
+    // bucket: 'fashion-footprint',
 })
 
 const storage = multerS3({
@@ -56,17 +57,17 @@ const upload = multer({
 
 const deleteFile = (fileLink) => {
     const fileName = fileLink.slice(53); // https://fashion-footprint.s3.us-east-2.amazonaws.com/ BASE LINK LENGTH IS 53
-    const bucketInstance = new AWS.S3();
     const params = {
         Bucket: 'fashion-footprint',
         Key: fileName
     };
-    bucketInstance.deleteObject(params, function (err, data) {
+    
+    s3.deleteObject(params, function (err, data) {
         if (data) {
             console.log("File deleted successfully");
         }
         else {
-            console.log("Check if you have sufficient permissions : "+err);
+            console.log(`Check if you have sufficient permissions : ${err}`);
         }
     });
 }
@@ -182,8 +183,7 @@ router.post('/add/:brand_id', upload.single('productPic'), async (request, respo
         // default_pic = '/images/products/' + request.file.filename;
         default_pic = request.file.location;
     } 
-    console.log('BODY: ', request.body)
-    console.log('FILE: ', request.file)
+
     if (checkValidId(response, brand_id) 
         && checkValidId(response, type_id)
         && checkValidParams(response, name)
