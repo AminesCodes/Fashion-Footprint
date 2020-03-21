@@ -25,7 +25,6 @@ const s3 = new AWS.S3({
     accessKeyId: process.env.KEY_ID,
     secretAccessKey: process.env.SECRET_KEY,
     region: 'us-east-2',
-    // bucket: 'fashion-footprint',
 })
 
 const storage = multerS3({
