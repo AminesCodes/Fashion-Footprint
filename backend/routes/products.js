@@ -55,6 +55,7 @@ const upload = multer({
 })
 
 const deleteFile = (fileLink) => {
+    // ####### REMINDER: CHANGE THE LENGTH IF BUCKET NAME CHANGES
     const fileName = fileLink.slice(53); // https://fashion-footprint.s3.us-east-2.amazonaws.com/ BASE LINK LENGTH IS 53
     const params = {
         Bucket: 'fashion-footprint',
