@@ -2,7 +2,7 @@
 -- DROP DATABASE IF EXISTS fashion_footprint_db;
 
 -- CREATE DATABASE fashion_footprint_db;
--- \c fashion_footprint_db;
+\c fashion_footprint_db;
 
 DROP TABLE IF EXISTS facts;
 DROP TABLE IF EXISTS wishlists;
@@ -351,7 +351,7 @@ INSERT INTO  products(brand_id, type_id, name, default_pic, description, closing
       (2,	79,	'2020 - Summer', '/images/products/1582939843745-Levis-P-W-2.jpg', 'Style',	'2020-03-01', 1);
 
 INSERT INTO wishlists(willing_to_buy, user_id, product_id) 
-    VALUES (true, 1, 2), (false, 2, 1), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2), (true, 1, 2);
+    VALUES (true, 1, 2), (false, 2, 1), (true, 1, 1), (true, 1, 3), (true, 1, 4), (true, 1, 5), (true, 1, 6), (true, 2, 2), (true, 2, 3), (true, 2, 4), (true, 3, 2);
 
 INSERT INTO votes (product_id, user_id)
   VALUES (1, 1), (1, 2), (2, 1), (2, 2), (2, 3), (2, 4);
