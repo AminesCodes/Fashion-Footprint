@@ -70,6 +70,14 @@ const checkIfWishExists = async (prodId, userId) => {
     return db.oneOrNone('SELECT * FROM wishlists WHERE product_id = $1 AND user_id = $2', [prodId, userId]);
 }
 
+const addCoupon = async (wishId, coupon) => {
+    return await db.one('UPDATE wishlists SET coupon=$2 WHERE id=$1 RETURNING *', [wishId, coupon])
+}
+
+const deleteCoupon = async (wishId) => {
+    return await db.one('UPDATE wishlists SET coupon=NULL WHERE id=$1 RETURNING *', wishId)
+}
+
 module.exports = {
     getWishlistByUserId, 
     createWishlistItem, 
@@ -77,7 +85,8 @@ module.exports = {
     deleteWishlistItem,
     createVote,
     deleteVote,
-    checkIfWishExists
-
+    checkIfWishExists,
+    addCoupon,
+    deleteCoupon
 }
 
