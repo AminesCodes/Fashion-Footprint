@@ -68,7 +68,8 @@ CREATE TABLE wishlists (
   id SERIAL PRIMARY KEY,
   willing_to_buy BOOLEAN DEFAULT false,
   user_id INT REFERENCES users(id) ON DELETE CASCADE,
-  product_id INT  REFERENCES products(id) ON DELETE CASCADE
+  product_id INT  REFERENCES products(id) ON DELETE CASCADE,
+  UNIQUE (product_id, user_id)
 );
 
 CREATE TABLE facts (
