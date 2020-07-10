@@ -1,7 +1,7 @@
 
 -- DROP DATABASE IF EXISTS fashion_footprint_db;
 
-CREATE DATABASE fashion_footprint_db;
+-- CREATE DATABASE fashion_footprint_db;
 -- \c fashion_footprint_db;
 
 DROP TABLE IF EXISTS facts;
@@ -60,7 +60,8 @@ CREATE TABLE votes  (
     id SERIAL PRIMARY KEY,
     product_id INT REFERENCES products(id) ON DELETE CASCADE,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    coupon VARCHAR(9) DEFAULT NULL
+    coupon VARCHAR(9) DEFAULT NULL,
+    UNIQUE (product_id, user_id)
 );
 
 CREATE TABLE wishlists (
