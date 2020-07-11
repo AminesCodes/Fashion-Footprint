@@ -23,15 +23,16 @@ const getWishlistByUserId = async (id) => {
     return await db.any(selectQuery, id)
 }
 
-const createWishlistItem = async (product_id, user_id) => {
+const createWishlistItem = async (product_id, user_id, willingToBuy = false) => {
     const insertQuery = `
         INSERT INTO wishlists
-            (product_id, user_id)
+            (product_id, user_id, willing_to_buy)
         VALUES
-            ($1, $2) 
+            ($1, $2, $3) 
         RETURNING *
     `
-    return await db.one(insertQuery, [product_id, user_id])
+
+    return await db.one(insertQuery, [product_id, user_id, willingToBuy])
 }
 
 const updateWishlistItem = async (id) => {
@@ -44,14 +45,14 @@ const updateWishlistItem = async (id) => {
     return await db.one(updateQuery, [id])
 }
 
-const createVote = async (id) =>  {
-    const createdVote = `
-     INSERT INTO votes (product_id, user_id)
-        VALUES ((SELECT product_id FROM wishlists WHERE id=$1), (SELECT user_id FROM wishlists WHERE id=$1))
-        RETURNING *
-    `
-    return await db.one(createdVote, [id]);
-}
+// const createVote = async (id) =>  {
+//     const createdVote = `
+//      INSERT INTO votes (product_id, user_id)
+//         VALUES ((SELECT product_id FROM wishlists WHERE id=$1), (SELECT user_id FROM wishlists WHERE id=$1))
+//         RETURNING *
+//     `
+//     return await db.one(createdVote, [id]);
+// }
 
 const deleteVote = async (id) => {
     const deletedVote = `
@@ -83,7 +84,7 @@ module.exports = {
     createWishlistItem, 
     updateWishlistItem,
     deleteWishlistItem,
-    createVote,
+    // createVote,
     deleteVote,
     checkIfWishExists,
     addCoupon,
