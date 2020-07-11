@@ -35,14 +35,14 @@ const createWishlistItem = async (product_id, user_id, willingToBuy = false) => 
     return await db.one(insertQuery, [product_id, user_id, willingToBuy])
 }
 
-const updateWishlistItem = async (id) => {
+const updateWishlistItem = async (id, willingToBuy) => {
     const updateQuery = `
         UPDATE wishlists
-        SET willing_to_buy = NOT willing_to_buy
+        SET willing_to_buy=$2
         WHERE id=$1 
         RETURNING *
     `
-    return await db.one(updateQuery, [id])
+    return await db.one(updateQuery, [id, willingToBuy]);
 }
 
 // const createVote = async (id) =>  {
