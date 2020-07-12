@@ -153,9 +153,11 @@ router.get('/filters/:brandId/:typeId/:textileId', async (request, response) => 
     const typeId = request.params.typeId;
     const textileId = request.params.textileId;
 
+    const userId = request.user.id;
+
     if (checkValidId(response, brandId) && checkValidId(response, typeId) && checkValidId(response, textileId)) {
         try {
-            const products = await productQueries.getFilteredProducts(brandId, typeId, textileId);
+            const products = await productQueries.getFilteredProducts(userId, brandId, typeId, textileId);
             response.status(200).json({
                 error: false,
                 message: `Success, retrieved all products with filters`,

@@ -121,7 +121,7 @@ class UsersHome extends React.PureComponent {
 
     handleAddToWishlist = async (productId) => { 
         try {
-            await axios.post(`/api/wishlist/add/${productId}`, {user_id: this.props.loggedUser.id});
+            await axios.post(`/api/wishlist/${productId}`, {user_id: this.props.loggedUser.id});
             this.setState((state, props) => {
                 return {currentProductIndex: state.currentProductIndex >= state.productsArr.length - 1
                     ? 0
