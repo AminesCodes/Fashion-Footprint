@@ -106,7 +106,7 @@ class UsersHome extends React.PureComponent {
 
     handleVote = async (productId) =>{
         try {
-            await axios.post('/api/votes/addVote', {user_id: this.props.loggedUser.id, product_id: productId});
+            await axios.post('/api/wishlist/vote/add_vote', {user_id: this.props.loggedUser.id, product_id: productId});
             this.setState((state, props) => {
                 return {currentProductIndex: state.currentProductIndex >= state.productsArr.length - 1
                     ? 0

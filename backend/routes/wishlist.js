@@ -51,22 +51,23 @@ router.post('/:product_id', async (req, res, next) => {
 })
 
 // POST add new vote (from the home page that will create a wish as well) 
-router.post('/vote/:product_id', async (req, res, next) => {
-    let product_id = req.params.product_id
-    let user_id = req.body.user_id
+router.post('/vote/add_vote', async (req, res, next) => {
+    let product_id = req.body.product_id
+    // let user_id = req.body.user_id
+    let user_id = req.user.id
 
     if (product_id && user_id) {
         try {
             let doesWishExist = await wishlistQueries.checkIfWishExists(product_id, user_id); 
-            let newWish = null;
+            let wishItem = null;
             if(!doesWishExist){
-                newWish = await wishlistQueries.createWishlistItem(product_id, user_id, true);
+                wishItem = await wishlistQueries.createWishlistItem(product_id, user_id, true);
             } else {
-                newWish = await wishlistQueries.updateWishlistItem(doesWishExist.id, true);
+                wishItem = await wishlistQueries.updateWishlistItem(doesWishExist.id, true);
             }
             res.status(200).json({
                 message: "Success added new wish and a vote",
-                payload: newWish
+                payload: wishItem
             }) 
         } catch (err) {
             handleErrors(res, err)
