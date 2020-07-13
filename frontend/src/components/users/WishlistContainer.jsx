@@ -24,9 +24,13 @@ class WishlistContainer extends React.PureComponent {
 		this.getWishList();
 	}
 
-	handleWish = async (wishlistId) => {
+	handleWish = async (wishlistId, vote) => {
 		try {
-			await axios.patch(`/api/wishlist/vote/${wishlistId}`);
+			const requestBody = {};
+			if (vote) {
+				requestBody.vote = true;
+			}
+			await axios.patch(`/api/wishlist/vote/${wishlistId}`, requestBody);
 			this.getWishList();
 		} catch (err) {
 			this.setState({ networkErr: err });
