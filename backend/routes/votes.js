@@ -4,15 +4,15 @@ const router = express.Router();
 const wishQuery = require('../queries/wishlist');
 const { handleErrors, checkValidId } = require('./helpers/helpers');
 
-router.get('/:brandId', async (request, response) => {
-    const brandId = request.params.brandId;
+router.get('/:product_id', async (request, response) => {
+    const productId = request.params.product_id;
 
-    if (checkValidId(response, brandId)) {
+    if (checkValidId(response, productId)) {
         try {
-            const votes = await wishQuery.getAllVotesByProduct(brandId);
+            const votes = await wishQuery.getAllVotesByProduct(productId);
             response.json({
                 error: false,
-                message: `Successfully retrieved all votes to product id#${brandId}`,
+                message: `Successfully retrieved all votes to product id#${productId}`,
                 payload: votes,
             })
         } catch (err) {

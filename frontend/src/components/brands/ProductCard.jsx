@@ -14,7 +14,7 @@ export default function ProductCard(props) {
 
 	const getVotes = async () => {
 		try {
-			const { data } = await axios.get(`/api/votes/${props.product.id}`);
+			const { data } = await axios.get(`/api/wishlist/votes/${props.product.id}`);
 			setVotes(data.payload);
 		} catch (err) {
 			setNetworkErr(err);
