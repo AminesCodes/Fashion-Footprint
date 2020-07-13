@@ -94,14 +94,14 @@ const deleteProduct = async(id) =>{
     return await db.one(`DELETE FROM products WHERE id=$1 RETURNING *`, id)
 }
 
-const updateProductStatus = async (productId) => {
+const updateProductStatus = async (productId, production) => {
     const updateQuery = `
         UPDATE products 
-        SET going_to_production=NOT going_to_production 
+        SET going_to_production=$2
         WHERE id=$1 
         RETURNING *
     `
-    return await db.one(updateQuery, productId)
+    return await db.one(updateQuery, [productId, production])
 }
 
 

@@ -6,7 +6,7 @@ const multerS3 = require('multer-s3');
 
 
 const productQueries = require('../queries/products');
-const voteQueries = require('../queries/votes');
+const wishQueries = require('../queries/wishlist');
 const { handleErrors, checkValidId, checkValidParams } = require('./helpers/helpers');
 
 // LOCAL STORAGE SETUP
@@ -255,15 +255,15 @@ router.patch('/:productId', async (request, response) => {
         try {
             const updatedProduct = await productQueries.updateProductStatus(productId);
             if (updatedProduct.going_to_production) {
-                const allVotesForProduct = await voteQueries.getAllVotesByProduct(updatedProduct.id);
+                const allVotesForProduct = await wishQueries.getAllVotesByProduct(updatedProduct.id);
                 const promises = [];
-                allVotesForProduct.forEach(vote => promises.push(voteQueries.addCoupon(vote.id, generateCoupon())))
+                allVotesForProduct.forEach(vote => promises.push(wishQueries.addCoupon(vote.id, generateCoupon())))
                 await Promise.all(promises)
             } 
             else {
-                const allVotesForProduct = await voteQueries.getAllVotesByProduct(updatedProduct.id);
+                const allVotesForProduct = await wishQueries.getAllVotesByProduct(updatedProduct.id);
                 const promises = [];
-                allVotesForProduct.forEach(vote => promises.push(voteQueries.deleteCoupon(vote.id)))
+                allVotesForProduct.forEach(vote => promises.push(wishQueries.deleteCoupon(vote.id)))
                 await Promise.all(promises)
             }
 

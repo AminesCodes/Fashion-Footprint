@@ -150,7 +150,7 @@ export default function BrandsHome (props) {
 
     const handleApprobation = async (productId) => {
         try {
-            const { data } = await axios.patch(`/api/products/${productId}`)
+            await axios.patch(`/api/products/${productId}`)
             getProducts()
         } catch (err) {
             setNetworkErr(err)
