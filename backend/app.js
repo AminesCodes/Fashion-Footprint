@@ -47,7 +47,7 @@ app.use('/api/wishlist', checkUserLogged, wishlistRouter);
 app.use('/api/facts', factsRouter);
 app.use('/api/types', checkUserLogged, typesRouter);
 app.use('/api/products', checkUserLogged, productsRouter);
-app.use('/api/votes', checkUserLogged, votesRouter);
+// app.use('/api/votes', checkUserLogged, votesRouter);
 
 
 app.use('*', (req, res) => {
