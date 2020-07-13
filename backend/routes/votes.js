@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const votesQueries = require('../queries/votes');
+const wishQuery = require('../queries/wishlist');
 const { handleErrors, checkValidId } = require('./helpers/helpers');
 
 router.get('/:brandId', async (request, response) => {
@@ -9,7 +9,7 @@ router.get('/:brandId', async (request, response) => {
 
     if (checkValidId(response, brandId)) {
         try {
-            const votes = await votesQueries.getAllVotesByProduct(brandId);
+            const votes = await wishQuery.getAllVotesByProduct(brandId);
             response.json({
                 error: false,
                 message: `Successfully retrieved all votes to product id#${brandId}`,
@@ -25,7 +25,7 @@ router.post('/addVote', async (req, res) => {
     let userId = parseInt(req.body.user_id);
     let productId = parseInt(req.body.product_id);
     try{
-        const newVote = await votesQueries.addNewVote(userId, productId);
+        const newVote = await wishQuery.addNewVote(userId, productId);
         res.json({
             error: false,
             message: 'Successfully created a new vote'
