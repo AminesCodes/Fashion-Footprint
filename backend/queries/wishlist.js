@@ -70,7 +70,7 @@ const checkIfWishExists = async (prodId, userId) => {
 }
 
 const getAllVotesByProduct = async (ProductId) => {
-    return await db.any('SELECT wishlists.id, product_id, email FROM wishlists JOIN users ON user_id=users.id WHERE product_id=$1', ProductId);
+    return await db.any('SELECT wishlists.id, product_id, email FROM wishlists JOIN users ON user_id=users.id WHERE product_id=$1 AND willing_to_buy IS TRUE', ProductId);
 }
 
 const addCoupon = async (wishId, coupon) => {
