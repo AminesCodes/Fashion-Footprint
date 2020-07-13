@@ -16,8 +16,6 @@ const getWishlistByUserId = async (id) => {
         FROM wishlists JOIN products ON wishlists.product_id = products.id
             JOIN brands ON brand_id = brands.id
             JOIN textiles ON textile_id = textiles.id
-            LEFT JOIN votes ON wishlists.product_id = votes.product_id
-                AND wishlists.user_id = votes.user_id
         WHERE wishlists.user_id = $1
     `
     return await db.any(selectQuery, id)
