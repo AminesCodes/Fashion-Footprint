@@ -106,16 +106,6 @@ router.patch('/vote/:wish_id', async (req, res, next) => {
         const vote = req.body.vote || false;
         let wishItem = await wishlistQueries.updateWishlistItem(wish_id, vote);
 
-        // if(wishItem.willing_to_buy){
-        //     wishItem = await wishlistQueries.addCoupon(wish_id);
-        // }
-        // else {
-        //     const voteExists = await votesQueries.checkIfVoteExists(wishItem.product_id, wishItem.user_id)
-        //     if (voteExists) {
-        //         await wishlistQueries.deleteVote(voteExists.id);
-        //     }
-        // }
-
         res.status(200).json({
             message: `Success updated wish with id ${wish_id}`,
             payload: wishItem

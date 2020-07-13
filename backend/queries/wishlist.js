@@ -43,23 +43,6 @@ const updateWishlistItem = async (id, willingToBuy) => {
     return await db.one(updateQuery, [id, willingToBuy]);
 }
 
-// const createVote = async (id) =>  {
-//     const createdVote = `
-//      INSERT INTO votes (product_id, user_id)
-//         VALUES ((SELECT product_id FROM wishlists WHERE id=$1), (SELECT user_id FROM wishlists WHERE id=$1))
-//         RETURNING *
-//     `
-//     return await db.one(createdVote, [id]);
-// }
-
-const deleteVote = async (id) => {
-    const deletedVote = `
-    DELETE FROM votes 
-    WHERE id = $1 
-    RETURNING *
-`;
-    return await db.one(deletedVote, id);
-};
 
 const deleteWishlistItem = async (id) => {
     return db.one('DELETE FROM wishlists WHERE id=$1 RETURNING *', id)
@@ -86,8 +69,6 @@ module.exports = {
     createWishlistItem, 
     updateWishlistItem,
     deleteWishlistItem,
-    // createVote,
-    deleteVote,
     checkIfWishExists,
     getAllVotesByProduct,
     addCoupon,
