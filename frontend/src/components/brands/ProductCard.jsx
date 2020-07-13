@@ -57,13 +57,13 @@ export default function ProductCard(props) {
 					?   <button 
 							className='btn btn-light w-100' 
 							style={{ borderColor: "#292b2c" }}
-							onClick={() => props.handleApprobation(props.product.id)}>
+							onClick={() => props.handleApprobation(props.product.id, false)}>
 							Discard
 						</button>
 					:	<button 
 							className='btn btn-light w-100' 
 							style={{ borderColor: "#5bc0de" }}
-							onClick={() => props.handleApprobation(props.product.id)}>
+							onClick={() => props.handleApprobation(props.product.id, true)}>
 							Approve
 						</button>
 				}

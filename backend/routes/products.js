@@ -74,8 +74,8 @@ const deleteFile = (fileLink) => {
 
 const generateCoupon = () => {
     const str = 'QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm';
-    const coupon = '';
-    for (const i=0; i<7; i++) {
+    let coupon = '';
+    for (let i=0; i<7; i++) {
         const randomIndex = Math.floor(Math.random() * str.length);
         coupon += str[randomIndex];
     }
@@ -253,7 +253,8 @@ router.patch('/:productId', async (request, response) => {
     const productId = request.params.productId
     if (checkValidId(response, productId)) {
         try {
-            const updatedProduct = await productQueries.updateProductStatus(productId);
+            const production = request.body.production || false;
+            const updatedProduct = await productQueries.updateProductStatus(productId, production);
             if (updatedProduct.going_to_production) {
                 const allVotesForProduct = await wishQueries.getAllVotesByProduct(updatedProduct.id);
                 const promises = [];
