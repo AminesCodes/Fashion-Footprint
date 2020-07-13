@@ -14,7 +14,7 @@ export default function ProductCard(props) {
 
 	const getVotes = async () => {
 		try {
-			const { data } = await axios.get(`/api/votes/${props.product.id}`);
+			const { data } = await axios.get(`/api/wishlist/votes/${props.product.id}`);
 			setVotes(data.payload);
 		} catch (err) {
 			setNetworkErr(err);
@@ -57,13 +57,13 @@ export default function ProductCard(props) {
 					?   <button 
 							className='btn btn-light w-100' 
 							style={{ borderColor: "#292b2c" }}
-							onClick={() => props.handleApprobation(props.product.id)}>
+							onClick={() => props.handleApprobation(props.product.id, false)}>
 							Discard
 						</button>
 					:	<button 
 							className='btn btn-light w-100' 
 							style={{ borderColor: "#5bc0de" }}
-							onClick={() => props.handleApprobation(props.product.id)}>
+							onClick={() => props.handleApprobation(props.product.id, true)}>
 							Approve
 						</button>
 				}

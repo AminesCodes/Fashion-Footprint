@@ -7,9 +7,9 @@ import { faVoteYea, faBan, faInfoCircle } from '@fortawesome/free-solid-svg-icon
 
 const Wishlist = (props) => {
 	const button = props.wishlist.willing_to_buy
-		? <button className='btn btn-light' onClick={() => props.handleWish(props.wishlist.wishlist_id)}>
+		? <button className='btn btn-light' onClick={() => props.handleWish(props.wishlist.wishlist_id, false)}>
 			<span className='h6'>Un-vote</span></button>
-		: <button className='btn btn-info' onClick={() => props.handleWish(props.wishlist.wishlist_id)}>
+		: <button className='btn btn-info' onClick={() => props.handleWish(props.wishlist.wishlist_id, true)}>
 			<FontAwesomeIcon icon={faVoteYea} /><span className='h6'>Vote</span></button>
 
 	const theText = props.wishlist.going_to_production 

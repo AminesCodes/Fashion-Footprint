@@ -104,15 +104,16 @@ class UsersHome extends React.PureComponent {
         this.handleProductByFilter(brand_id, material_id, type_id)
     }
 
+    removeItemFromProductsArr = (index) => {
+        const productsList = [...this.state.productsArr];
+        productsList.splice(index, 1);
+        this.setState({ productsArr: productsList })
+    }
+
     handleVote = async (productId) =>{
         try {
-            await axios.post('/api/votes/addVote', {user_id: this.props.loggedUser.id, product_id: productId});
-            this.setState((state, props) => {
-                return {currentProductIndex: state.currentProductIndex >= state.productsArr.length - 1
-                    ? 0
-                    : state.currentProductIndex + 1
-                };
-              });
+            await axios.post('/api/wishlist/vote/add_vote', {user_id: this.props.loggedUser.id, product_id: productId});
+            this.removeItemFromProductsArr(this.state.currentProductIndex);
         }
         catch (err) {
             this.setState({ networkErr: err });
@@ -121,13 +122,8 @@ class UsersHome extends React.PureComponent {
 
     handleAddToWishlist = async (productId) => { 
         try {
-            await axios.post(`/api/wishlist/add/${productId}`, {user_id: this.props.loggedUser.id});
-            this.setState((state, props) => {
-                return {currentProductIndex: state.currentProductIndex >= state.productsArr.length - 1
-                    ? 0
-                    : state.currentProductIndex + 1
-                };
-            });
+            await axios.post(`/api/wishlist/${productId}`, {user_id: this.props.loggedUser.id});
+            this.removeItemFromProductsArr(this.state.currentProductIndex);
         }
         catch (err) {
             this.setState({ networkErr: err });

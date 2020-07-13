@@ -6,7 +6,7 @@ const multerS3 = require('multer-s3');
 
 
 const productQueries = require('../queries/products');
-const voteQueries = require('../queries/votes');
+const wishQueries = require('../queries/wishlist');
 const { handleErrors, checkValidId, checkValidParams } = require('./helpers/helpers');
 
 // LOCAL STORAGE SETUP
@@ -74,8 +74,8 @@ const deleteFile = (fileLink) => {
 
 const generateCoupon = () => {
     const str = 'QWERTYUIOPASDFGHJKLZXCVBNM1234567890qwertyuiopasdfghjklzxcvbnm';
-    const coupon = '';
-    for (const i=0; i<7; i++) {
+    let coupon = '';
+    for (let i=0; i<7; i++) {
         const randomIndex = Math.floor(Math.random() * str.length);
         coupon += str[randomIndex];
     }
@@ -153,9 +153,11 @@ router.get('/filters/:brandId/:typeId/:textileId', async (request, response) => 
     const typeId = request.params.typeId;
     const textileId = request.params.textileId;
 
+    const userId = request.user.id;
+
     if (checkValidId(response, brandId) && checkValidId(response, typeId) && checkValidId(response, textileId)) {
         try {
-            const products = await productQueries.getFilteredProducts(brandId, typeId, textileId);
+            const products = await productQueries.getFilteredProducts(userId, brandId, typeId, textileId);
             response.status(200).json({
                 error: false,
                 message: `Success, retrieved all products with filters`,
@@ -251,17 +253,18 @@ router.patch('/:productId', async (request, response) => {
     const productId = request.params.productId
     if (checkValidId(response, productId)) {
         try {
-            const updatedProduct = await productQueries.updateProductStatus(productId);
+            const production = request.body.production || false;
+            const updatedProduct = await productQueries.updateProductStatus(productId, production);
             if (updatedProduct.going_to_production) {
-                const allVotesForProduct = await voteQueries.getAllVotesByProduct(updatedProduct.id);
+                const allVotesForProduct = await wishQueries.getAllVotesByProduct(updatedProduct.id);
                 const promises = [];
-                allVotesForProduct.forEach(vote => promises.push(voteQueries.addCoupon(vote.id, generateCoupon())))
+                allVotesForProduct.forEach(vote => promises.push(wishQueries.addCoupon(vote.id, generateCoupon())))
                 await Promise.all(promises)
             } 
             else {
-                const allVotesForProduct = await voteQueries.getAllVotesByProduct(updatedProduct.id);
+                const allVotesForProduct = await wishQueries.getAllVotesByProduct(updatedProduct.id);
                 const promises = [];
-                allVotesForProduct.forEach(vote => promises.push(voteQueries.deleteCoupon(vote.id)))
+                allVotesForProduct.forEach(vote => promises.push(wishQueries.deleteCoupon(vote.id)))
                 await Promise.all(promises)
             }
 
