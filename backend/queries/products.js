@@ -1,7 +1,7 @@
 const db = require('../database/db')
 
 const getProductsByBrand = async(id) =>{
-return await db.any(`SELECT * FROM products WHERE brand_id =$1`, id)
+return await db.any(`SELECT * FROM products WHERE brand_id =$1 ORDER BY closing_date, id`, id)
 }
 
 const getProductsById = async(id) =>{
